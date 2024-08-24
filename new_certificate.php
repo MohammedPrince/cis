@@ -2,11 +2,12 @@
 
 <?php
 
-// if (isset($_POST['check_index'])){
+if (isset($_POST['check_index'])){
 
-    //  = $_POST['questions'];
-//     $check_index = Check_Student_Index();
-// }
+    $check_index = $_POST['check_index'];
+    
+    $stud_info = Stud_Info($check_index);
+}
 
 
 if(isset($_POST['send_request'])){
