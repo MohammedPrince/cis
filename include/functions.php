@@ -22,17 +22,6 @@ if (!$conn && $sis_con) {
     // echo "Success!";
 }
 
-/*
-Import sis database using mysql source, Not PHPmyadmin
-
-CREATE USER 'cis_sis'@'localhost' IDENTIFIED BY 'cis_sis@root*#';
-GRANT SELECT ON sis.* TO 'cis_sis'@'localhost';
-REVOKE INSERT, UPDATE, DELETE ON sis.* FROM 'cis_sis'@'localhost';
-FLUSH PRIVILEGES;
-exit;
-
-NOET: DELETE THIS COMMEBT SECTION AFTER USER CREATED.
-*/
 
 //========================= Global Variables =======================//
 $alert = '';
