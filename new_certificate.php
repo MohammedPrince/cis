@@ -2,12 +2,6 @@
 
 <?php
 
-if (isset($_POST['check_index'])){
-
-    $check_index = $_POST['check_index'];
-    
-    $stud_info = Stud_Info($check_index);
-}
 
 
 if(isset($_POST['send_request'])){
@@ -117,22 +111,10 @@ if (isset($_POST['send_request'])){
         // echo $alert = alerts(1,"User Added Done");
         echo $alert = alerts(1,"Request Send successfully");
     }
-
-
-
 }
 ?>
 
 
-<?php 
-// if(isset($_POST['check_index'])){
-//     if($check_index == 1){  
-//         echo $alert = alerts(1,'Index is Valid');
-//     }else{
-//         echo $alert = alerts(3,'Index is not Valid');
-//     }
-// }
-?>
 
 <!-- start of the card search -->
 <div class="card card-info">
@@ -143,11 +125,38 @@ if (isset($_POST['send_request'])){
     <!-- search start -->
     <div class="card-body">
 
-        <form action="new_certificate.php" method="POST">
+    <?php
+    if (isset($_POST["check_index"])){
 
+        $std_index = $_POST['std_index'];
+
+        $stud_index = Stud_Index($std_index);
+
+        if($stud_index == 3){
+
+            echo $alert = alerts(3,'Index is not Valid');
+        }else{
+
+          $student_profile_common = student_profile_common_sql($std_index);
+            stud_course_mark_sql($std_index);
+            stud_transcript_sql($std_index);
+            // stud_sql($std_index);
+
+        }
+
+    }
+    
+
+     
+
+    ?>
+
+        <form action="new_certificate.php" method="POST">
         <label for="">Studaent Index</label>
         <div class="input-group input-group-sm">
-            <input type="number" name="std_index" class="form-control">
+
+            <input type="text" name="std_index" class="form-control" required>
+
             <span class="input-group-append">
                 <button type="submit" name="check_index" class="btn btn-info btn-flat">Check!</button>
             </span>
@@ -221,9 +230,9 @@ if (isset($_POST['send_request'])){
 
     <!-- start National numbe-->
     <div class="card-body">
-        <label for="">National Numbe</label>
+        <label for="">National Number</label>
     <div class="col-12">
-    <input type="text" name="national_number" class="form-control" placeholder="National numbe..." required>
+    <input type="text" name="national_number" value="<?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?>" class="form-control" placeholder="National numbe..." required>
     </div>
     </div>
     <!-- end -->
@@ -324,7 +333,7 @@ if (isset($_POST['send_request'])){
          <div class="card-body">
          <label for="">Student Full Nmae in English</label>
          <div class="col-8">
-             <input type="text" name="std_full_name_en" class="form-control" placeholder="Student Full Nmae..." required>
+             <input type="text" name="std_full_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="Student Full Nmae..." required>
             </div>
         </div>
         <!-- Full Name in Arabic end-->

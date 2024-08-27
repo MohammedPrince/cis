@@ -80,10 +80,7 @@ function Login($username, $password)
             header("Location: home.php");
 
         } else {
-            // echo "No user";
             return 1;
-
-            // echo $sqli;
         }
     } else {
         echo $sqli;
@@ -106,12 +103,11 @@ function Add_user($user_full_name, $username, $user_email, $password, $user_type
 {
     global $conn;
 
+    $sqli_check = "SELECT * FROM `users` WHERE `username`='$username' AND `user_type` = '$user_type' AND `dell_user` = 0 ";
 
-    $sqli_check = "SELECT * FROM `users` WHERE `dell_user` = 0 AND `username`='$username' AND `user_type` = '$user_type'  ";
-    // $sqli_check  = "SELECT * FROM `users` WHERE `username`='$username' AND `user_type` = '$user_type' AND `user_staff_id` = '$user_staff_id'";
     $query_ckeck = mysqli_query($conn, $sqli_check);
     if (mysqli_num_rows($query_ckeck) > 0) {
-        return 1;
+        return 2;
 
     } else {
 
@@ -189,21 +185,6 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
         return 2;
     }
 }
-
-
-// function Check_Student_Index(){
-global $conn;
-
-//    $sqli = "SELECT * FROM `student_cert_info` WHERE `dell_std_cert_info` = 0";
-//    if($query = mysqli_query($conn,$sqli)){
-//     return 1;
-
-//          }else{
-//          return $sqli;
-//          }
-// }
-
-
 
 
 function Insert_Student_Info($program, $department, $majer, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en, $std_third_name_en, $std_fourth_name_en, $std_fourth_name_ar, $std_third_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
@@ -292,7 +273,6 @@ function Get_Requests()
     }
 }
 
-
 // sis
 function Get_Program()
 {
@@ -327,7 +307,7 @@ function Get_Department()
 
 
 
-function Stud_Info($stud_id)
+function Stud_Index($std_index)
 {
     global $sis_con;
 
@@ -344,20 +324,39 @@ function Stud_Info($stud_id)
     Retrun data in any methods you want to, But avoid DUPLICATION.
     */
 
-    
-    $stud_profile_sql = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$stud_id' " ;
-    $stud_profile_query = mysqli_query($sis_con, $stud_profile_sql);
+    $index_check = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$std_index'  ";
+     
+   
+    if ($index_check = mysqli_query($sis_con, $index_check)) {
+        if (mysqli_num_rows($index_check)){
+
+            $row = mysqli_fetch_array($index_check);
+            return $row;
+            
+           
+        }
+        
+
+    }
+    // if true select the data of student to display it into fild.
+    else {
+           return 3;
+    }
 
     
-    $student_profile_common_sql = "SELECT * FROM `student_profile_common` WHERE `stud_id` = '$stud_id' " ;
-    $student_profile_common_query = mysqli_query($sis_con, $student_profile_common_sql);
+    // $stud_profile_sql = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$Stud_Index' " ;
+    // $stud_profile_query = mysqli_query($sis_con, $stud_profile_sql);
+
+    
+    // $student_profile_common_sql = "SELECT * FROM `student_profile_common` WHERE `stud_id` = '$Stud_Index' " ;
+    // $student_profile_common_query = mysqli_query($sis_con, $student_profile_common_sql);
 
         
-    $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$stud_id' " ;
-    $stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql);
+    // $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$Stud_Index' " ;
+    // $stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql);
 
-    $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$stud_id' " ;
-    $stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql);
+    // $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$Stud_Index' " ;
+    // $stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql);
 
 
     // $stud_sql = "SELECT * FROM `student_profile_e` SP, `student_profile_common` SC , `stud_course_mark` SM , `stud_transcript_table` ST  WHERE SC.`stud_id` = '$stud_id' and SM.`stud_id` = '$stud_id' and ST.`stud_id` = '$stud_id' " ;
@@ -372,8 +371,47 @@ function Stud_Info($stud_id)
 
 
 
+      function student_profile_common_sql($std_index){
+        global $sis_con;
+           $student_profile_common_sql = "SELECT * FROM `student_profile_common` WHERE `stud_id` = '$std_index' " ;
+           if($student_profile_common_sql = mysqli_query($sis_con, $student_profile_common_sql)){
+
+            $row = mysqli_fetch_array($student_profile_common_sql);
+            return $row;
+
+           }else{
+            echo $student_profile_common_sql;
+           }
 
 
+      }
+      function stud_course_mark_sql($std_index){
+        global $sis_con;
+
+            $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' " ;
+            if($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)){
+                $row = mysqli_fetch_array($stud_course_mark_sql_query);
+                return $row;
+            }else{
+                echo $stud_course_mark_sql;
+            }
+      }
+       function stud_transcript_sql($std_index){
+        global $sis_con;
+            // $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$Stud_Index' " ;
+    // $stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql);
+      }
+    //  function stud_sql($std_index){
+    //    global $sis_con; 
+
+    //        $stud_sql = "SELECT * FROM `student_profile_e` SP, `student_profile_common` SC , `stud_course_mark` SM , `stud_transcript_table` ST  WHERE SC.`stud_id` = '$std_index' and SM.`stud_id` = '$std_index' and ST.`stud_id` = '$std_index' " ;
+    //        if($stud_query = mysqli_query($sis_con, $stud_sql)){
+    //         $row = mysqli_fetch_array($stud_query);
+    //         return $row;
+    //        }else{
+    //         echo $stud_sql;
+    //        }
+    //  }
 
 
 

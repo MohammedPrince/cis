@@ -10,7 +10,6 @@ $get_users = Get_users();
         $username = $_POST['username'];
         $user_email =  $_POST['user_email'];
         $password =  $_POST['password'];
-        // $user_staff_id =  $_POST['user_staff_id'];
         $user_type =  $_POST['user_type'];
 
         $adduser = Add_user($user_full_name,$username,$user_email,$password,$user_type);
