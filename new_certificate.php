@@ -351,16 +351,16 @@ if (isset($_POST['send_request'])){
         <label for="">English Name</label>
         <div class="row">
             <div class="col-3">
-                <input type="text" name="std_first_name_en" class="form-control" placeholder="First Name..." required>
+                <input type="text" name="std_first_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="First Name..." required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_second_name_en"  class="form-control" placeholder="Second Name..." required>
+                <input type="text" name="std_second_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_surname']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_third_name_en"  class="form-control" placeholder="Third Name..." required>
+                <input type="text" name="std_third_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="Third Name..." required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_fourth_name_en"  class="form-control" placeholder="Fourth Name..." required>
+                <input type="text" name="std_fourth_name_en" value="<?php if(isset($stud_index)) echo $stud_index['familyname']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
             </div>
         </div>
     </div>
