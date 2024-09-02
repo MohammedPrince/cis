@@ -274,21 +274,21 @@ function Get_Requests()
 }
 
 // sis
-function Get_Program()
-{
-    global $conn;
+// function Get_Program()
+// {
+//     global $conn;
 
-    $sqli = "SELECT * FROM `program` WHERE dell_program = 0";
-    if ($query = mysqli_query($conn, $sqli)) {
+//     $sqli = "SELECT * FROM `program` WHERE dell_program = 0";
+//     if ($query = mysqli_query($conn, $sqli)) {
 
-        return $query;
+//         return $query;
 
-    } else {
-        echo $sqli;
-        die;
+//     } else {
+//         echo $sqli;
+//         die;
 
-    }
-}
+//     }
+// }
 function Get_Department()
 {
     // global $conn;
@@ -396,10 +396,32 @@ function Stud_Index($std_index)
                 echo $stud_course_mark_sql;
             }
       }
-       function stud_transcript_sql($std_index){
+      
+    // get Bachelor cgpa and gpa
+       function stud_transcript_sql($std_index, $current_sem){
         global $sis_con;
-            // $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$Stud_Index' " ;
-    // $stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql);
+        $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$std_index' AND `semester` = '$current_sem' " ;
+        if($stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql)){
+            $row = mysqli_fetch_array($stud_transcript_query);
+                return $row;
+
+        }else{
+                echo $stud_transcript_sql;
+            }
+      }
+
+      function Total_Hours($stud_index){
+        global $sis_con;
+        $total_hours_sql = "SELECT SUM(course_units) AS unit FROM `stud_course_mark` WHERE `stud_id` = '$stud_index'";
+        if($total_hours_query = mysqli_query($sis_con, $total_hours_sql)){
+            $row = mysqli_fetch_assoc($total_hours_query);
+            $num_rows = $row['unit'];
+            return $num_rows;
+
+        }else{
+                echo $total_hours_sql;
+            }
+
       }
     //  function stud_sql($std_index){
     //    global $sis_con; 
@@ -415,6 +437,44 @@ function Stud_Index($std_index)
 
 
 
+
+    function Get_Nationalty($nationality_code){
+
+        if($nationality_code==0){
+            return "Foreign";
+         }
+         if($nationality_code==1){
+            return "Sudanese";
+         }
+         if($nationality_code==4){
+            return "Refugees";
+         }
+         
+    }
+
+    function Get_Program($program_code){
+         if($program_code==1){
+            return "Bachelor";
+         }
+         if($program_code==2){
+            return "Diploma";
+         }
+         if($program_code==3){
+            return "Master";
+         }
+         if($program_code==4){
+            return "PhD";
+         }
+         if($program_code==5){
+            return "CIT";
+         }
+         if($program_code==6){
+            return "COA";
+         }
+         if($program_code==7){
+            return "HND";
+         }
+    }
 
 
 ?>
