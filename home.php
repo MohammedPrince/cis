@@ -5,6 +5,12 @@ include("include/header.php");
 
 ?>
 
+<?php 
+
+$total_request = Total_Request();
+
+
+?>
 
 <div class="content-wrapper">
     <!-- start of nave link active -->
@@ -93,11 +99,14 @@ include("include/header.php");
 
 
 
+
 <!--  -->
 <div class="col-lg-2 col-4">
 <div class="small-box bg-secondary">
 <div class="inner">
-<h3>65</h3>
+<h3 >
+    <input type="number" value="<?php if(isset($total_request)) echo $total_request; else echo "" ;?>" name="" id="">
+</h3>
 <p>Total Request Inprogress</p>
 </div>
 <div class="icon">

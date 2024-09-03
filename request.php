@@ -56,13 +56,14 @@ $get_requests = Get_Requests();
 <table id="example1" class="table table-bordered table-striped">
 <thead>
     <tr>
-        <th># Number</th>
-        <th>Request From</th>
-        <th>Student Name</th>
-        <th>Student Index</th>
-        <th>Action</th>
+        <th  class="center-align"># Number</th>
+        <th  class="center-align">Request From</th>
+        <th  class="center-align">Student Full Name</th>
+        <th  class="center-align">Student Index</th>
+        <th  class="center-align">Action</th>
         <!-- <th>Cancel</th> -->
         <!-- <th>Upload Document</th> -->
+
     </tr>
 </thead>
     
@@ -71,29 +72,39 @@ $get_requests = Get_Requests();
     while($row = mysqli_fetch_array($get_requests)){ ?>
     <tbody>
         <tr>
-            <td><?php
+            <td class="center-align"><?php
             echo $i++; 
             ?></td>
-             <td><?php
+             <td class="center-align"><?php
              echo $row['user_full_name']; 
              ?></td>
-             <td><?php
+             <td class="center-align"><?php
               echo $row['std_full_name_en']; 
              ?></td>
-               <td>
+               <td class="center-align">
             <?php
               echo $row['std_index']; 
              ?></td>
 
-            <td><a data-toggle="modal" data-target="#modal-xl" class="btn btn-info btn-sm" href="#"  >
-            <i class="fas fa-eye"></i> View</a></td>
+            <td class="center-align">
+                <button type="button" class="btn btn-info"  class="btn btn-info btn-sm" href="#">
+                    <i class="fas fa-eye"></i> View</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-info"  class="btn btn-info btn-sm" href="#">
+                    <ion-icon name="reload-outline"></ion-icon> Reject</button>
+            </td>
             
         </tr>
+        <style>
+            .center-align {
+                text-align: center;
+            }
+        </style>
     </tbody>
  <?php 
 } 
 ?> 
-
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=". bd-example-modal-lg">Large modal</button> -->
 
    
 <!-- <tfoot>
@@ -106,11 +117,18 @@ $get_requests = Get_Requests();
 </tr>
 </tfoot> -->
 </table>
-</div>
+
+<!--  -->
 
 </div>
 
 </div>
+
+</div>
+<!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-xl">
+Launch Extra Large Modal
+</button> -->
+<!--  -->
 
 </div>
 

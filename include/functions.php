@@ -173,21 +173,30 @@ function Get_paper()
     }
 }
 
+
 function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 {
     global $conn;
 
-    $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) VALUES ($paper_number, $serial_number_start,$serial_number_end)";
-    if ($query = mysqli_query($conn, $sqli)) {
-        return $query;
+    $serial_count = $serial_number_end - $serial_number_start + 1;
 
-    } else {
-        return 2;
+    if ($serial_count == $paper_number) {
+        
+        $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
+        if ($query = mysqli_query($conn, $sqli)) {
+            return 1; 
+        } else {
+            return 2;
+        }
+        } else {
+            return 3;
+        }
     }
-}
 
 
-function Insert_Student_Info($program, $department, $majer, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en, $std_third_name_en, $std_fourth_name_en, $std_fourth_name_ar, $std_third_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
+
+
+function Insert_Student_Info($std_index, $program, $faculty, $majer, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
 {
 
     global $conn;
@@ -196,16 +205,16 @@ function Insert_Student_Info($program, $department, $majer, $nationality, $natio
 
     $sqli_1 = "INSERT INTO
          `student_basic_info`
-         (`std_full_name_en`, `std_full_name_ar`, `std_first_name_en`, `std_second_name_en`, `std_third_name_en`, `std_fourth_name_en`, `std_first_name_ar`, `std_second_name_ar`, `std_third_name_ar`, `std_fourth_name_ar`, `std_email`, `std_mobail`)
+         (`std_index`, `std_full_name_en`, `std_full_name_ar`, `std_first_name_en`, `std_second_name_en`,  `std_fourth_name_en`, `std_first_name_ar`, `std_second_name_ar`,  `std_fourth_name_ar`, `std_email`, `std_mobail`)
          VALUES 
-         ('$std_full_name_en', '$std_full_name_ar', '$std_first_name_en', '$std_second_name_en', '$std_third_name_en', '$std_fourth_name_en', '$std_first_name_ar', '$std_second_name_ar', '$std_third_name_ar', '$std_fourth_name_ar', '$std_email', '$std_mobail')";
+         ('$std_index', '$std_full_name_en', '$std_full_name_ar', '$std_first_name_en', '$std_second_name_en', '$std_fourth_name_en', '$std_first_name_ar', '$std_second_name_ar',  '$std_fourth_name_ar', '$std_email', '$std_mobail')";
     if ($query_1 = mysqli_query($conn, $sqli_1)) {
 
         $std_info_last_id = Get_Std_Info_Last_Id();
 
-        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `department`, `majer`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `divition`, `senate_on`)
+        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `faculty`, `majer`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `divition`, `senate_on`)
           VALUES
-           ('$std_info_last_id','$program','$department','$majer','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$divition', '$senate_on')";
+           ('$std_info_last_id','$program','$faculty','$majer','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$divition', '$senate_on')";
 
         if ($query_2 = mysqli_query($conn, $sqli_2)) {
 
@@ -227,7 +236,7 @@ function Request()
 
 
     $std_cert_info_last_id = Get_Std_Cert_Info_Last_Id();
-    $sqli = "INSERT INTO `request`(`std_cert_id`, `user_id`) VALUES ('$std_cert_info_last_id', '$user_id')";
+    $sqli = "INSERT INTO `request`(`std_cert_id`, `user_id`, `certificate_type`) VALUES ('$std_cert_info_last_id', '$user_id', '$')";
 
     if ($query = mysqli_query($conn, $sqli)) {
         return $query;
@@ -237,6 +246,19 @@ function Request()
     }
 }
 
+function Total_Request(){
+    global $conn;
+    $total_request_sql = "SELECT SUM(request_id) AS total_request FROM `request` WHERE `dell_request` = '0'";
+    if($total_request_query = mysqli_query($conn, $total_request_sql)){
+        $row = mysqli_fetch_assoc($total_request_query);
+        $num_rows = $row['total_request'];
+        return $num_rows;
+
+    }else{
+            echo $total_request_sql;
+        }
+
+  }
 function Get_Std_Info_Last_Id()
 {
     global $conn;
@@ -254,6 +276,16 @@ function Get_Std_Cert_Info_Last_Id()
     $query = mysqli_query($conn, $sql_id);
     $values = mysqli_fetch_assoc($query);
     $num_rows = $values['cert_id'];
+    return $num_rows;
+
+}
+function Get_Cert_Type()
+{
+    global $conn;
+    $sql_id = "SELECT MAX(std_cert_id) AS cert_type FROM student_cert_info";
+    $query = mysqli_query($conn, $sql_id);
+    $values = mysqli_fetch_assoc($query);
+    $num_rows = $values['std_cert_id'];
     return $num_rows;
 
 }
@@ -289,21 +321,37 @@ function Get_Requests()
 
 //     }
 // }
-function Get_Department()
-{
-    // global $conn;
 
-    // $sqli = "SELECT * FROM `department` WHERE dell_department = 0";
-    // if($query = mysqli_query($conn,$sqli)){
+function Get_Faculty() {
+    global $sis_con;
+    $output = '';
 
-    //     return $query;
+    $sqli = "SELECT * FROM `faculty` WHERE `deleted` = '0' ORDER BY `faculty_desc` ";
 
-    // }else{
-    //     echo $sqli;
-    //     die;
+    $result = mysqli_query($sis_con, $sqli);
 
-    // }
+    while ($row = mysqli_fetch_assoc($result)) {
+        $output .= '<option value="' . $row['faculty_code'] . '">' . $row['faculty_desc_e'] . '</option>';
+    }
+
+    return $output;
 }
+function Get_Major(){
+    global $sis_con;
+    $output = '';
+
+    $sqli = "SELECT * FROM `major` WHERE `deleted` = '0' ORDER BY `major_desc_e` ";
+
+    $result = mysqli_query($sis_con, $sqli);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $output .= '<option value="' . $row['major_code'] . '">' . $row['major_desc_e'] . '</option>';
+    }
+
+    return $output;
+  
+}
+
 
 
 
@@ -325,22 +373,18 @@ function Stud_Index($std_index)
     */
 
     $index_check = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$std_index'  ";
-     
    
     if ($index_check = mysqli_query($sis_con, $index_check)) {
         if (mysqli_num_rows($index_check)){
 
             $row = mysqli_fetch_array($index_check);
             return $row;
-            
-           
         }
-        
 
     }
     // if true select the data of student to display it into fild.
     else {
-           return 3;
+        return 3;
     }
 
     
@@ -363,9 +407,6 @@ function Stud_Index($std_index)
     // $stud_query = mysqli_query($sis_con, $stud_sql);
 
  
-
-
-
 }
 
 
@@ -477,4 +518,19 @@ function Stud_Index($std_index)
     }
 
 
+
+// function calculateSerial($numPapers, $startingSerial) {
+
+//     global $conn;
+//     $sqli = "SELECT * FROM `papers` WHERE `dell_paper` = 0 ";
+
+
+
+
+// }
+
+
+
+
 ?>
+

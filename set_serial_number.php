@@ -16,9 +16,7 @@ if(isset($_POST['insert'])){
 
     $insert_paper = Insert_paper($paper_number,$serial_number_start, $serial_number_end);
 
-    // if($insert_paper == 1){
-    // echo $alert = alerts(1,"Total Paper Added is " . $paper_number . " With serial number Start with FU" . $serial_number_start);
-    // }
+
 }
 
 ?>
@@ -59,13 +57,16 @@ if(isset($_POST['insert'])){
                                 <?PHP
                                 if(isset($_POST["insert"])){
                                     
+                                    
                                 if($insert_paper == 1){
                                     echo $alert = alerts(1,"Total Paper Added is " . $paper_number . " With serial number Start with FU" . $serial_number_start);
                                     }
-                                    if($insert_paper == 2){
-                                        echo $alert = alerts(3,"Something wrong plase Relod the page");
+                                if ($insert_paper == 2){
+                                        echo $alert = alerts(4,"Mismatch! The number of serial numbers does not match the number of papers.");
                                         }
+                                      
                                     }
+                                    
                             
                                 ?>
                                 <label for="">New Paper</label>
@@ -121,7 +122,7 @@ while($row = mysqli_fetch_array($get_paper)){ ?>
     <tr>
         <td><?php echo $i++; ?></td>
         <td><?php echo $row['paper_number']; ?></td>
-        <td><?php echo 'FU ' . $row['serial_number_start']; ?></td>
+        <td><?php echo $row['serial_number_start']; ?></td>
         <td><?php echo $row['serial_number_end']; ?></td>
         <td><?php echo $row['created_at']; ?></td>
      </tr>
