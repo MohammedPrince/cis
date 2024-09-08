@@ -105,7 +105,7 @@ $total_request = Total_Request();
 <div class="small-box bg-secondary">
 <div class="inner">
 <h3 >
-    <input type="number" value="<?php if(isset($total_request)) echo $total_request; else echo "" ;?>" name="" id="">
+   <?php if(isset($total_request)) echo $total_request; else echo "" ;?>
 </h3>
 <p>Total Request Inprogress</p>
 </div>

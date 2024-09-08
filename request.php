@@ -60,6 +60,7 @@ $get_requests = Get_Requests();
         <th  class="center-align">Request From</th>
         <th  class="center-align">Student Full Name</th>
         <th  class="center-align">Student Index</th>
+        <th  class="center-align">Statuse</th>
         <th  class="center-align">Action</th>
         <!-- <th>Cancel</th> -->
         <!-- <th>Upload Document</th> -->
@@ -87,12 +88,19 @@ $get_requests = Get_Requests();
              ?></td>
 
             <td class="center-align">
-                <button type="button" class="btn btn-info"  class="btn btn-info btn-sm" href="#">
-                    <i class="fas fa-eye"></i> View</button>
-                    &nbsp;&nbsp;
-                    <button type="button" class="btn btn-info"  class="btn btn-info btn-sm" href="#">
-                    <ion-icon name="reload-outline"></ion-icon> Reject</button>
+            <a  class="btn btn-primary"  class="btn btn-info btn-sm" href="#">
+           </i>Printed</a>
             </td>
+
+            <td class="center-align">
+                <a  class="btn btn-info"  class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
+                    <i class="fas fa-eye"></i> View</a>
+                    &nbsp;&nbsp;
+                    <!-- <button  class="btn btn-info"  class="btn btn-info btn-sm" href="#"> -->
+                    <button href="request.php?reject_id=<?php  echo base64_encode($row['user_id']);  ?>"   class="btn btn-success btn-sm"  target="_self">
+                    <ion-icon name="cloud-upload-outline"></ion-icon> Upload</button>
+            </td>
+            
             
         </tr>
         <style>

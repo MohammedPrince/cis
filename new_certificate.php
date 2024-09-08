@@ -4,12 +4,26 @@
 
 
 
-if(isset($_POST['send_request'])){
+if(isset($_POST['send_request']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+
+   
+
+        $std_photo = $_FILES['std_photo'];
+    
+        $image_name = $_FILES['std_photo']['name'];
+        $image_type = $_FILES['std_photo']['type'];
+        $image_temp = $_FILES['std_photo']['tmp_name'];
+        $image_size = $_FILES['std_photo']['size'];
+
+        move_uploaded_file($image_temp, 'C:\xampp\htdocs\GitRepo\cis\uploads\\' . $image_name);
+
+    
+
 
     $std_index = $_POST['std_index'];
     $program = $_POST['program'];
-    $faculty = $_POST['Faculty'];
-    $majer = $_POST['majer'];
+    $faculty = $_POST['faculty'];
+    $major = $_POST['major'];
     $nationality = $_POST['nationality'];
     $national_number = $_POST['national_number'];
     $ministery_number = $_POST['ministery_number'];
@@ -37,7 +51,7 @@ if(isset($_POST['send_request'])){
     $std_email = $_POST['std_email'];
     $std_mobail = $_POST['std_mobail'];
 
-    // $ = $_POST['passport'];
+    $std_photo = $_POST['std_photo'];
     // $ = $_POST['photo'];
 
     $mode = $_POST['mode'];
@@ -48,7 +62,7 @@ if(isset($_POST['send_request'])){
     $insert_student_info = Insert_Student_Info($std_index,
         $program,
         $faculty,
-        $majer,
+        $major,
         $nationality,
         $national_number,
         $ministery_number,
@@ -149,18 +163,18 @@ if (isset($_POST['send_request'])){
         }
 
     }
-    
-    if(isset($_POST['std_index'])){
-        
-        $std_index = $_POST['std_index'];
-        $std_index = student_profile_common_sql($std_index);
-    }
 
-     
+
+    
 
     ?>
+    <!--search  end -->
 
-        <form action="new_certificate.php" method="POST">
+ 
+
+
+
+<form action="new_certificate.php" method="POST" enctype="multipart/form-data">
 
         <label for="">Studaent Index</label>
         <div class="input-group input-group-sm">
@@ -172,7 +186,7 @@ if (isset($_POST['send_request'])){
             </span>
         </div>
     </div>
-    </form>
+</form>
     <!--search  end -->
 
 <form action="new_certificate.php" method="POST">
@@ -476,7 +490,7 @@ $(document).ready(function() {
              <label for="exampleInputFile">Documents Upload</label>
              <div class="input-group">
                  <div class="custom-file">
-                     <input type="file" name="std_photo" class="custom-file-input"  >
+                     <input type="file" name="std_photo" value="" class="custom-file-input"  >
                      <label class="custom-file-label" for="exampleInputFile">Choose Photograph</label>
                     </div>
                     <div class="input-group-append">
@@ -486,7 +500,7 @@ $(document).ready(function() {
                 <br><br>
              <div class="input-group">
                  <div class="custom-file">
-                     <input type="file" name="std_passport" class="custom-file-input"  >
+                     <input type="file" name="std_passport" value="" class="custom-file-input"  >
                      <label class="custom-file-label" for="exampleInputFile">Choose Passport</label>
                     </div>
                     <div class="input-group-append">

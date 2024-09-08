@@ -81,7 +81,7 @@ include("include/functions.php");
                     <span class="fas fa-lock"></span>
                 </div>
             </div>
-        <input type="password" name="password" required class="form-control" placeholder="Password">
+        <input type="password" name="password"  placeholder="Password"class="form-control" id="exampleInputPassword1"  >
 
         </div>
   

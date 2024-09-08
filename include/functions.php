@@ -196,7 +196,7 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 
 
 
-function Insert_Student_Info($std_index, $program, $faculty, $majer, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
+function Insert_Student_Info($std_index, $program, $faculty, $major, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
 {
 
     global $conn;
@@ -212,9 +212,9 @@ function Insert_Student_Info($std_index, $program, $faculty, $majer, $nationalit
 
         $std_info_last_id = Get_Std_Info_Last_Id();
 
-        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `faculty`, `majer`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `divition`, `senate_on`)
+        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `faculty`, `major`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `divition`, `senate_on`)
           VALUES
-           ('$std_info_last_id','$program','$faculty','$majer','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$divition', '$senate_on')";
+           ('$std_info_last_id','$program','$faculty','$major','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$divition', '$senate_on')";
 
         if ($query_2 = mysqli_query($conn, $sqli_2)) {
 
@@ -372,12 +372,12 @@ function Stud_Index($std_index)
     Retrun data in any methods you want to, But avoid DUPLICATION.
     */
 
-    $index_check = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$std_index'  ";
+    $sqli = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$std_index'  ";
    
-    if ($index_check = mysqli_query($sis_con, $index_check)) {
-        if (mysqli_num_rows($index_check)){
+    if ($sqli = mysqli_query($sis_con, $sqli)) {
+        if (mysqli_num_rows($sqli)){
 
-            $row = mysqli_fetch_array($index_check);
+            $row = mysqli_fetch_array($sqli);
             return $row;
         }
 
@@ -421,7 +421,7 @@ function Stud_Index($std_index)
             return $row;
 
            }else{
-            echo $student_profile_common_sql;
+            return 3;
            }
 
 
