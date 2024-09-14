@@ -236,7 +236,7 @@ function Request()
 
 
     $std_cert_info_last_id = Get_Std_Cert_Info_Last_Id();
-    $sqli = "INSERT INTO `request`(`std_cert_id`, `user_id`, `certificate_type`) VALUES ('$std_cert_info_last_id', '$user_id', '$')";
+    $sqli = "INSERT INTO `request`(`std_cert_id`, `user_id`) VALUES ('$std_cert_info_last_id', '$user_id')";
 
     if ($query = mysqli_query($conn, $sqli)) {
         return $query;
@@ -244,6 +244,21 @@ function Request()
     } else {
         echo $sqli;
     }
+}
+
+function Get_Requests_Data($request_id_de){
+    global $conn;
+
+    $sql = "SELECT * FROM `student_basic_info`bi, `student_cert_info`si, `request`r,`users`u WHERE bi.student_basic_info_id = si.student_basic_info_id AND si.std_cert_id = r.`std_cert_id` AND u.user_id  = r.user_id AND
+    r.dell_request = 0 AND r.request_id = '$request_id_de'";
+
+    if($query = mysqli_query($conn, $sql)){
+
+        $row = mysqli_fetch_array($query);
+        return $row;
+
+       }
+
 }
 
 function Total_Request(){
@@ -322,34 +337,70 @@ function Get_Requests()
 //     }
 // }
 
+
+
 function Get_Faculty() {
-    global $sis_con;
-    $output = '';
 
-    $sqli = "SELECT * FROM `faculty` WHERE `deleted` = '0' ORDER BY `faculty_desc` ";
+    global $conn;
+    
+    $query = "SELECT * FROM `faculty` WHERE `deleted` = 0 ";
 
-    $result = mysqli_query($sis_con, $sqli);
+    if ($query = mysqli_query($conn, $query)) {
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $output .= '<option value="' . $row['faculty_code'] . '">' . $row['faculty_desc_e'] . '</option>';
+        return $query;
+
+    } else {
+        echo $query;
+        die;
+
     }
-
-    return $output;
 }
+
+function  Get_Faculty_Name($faculty_code){
+
+    global $conn;
+
+    $sql = "SELECT * FROM `faculty` WHERE `faculty_code` =  $faculty_code";
+    if($query = mysqli_query($conn, $sql)){
+        $row = mysqli_fetch_array($query);
+            return $row['faculty_desc_e'];
+
+    }else{
+            echo $query;
+        }
+
+}
+
+
 function Get_Major(){
-    global $sis_con;
-    $output = '';
+    global $conn;
+    
+    $query = "SELECT * FROM `major` WHERE `deleted` = 0 ";
 
-    $sqli = "SELECT * FROM `major` WHERE `deleted` = '0' ORDER BY `major_desc_e` ";
+    if ($query = mysqli_query($conn, $query)) {
 
-    $result = mysqli_query($sis_con, $sqli);
+        return $query;
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $output .= '<option value="' . $row['major_code'] . '">' . $row['major_desc_e'] . '</option>';
+    } else {
+        echo $query;
+        die;
+
     }
-
-    return $output;
   
+}
+
+function Get_Major_Name($major_code){
+    global $conn;
+
+    $sql = "SELECT * FROM `major` WHERE `major_code` =  $major_code";
+    if($query = mysqli_query($conn, $sql)){
+        $row = mysqli_fetch_array($query);
+            return $row['major_desc_e'];
+
+    }else{
+            echo $query;
+        }
+
 }
 
 
@@ -374,7 +425,8 @@ function Stud_Index($std_index)
 
     $sqli = "SELECT * FROM `student_profile_e` WHERE `stud_id` = '$std_index'  ";
    
-    if ($sqli = mysqli_query($sis_con, $sqli)) {
+    if ($sqli = mysqli_query($sis_con, $sqli)) {    
+
         if (mysqli_num_rows($sqli)){
 
             $row = mysqli_fetch_array($sqli);
@@ -384,7 +436,7 @@ function Stud_Index($std_index)
     }
     // if true select the data of student to display it into fild.
     else {
-        return 3;
+        return 2;
     }
 
     

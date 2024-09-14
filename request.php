@@ -19,6 +19,40 @@ $get_requests = Get_Requests();
         $adduser = Add_user($user_full_name,$username,$user_email,$password,$user_type);
          }                 
  ?>
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'POST'):
+    $photo = $_FILES['doc'];
+
+    // error handeling
+    $errors = array();
+    
+    $image_name = $_FILES['doc']['name'];
+    $image_type = $_FILES['doc']['type'];
+    $image_temp = $_FILES['doc']['tmp_name'];
+    $image_size = $_FILES['doc']['size'];
+
+    // check the handeling file
+
+    if($image_size > 11328875670)
+        $errors[] =  $alert = alerts(4,"File Can not More than 10 MG");
+
+endif;
+
+if(empty($errors)):
+    move_uploaded_file($image_temp, $_SERVER['DOCUMENT_ROOT'] . '\GitRepo\cis\include\uploads\\' . $image_name);
+
+    echo $alert = alerts(1,"Upload Done");
+else:
+
+foreach ($errors as $error):
+    echo $error;
+endforeach;
+
+    // move_uploaded_file($image_temp, $_SERVER['DOCUMENT_ROOT'] . '\GitRepo\cis\include\uploads\\' . $image_name);
+
+ endif;
+
+ ?>
 <div class="content-wrapper">
 
 
@@ -62,6 +96,7 @@ $get_requests = Get_Requests();
         <th  class="center-align">Student Index</th>
         <th  class="center-align">Statuse</th>
         <th  class="center-align">Action</th>
+        <th  class="center-align">Files</th>
         <!-- <th>Cancel</th> -->
         <!-- <th>Upload Document</th> -->
 
@@ -95,11 +130,17 @@ $get_requests = Get_Requests();
             <td class="center-align">
                 <a  class="btn btn-info"  class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
                     <i class="fas fa-eye"></i> View</a>
-                    &nbsp;&nbsp;
-                    <!-- <button  class="btn btn-info"  class="btn btn-info btn-sm" href="#"> -->
-                    <button href="request.php?reject_id=<?php  echo base64_encode($row['user_id']);  ?>"   class="btn btn-success btn-sm"  target="_self">
-                    <ion-icon name="cloud-upload-outline"></ion-icon> Upload</button>
             </td>
+
+            <!-- if condyion if the request Statuse hase ben done and Printed this form will be allow nither that
+              -->
+            <form action="request.php"  method="POST" enctype="multipart/form-data">
+            <td>       
+                    <!-- <button  class="btn btn-info"  class="btn btn-info btn-sm" href="#"> -->
+                    <input type="file" name="doc"  value="">
+                   <button class="btn btn-success btn-sm"><ion-icon name="cloud-upload-outline"></ion-icon> Upload</button> 
+                </td>
+            </form>
             
             
         </tr>

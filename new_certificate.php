@@ -3,19 +3,21 @@
 <?php
 
 
+$get_faculty = Get_Faculty();
+$get_major = Get_Major();
 
-if(isset($_POST['send_request']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
+if(isset($_POST['send_request']) ){
 
    
-
-        $std_photo = $_FILES['std_photo'];
+// && $_SERVER['REQUEST_METHOD'] == 'POST'
+//         $std_photo = $_FILES['std_photo'];
     
-        $image_name = $_FILES['std_photo']['name'];
-        $image_type = $_FILES['std_photo']['type'];
-        $image_temp = $_FILES['std_photo']['tmp_name'];
-        $image_size = $_FILES['std_photo']['size'];
+//         $image_name = $_FILES['std_photo']['name'];
+//         $image_type = $_FILES['std_photo']['type'];
+//         $image_temp = $_FILES['std_photo']['tmp_name'];
+//         $image_size = $_FILES['std_photo']['size'];
 
-        move_uploaded_file($image_temp, 'C:\xampp\htdocs\GitRepo\cis\uploads\\' . $image_name);
+//         move_uploaded_file($image_temp, 'C:\xampp\htdocs\GitRepo\cis\uploads\\' . $image_name);
 
     
 
@@ -92,6 +94,26 @@ if(isset($_POST['send_request']) && $_SERVER['REQUEST_METHOD'] == 'POST'){
 
 ?>
 
+<!-- Depended Select -->
+<script type="text/javascript" src="include/dist/js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    
+	$("#faculty").change(function() {
+		// $(this).after('<div id="loader"><img src="img/loading.gif" alt="loading subcategory" /></div>');
+		$.get('get_majors.php?faculty=' + $(this).val(), function(data) {
+			$("#major").html(data);
+			$('#loader').slideUp(200, function() {
+				$(this).remove();
+			});
+		});	
+    });
+
+});
+</script>
+
+<!-- Depended Select -->
+
 <div class="content-wrapper">
     <!-- start of nave link active -->
     <div class="content-header">
@@ -148,11 +170,11 @@ if (isset($_POST['send_request'])){
 
         $stud_index = Stud_Index($std_index);
 
-        if($stud_index == 3){
+        if($stud_index == ""){
 
             echo $alert = alerts(3,'Index is not Valid');
+           
         }else{
-
           $student_profile_common = student_profile_common_sql($std_index);
           $current_sem = $student_profile_common['curr_sem'];
           $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
@@ -164,8 +186,6 @@ if (isset($_POST['send_request'])){
 
     }
 
-
-    
 
     ?>
     <!--search  end -->
@@ -185,6 +205,9 @@ if (isset($_POST['send_request'])){
                 <button type="submit" name="check_index" class="btn btn-info btn-flat">Check!</button>
             </span>
         </div>
+
+
+
     </div>
 </form>
     <!--search  end -->
@@ -225,49 +248,81 @@ if (isset($_POST['send_request'])){
 
     <input type="hidden" value="<?php if(isset($student_profile_common)) echo $student_profile_common['stud_id']; else echo "" ;?>" name="std_index">  
 
-    <!-- start Faculty-->
+    <!-- Faculty start-->
     <div class="card-body">
     <label>Faculty</label>
-        <select class="form-control" name="faculty" id="faculty" >
+    <?php if(isset($student_profile_common)) {  ?>
+
+    <input type="text" class="form-control" readonly value="<?php  echo Get_Faculty_Name($student_profile_common['faculty_code']); ?>" name="faculty">  
+
+
+    <?php }else{ ?>
+        
+
+        <select class="form-control" name="faculty" id="faculty" required="required">
             <option value="">Select Faculty...</option>
-            <?php echo Get_Faculty();  ?>
-        </select>
+            
+            <?php while($row=mysqli_fetch_array($get_faculty)){  ?>
+
+            <option value="<?php  echo $row['faculty_code'];  ?>" >
+
+            <?php  
+                 echo $row['faculty_desc_e'];
+            ?>
+
+            </option>
+            <?php } ?>
+       
+       <?php } ?>
+
+
+       </select>
+       
     </div>
-    <!-- end -->
+    <!-- Faculty end -->
 
 
-    <!-- start Majer-->
+    <!-- Major start-->
     <div class="card-body">
     <label>Major</label>
-        <select class="form-control" name="major" id="major">
-            <option value="">Select Majer...</option>
-            <?php echo Get_Major();  ?>
-        </select>
+    <?php if(isset($student_profile_common)) {  ?>
+
+<input type="text" class="form-control" readonly value="<?php  echo Get_Major_Name($student_profile_common['major_code']); ?>" name="major">  
+
+
+<?php }else{ ?>
+    
+
+    <select class="form-control" name="major" id="major" required="required">
+        <option value="">Select Major...</option>
+        
+
+   <?php } ?>
+
+
+   </select>
     </div>
-    <!-- end -->
+    <!-- Major end -->
 
-     <!-- script -->
-     <script>
-$(document).ready(function() {
-    $('#faculty').on('change', function() {
-        var facultyId = $(this).val();
+    <!-- major original code start !! -->
+    <!-- <select class="form-control" name="major" id="major" required="required">
+        <option value="">Select Major...</option>
+        
+        <?php //while($row=mysqli_fetch_array($get_major)){  ?>
 
-        if (facultyId) {
-            $.ajax({
-                type: 'POST',
-                url: 'function.php',
-                data: 'faculty_code=' + facultyId,
-                success: function(html) {
-                    $('#major').html(html);
-                }
-            });
-        } else {
-            $('#major').html('<option value="">Select Major...</option>');
-        }
-    });
-});
-</script>
-     <!-- script -->
+        <option value="<?php  //echo $row['major_code'];  ?>" >
+
+        <?php  
+             //echo $row['major_desc_e'];
+        ?>
+
+        </option>
+        <?php //} ?>
+   </select> -->
+    <!-- major original code end !! -->
+
+
+
 
 
     <!-- start Nationality-->
@@ -298,6 +353,8 @@ $(document).ready(function() {
         </select>
     </div>
     <!-- end -->
+
+
 
 
     <!-- start National numbe-->
