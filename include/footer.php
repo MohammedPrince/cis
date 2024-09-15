@@ -12,16 +12,36 @@ All rights reserved.
 </aside> -->
 
 </div>
+<script src="plugins/jquery/jquery.min.js"></script>
+
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="plugins/datatables-bs4/"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src=".plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/jszip/jszip.min.js"></script>
+<script src="plugins/pdfmake/pdfmake.min.js"></script>
+<script src="plugins/pdfmake/vfs_fonts.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+<script src="./include/dist/js/adminlte.min2167.js?v=3.2.0"></script>
+
+<script src="./include/dist/js/demo.js"></script>
 
 
 
-<script src="include/plugins/jquery/jquery.min.js"></script>
+<script src="./include/plugins/jquery/jquery.min.js"></script>
 
-<script src="include/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="./include/plugins/jquery-ui/jquery-ui.min.js"></script>
 
-<script>
+<!-- <script>
   $.widget.bridge('uibutton', $.ui.button)
-</script>
+</script> -->
 
 <script src="./include/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -40,7 +60,7 @@ All rights reserved.
 <script src="./include/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 
 <script src="./include/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- <script src="../../plugins/summernote/summernote-bs4.min.js"></script> -->
+
 
 
 <script src="./include/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
@@ -51,20 +71,7 @@ All rights reserved.
 
 <script src="./include/dist/js/pages/dashboard.js"></script>
 
-<!-- datatable -->
 
-<script src="./include/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="./include/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="./include/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="./include/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="./include/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="./include/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="./include/plugins/jszip/jszip.min.js"></script>
-<script src="./include/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="./include/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="./include/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="./include/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="./include/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
 <script src="./include/plugins/jquery/jquery.min.js"></script>
 
@@ -76,7 +83,7 @@ All rights reserved.
 
 <script src="./include/dist/js/adminlte.min2167.js?v=3.2.0"></script>
 
-<script src="./include/dist/js/demo.js"></script>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 

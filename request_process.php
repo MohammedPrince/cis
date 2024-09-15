@@ -334,9 +334,9 @@ if(isset($_POST['send_request'])){
  
     <div class="card-footer">
         
-        <button type="submit" name="print"  class="btn btn-info  btn-sm float-right"><i>
+        <a href="cert_temp.php?std=<?php echo $request_data['std_full_name_en'];  ?>" name="print"  class="btn btn-info  btn-sm float-right"><i>
         <ion-icon name="print-outline"></ion-icon>
-        </i>Print</button>
+        </i>Print</a>
 
         <div class="text-center">
             <button type="submit" name="return" class="btn btn-primary btn-sm float-center"><i>

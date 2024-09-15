@@ -411,7 +411,7 @@ function Stud_Index($std_index)
     global $sis_con;
 
     //SIS Tables :
-
+// student_profile
     //student_profile_e
     //student_profile_common
     //stud_course_mark

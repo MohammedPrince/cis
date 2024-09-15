@@ -86,56 +86,67 @@ if(isset($_POST['insert'])){
                                         
                                     </span>
                                 </div>
-                                
-                                
                             </div>
                         </div>
                     </form>
                     <!-- end -->
-                </div>
-                
-            </div>
-            
 
-<!-- table start -->
-<div class="card">
-<div class="card-header">
-<h3 class="card-title">Paper and Serial</h3>
+                    <!-- table start-->
+                    <section class="content">
+
+                        <div class="container-fluid">
+                            
+                        <div class="row">
+                        <div class="col-12">
+                        <div class="card">
+    <div class="card-header"><h3 class="card-title">All Paper</h3></div>
+    <div class="card-body">
+        <table id="example2" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Total Paper</th>
+                    <th>Serial Start</th>
+                    <th>Serial End</th>
+                    <th>Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <?php 
+                    $i =1;
+                    while($row = mysqli_fetch_array($get_paper)){ ?>
+                                    
+                    <td><?php echo $i++; ?></td>
+                    <td><?php echo $row['paper_number']; ?></td>
+                    <td><?php echo $row['serial_number_start']; ?></td>
+                    <td><?php echo $row['serial_number_end']; ?></td>
+                    <td><?php echo $row['created_at']; ?></td>
+                </tr>
+            </tbody>
+            <?php } ?>
+        </table>
+    </div>
+</div>
+                            
+                        </div>
+                        </div>
+
+                        </div>
+                    </section>
+                    <!-- table end-->
+          
+        </div>
+    </div>
+
+
 </div>
 
-<div class="card-body">
-<table id="example1" class="table table-bordered table-striped">
-<thead>
-<tr>
-<th>#</th>
-<th>Total Paper</th>
-<th>Serial Start</th>
-<th>Serial End</th>
-<th>Created At</th>
-</tr>
-</thead>
-<?php 
-$i =1;
-while($row = mysqli_fetch_array($get_paper)){ ?>
 
-<tbody>
-    <tr>
-        <td><?php echo $i++; ?></td>
-        <td><?php echo $row['paper_number']; ?></td>
-        <td><?php echo $row['serial_number_start']; ?></td>
-        <td><?php echo $row['serial_number_end']; ?></td>
-        <td><?php echo $row['created_at']; ?></td>
-     </tr>
-</tbody>
- <?php } ?>
 
-</table>
-</div>
 
-</section>
-</div>
-</div>
 <?php
 include("include/footer.php");
 ?>
+
 
