@@ -18,41 +18,33 @@ if(!isset($_SESSION["user_id"])){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Certificat Information System</title>
 
-        <link rel="icon" type="image" href="include/dist/img/fu.png">
+    <link rel="icon" type="image" href="include/dist/img/fu.png">
 
         
         <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
         
-        <link rel="stylesheet" href="./include/plugins/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="include/plugins/fontawesome-free/css/all.min.css">
         
-        <link rel="stylesheet" href="./include/../../../code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="include/../../../code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         
-        <link rel="stylesheet" href="./include/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        <link rel="stylesheet" href="include/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
         
-        <link rel="stylesheet" href="./include/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        <link rel="stylesheet" href="include/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
         
-        <link rel="stylesheet" href="./include/plugins/jqvmap/jqvmap.min.css">
+        <link rel="stylesheet" href="include/plugins/jqvmap/jqvmap.min.css">
         
-     
+        <link rel="stylesheet" href="include/dist/css/adminlte.min2167.css?v=3.2.0">
         
-        <link rel="stylesheet" href="./include/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        <link rel="stylesheet" href="include/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         
-        <link rel="stylesheet" href="./include/plugins/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" href="include/plugins/daterangepicker/daterangepicker.css">
         
-        <link rel="stylesheet" href="./include/plugins/summernote/summernote-bs4.min.css">
+        <link rel="stylesheet" href="include/plugins/summernote/summernote-bs4.min.css">
+        <!-- datatable -->
+        <link rel="stylesheet" href="include/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="include/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="include/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
         
-
-<!--  -->
-        
-<link rel="stylesheet" href="./include/fontawesome-free/css/all.min.css">
-
-<link rel="stylesheet" href="./include/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="./include/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="./include/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-<link rel="stylesheet" href="./include/dist/css/adminlte.min2167.css?v=3.2.0">
-<!--  -->
-
     </head>
     <body class="hold-transition sidebar-mini layout-fixed">
         <div class="wrapper">
@@ -364,10 +356,8 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 </li>
 <!-- there -->
 
+
+
+
 </aside>
 
-
-
-<aside class="control-sidebar control-sidebar-dark">
-
-</aside>
