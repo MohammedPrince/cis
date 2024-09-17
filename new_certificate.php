@@ -99,7 +99,7 @@ if(isset($_POST['send_request'])){
     $std_email = $_POST['std_email'];
     $std_mobail = $_POST['std_mobail'];
 
-    $std_photo = $_POST['std_photo'];
+    // $std_photo = $_POST['std_photo'];
     // $ = $_POST['photo'];
 
     $mode = $_POST['mode'];
@@ -242,7 +242,7 @@ if (isset($_POST['send_request'])){
 
 <form action="new_certificate.php" method="POST">
 
-        <label for="">Studaent Index</label>
+        <label for="">Student Index</label>
         <div class="input-group input-group-sm">
 
             <input type="text" name="std_index" class="form-control" required>
@@ -670,7 +670,7 @@ if (isset($_POST['send_request'])){
     <div class="card-footer">
         <button type="submit" name="send_request" class="btn btn-info float-right"><i>
         <ion-icon name="send-outline"></ion-icon>
-        </i>Send Request</button>
+        </i>Eddit Request</button>
         <!-- <button type="submit"class="btn btn-default " >Cancel</button> -->
     </div>
     <!-- end -->

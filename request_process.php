@@ -334,7 +334,7 @@ if(isset($_POST['send_request'])){
  
     <div class="card-footer">
         
-        <a href="cert_temp.php?std=<?php echo $request_data['std_full_name_en'];  ?>" name="print"  class="btn btn-info  btn-sm float-right"><i>
+        <a href="master_temp.php?std=<?php echo $request_data['std_index'];  ?>" name="print"  class="btn btn-info  btn-sm float-right"><i>
         <ion-icon name="print-outline"></ion-icon>
         </i>Print</a>
 

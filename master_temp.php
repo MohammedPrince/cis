@@ -1,5 +1,5 @@
 <?php 
-// include("include/header.php");
+include("include/functions.php");
 
 ?>
 
@@ -814,7 +814,7 @@ div.WordSection1
 <p class=MsoNormal style='margin-bottom:0in'><b><span lang=EN-US
 style='font-size:10.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>National <span class=GramE>No:-</span><?php //if(isset($_GET['std'])) echo $_GET['identity_no']; ?><o:p></o:p></span></b></p>
+major-bidi'>National <span class=GramE>No:-</span><?php if(isset($_GET['std'])) echo $_GET['std']; ?><o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-bottom:0in'><b><span lang=EN-US
 style='font-size:10.0pt;line-height:106%;font-family:"Times New Roman",serif;
@@ -867,7 +867,7 @@ style='font-size:20.0pt;line-height:106%'><o:p></o:p></span></p>
 <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-US
 style='font-size:12.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>(Sudanese Nationality)<o:p></o:p></span></b></p>
+major-bidi'>(<?php if(isset($_GET['std'])) echo $_GET['std']; ?>)<o:p></o:p></span></b></p>
 
 <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
 style='font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;
@@ -883,8 +883,7 @@ style='font-size:28.0pt;line-height:106%;font-family:Algerian'>Master of
 COMPUTER Science <o:p></o:p></span></p>
 
 <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
-style='font-size:28.0pt;line-height:106%;font-family:Algerian'>(Artificial
-intelligence)</span><span lang=EN-US style='font-size:22.0pt;line-height:106%;
+style='font-size:28.0pt;line-height:106%;font-family:Algerian'>(<?php if(isset($_GET['std'])) echo $_GET['std']; ?>)</span><span lang=EN-US style='font-size:22.0pt;line-height:106%;
 font-family:Algerian'><o:p></o:p></span></p>
 
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;line-height:106%;
@@ -897,7 +896,7 @@ style='font-size:7.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
 style='font-size:12.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
 major-bidi'>On 29<sup>th</sup> of March 2024<o:p></o:p></span></b></p>
-
+<?php //if(isset($_GET['std'])) echo $_GET['std']; ?>
 <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-US
 style='font-size:9.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
@@ -948,7 +947,7 @@ major-bidi'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal style='text-align:justify;line-height:150%'><span
 lang=EN-US style='font-size:13.0pt;line-height:150%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>Date and place of issue: 31/08/2024<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+major-bidi'>Date and place of issue: <?php if(isset($_GET['std'])) echo $_GET['std']; ?><span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
 lang=EN-US style='font-size:8.0pt;line-height:150%'><span style='mso-tab-count:
 4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><o:p></o:p></span></p>
 
