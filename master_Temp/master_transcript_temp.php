@@ -1,3 +1,32 @@
+<?php 
+include("include/functions.php");
+
+
+?>
+
+
+<?php
+
+if(isset($_GET['std'])){
+
+   $std_index = $_GET['std'];
+
+   $stud_index = Stud_Index($std_index);
+
+   $student_profile_common = student_profile_common_sql($std_index);
+   $current_sem = $student_profile_common['curr_sem'];
+   $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
+   $total_hours = Total_Hours($std_index);
+   stud_course_mark_sql($std_index);
+
+  //  $get_date = Get_Date($std_cert_id);
+}
+?>
+
+
+
+
+
 <html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -914,7 +943,7 @@ major-bidi'><o:p>&nbsp;</o:p></span></b></p>
 <p class=MsoNormal style='margin-bottom:0in'><b><span lang=EN-US
 style='font-size:10.0pt;line-height:107%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>National <span class=GramE>No:-</span> 120-8186-7607<o:p></o:p></span></b></p>
+major-bidi'>National <span class=GramE>No:-</span> <?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?><o:p></o:p></span></b></p>
 
 <p class=Default><b><span lang=EN-US style='font-size:10.0pt;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
@@ -944,24 +973,40 @@ major-bidi'><o:p>&nbsp;</o:p></span></p>
 margin-left:9.0pt;text-align:justify;text-indent:-9.0pt'><span lang=EN-US
 style='font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'><span style='mso-spacerun:yes'>� </span>This is to certify that / </span><b><u><span
+major-bidi'><span style='mso-spacerun:yes'> &nbsp; </span>This is to certify that / </span><b><u><span
 lang=EN-US style='font-size:14.0pt;line-height:107%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>AHMED YASIR MOHAMED AHMED</span></u></b><span lang=EN-US
+major-bidi'><?php if(isset($stud_index)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?></span></u></b><span lang=EN-US
 style='font-size:14.0pt;line-height:107%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
 major-bidi'> </span><span lang=EN-US style='font-size:12.0pt;line-height:107%;
 font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
-major-bidi;mso-bidi-theme-font:major-bidi'>/ <b>(Sudanese Nationality)</b> has
+major-bidi;mso-bidi-theme-font:major-bidi'>/ <b>(<?php   
+
+if($student_profile_common['nationality_code'] == 0){
+  echo 'Foreign';
+}
+if($student_profile_common['nationality_code'] == 1){
+  echo 'Sudanese Nationality';
+
+}
+if($student_profile_common['nationality_code'] == 4){
+  echo 'Refugees';
+
+}
+?>)</b> has
 successfully passed the prescribed examinations and is hereby awarded the
-degree of <b>Master</b> of <b><u>Computer Science (Artificial Intelligence)</u>
-</b>by the senate of the university on the <b>29<sup>th</sup> of March 2024</b>.
-with a <b>CGPA /2.41/.<o:p></o:p></b></span></p>
+degree of <b>Master</b> of <b><u><?php  echo Get_Major_Name($student_profile_common['major_code']); ?> (<?php  echo Get_Major_Name($student_profile_common['major_code']); ?>)</u>
+</b>by the senate of the university on the <b>
+
+  <?php  //echo Get_Date($std_cert_id['senate_on']); ?>
+</b>.
+with a <b>CGPA /<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['cgpa']; else echo "" ;?>/.<o:p></o:p></b></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;text-align:justify'><span
 lang=EN-US style='font-size:12.0pt;line-height:107%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'><span style='mso-spacerun:yes'>�� </span>Below are the details of the
+major-bidi'><span style='mso-spacerun:yes'>&nbsp;&nbsp; </span>Below are the details of the
 grades he obtained.<o:p></o:p></span></p>
 
 <p class=MsoNormal style='margin-bottom:0in;text-align:justify'><span
@@ -994,6 +1039,10 @@ lang=EN-US style='font-size:1.0pt;line-height:107%;font-family:"Times New Roman"
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
 major-bidi'><o:p>&nbsp;</o:p></span></p>
 
+
+
+<!-- TABLE START ########################### -->
+ 
 <table class=MsoTableGrid border=0 cellspacing=0 cellpadding=0 width=684
  style='width:513.0pt;border-collapse:collapse;border:none;mso-yfti-tbllook:
  1184;mso-padding-alt:0in 5.4pt 0in 5.4pt;mso-border-insideh:none;mso-border-insidev:
@@ -1006,8 +1055,8 @@ major-bidi'><o:p>&nbsp;</o:p></span></p>
   normal'><span lang=EN-US style='font-size:9.0pt;font-family:"Times New Roman",serif;
   mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
   major-bidi;color:black;mso-color-alt:windowtext'><span
-  style='mso-spacerun:yes'>� </span><b>Semester <span class=GramE>One:-</span> February
-  <span style='mso-spacerun:yes'>�</span>2021- July 2021</b></span><b><span
+  style='mso-spacerun:yes'>&nbsp; </span><b>Semester <span class=GramE>One:-</span> February
+  <span style='mso-spacerun:yes'>&nbsp;</span>2021- July 2021</b></span><b><span
   lang=EN-US style='font-size:9.0pt;font-family:"Times New Roman",serif;
   mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
   major-bidi'><o:p></o:p></span></b></p>
@@ -1140,8 +1189,7 @@ major-bidi'><o:p>&nbsp;</o:p></span></p>
     normal;background:white;mso-background-themecolor:background1'><span
     lang=EN-US style='font-size:8.0pt;font-family:"Times New Roman",serif;
     mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-    major-bidi;color:black;mso-color-alt:windowtext'>Advanced Computer
-    Architecture</span><span lang=EN-US style='font-size:8.0pt;font-family:
+    major-bidi;color:black;mso-color-alt:windowtext'>Advanced Computer Architecture</span><span lang=EN-US style='font-size:8.0pt;font-family:
     "Times New Roman",serif;mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:
     major-bidi;mso-bidi-theme-font:major-bidi'><o:p></o:p></span></p>
     </td>
@@ -1373,13 +1421,18 @@ major-bidi'><o:p>&nbsp;</o:p></span></p>
     </td>
    </tr>
   </table>
+
+
+  <!-- TABLE END///////////////////////////////////////////////////////////////// -->
+
+
   <p class=MsoNormal style='margin-bottom:0in;text-align:justify;line-height:
   normal'><span lang=EN-US style='font-size:9.0pt;font-family:"Times New Roman",serif;
   mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
   major-bidi;color:black;mso-color-alt:windowtext'><span
   style='mso-spacerun:yes'>�����������������������������������������������������������������������������������������������������������������
   </span><span style='mso-spacerun:yes'>����</span><span
-  style='mso-spacerun:yes'>�</span><span class=GramE>GPA:-</span> 2.25<span
+  style='mso-spacerun:yes'>�</span><span class=GramE>GPA:-</span> 2.25ccc  <span
   style='mso-spacerun:yes'>���������������� </span>CGPA:-2.25</span><span
   lang=EN-US style='font-size:9.0pt;font-family:"Times New Roman",serif;
   mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:

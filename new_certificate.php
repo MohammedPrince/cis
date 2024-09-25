@@ -103,7 +103,7 @@ if(isset($_POST['send_request'])){
     // $ = $_POST['photo'];
 
     $mode = $_POST['mode'];
-    $divition = $_POST['divition'];
+    $division = $_POST['division'];
     $senate_on = $_POST['senate_on'];
 
 
@@ -133,7 +133,7 @@ if(isset($_POST['send_request'])){
         $std_email, 
         $std_mobail, 
         $mode, 
-        $divition, 
+        $division, 
         $senate_on);
 
 }
@@ -649,12 +649,12 @@ if (isset($_POST['send_request'])){
     <!-- end -->
      <!-- dependant multi select -->
     <div class="card-body">
-        <label>Graduation Mod(Divition) </label>
-        <select class="form-control" name="divition" readonly>
+        <label>Graduation Mod(Division) </label>
+        <select class="form-control" name="division" readonly>
             <option value="">Chose Mod...</option>
-            <option value="1">Divistion One</option>
-            <option value="2">Divistion Two</option>
-            <option value="3">Divistion Three</option>
+            <option value="1">Division One</option>
+            <option value="2">Division Two</option>
+            <option value="3">Division Three</option>
         </select>
         
     </div>

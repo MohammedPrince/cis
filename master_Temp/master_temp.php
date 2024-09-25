@@ -1,8 +1,27 @@
 <?php 
 include("include/functions.php");
 
+
 ?>
 
+
+<?php
+
+if(isset($_GET['std'])){
+
+  $std_index = $_GET['std'];
+
+  $stud_index = Stud_Index($std_index);
+
+  $student_profile_common = student_profile_common_sql($std_index);
+  $current_sem = $student_profile_common['curr_sem'];
+  $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
+  $total_hours = Total_Hours($std_index);
+  stud_course_mark_sql($std_index);
+ $std_cert_data  = Get_std_cert_Data($std_index);
+
+}
+?>
 <html xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
 xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -814,12 +833,12 @@ div.WordSection1
 <p class=MsoNormal style='margin-bottom:0in'><b><span lang=EN-US
 style='font-size:10.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>National <span class=GramE>No:-</span><?php if(isset($_GET['std'])) echo $_GET['std']; ?><o:p></o:p></span></b></p>
+major-bidi'>National <span class=GramE>No:-</span><?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ; ?><o:p></o:p></span></b></p>
 
 <p class=MsoNormal style='margin-bottom:0in'><b><span lang=EN-US
 style='font-size:10.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>University <span class=GramE>No:-</span> 527884477<o:p></o:p></span></b></p>
+major-bidi'>University <span class=GramE>No:-</span> #<o:p></o:p></span></b></p>
 
 <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
 style='font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;
@@ -861,13 +880,26 @@ style='font-size:2.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal align=center style='text-align:center'><b><u><span
 lang=EN-US style='font-size:23.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'><?php if(isset($_GET['std'])) echo $_GET['std']; ?></span></u></b><span lang=EN-US
+major-bidi'><?php if(isset($stud_index)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?></span></u></b><span lang=EN-US
 style='font-size:20.0pt;line-height:106%'><o:p></o:p></span></p>
 
 <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-US
 style='font-size:12.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>(<?php if(isset($_GET['std'])) echo $_GET['std']; ?>)<o:p></o:p></span></b></p>
+major-bidi'>(<?php   
+
+if($student_profile_common['nationality_code'] == 0){
+  echo 'Foreign';
+}
+if($student_profile_common['nationality_code'] == 1){
+  echo 'Sudanese Nationality';
+
+}
+if($student_profile_common['nationality_code'] == 4){
+  echo 'Refugees';
+
+}
+?>)<o:p></o:p></span></b></p>
 
 <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
 style='font-family:"Times New Roman",serif;mso-ascii-theme-font:major-bidi;
@@ -883,7 +915,7 @@ style='font-size:28.0pt;line-height:106%;font-family:Algerian'>Master of
 COMPUTER Science <o:p></o:p></span></p>
 
 <p class=MsoNormal align=center style='text-align:center'><span lang=EN-US
-style='font-size:28.0pt;line-height:106%;font-family:Algerian'>(<?php if(isset($_GET['std'])) echo $_GET['std']; ?>)</span><span lang=EN-US style='font-size:22.0pt;line-height:106%;
+style='font-size:28.0pt;line-height:106%;font-family:Algerian'>(<?php  echo Get_Major_Name($student_profile_common['major_code']); ?>)</span><span lang=EN-US style='font-size:22.0pt;line-height:106%;
 font-family:Algerian'><o:p></o:p></span></p>
 
 <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;line-height:106%;
@@ -895,7 +927,10 @@ style='font-size:7.0pt;line-height:106%'><o:p>&nbsp;</o:p></span></p>
 <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-US
 style='font-size:12.0pt;line-height:106%;font-family:"Times New Roman",serif;
 mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-major-bidi'>On 29<sup>th</sup> of March 2024<o:p></o:p></span></b></p>
+major-bidi'><?php  echo Get_Date($get_date['std_cert_id']); ?><o:p></o:p></span></b></p>
+
+<!-- On 29<sup>th</sup> of March 2024<o:p></o:p></span></b></p> -->
+
 <?php //if(isset($_GET['std'])) echo $_GET['std']; ?>
 <p class=MsoNormal align=center style='text-align:center'><b><span lang=EN-US
 style='font-size:9.0pt;line-height:106%;font-family:"Times New Roman",serif;

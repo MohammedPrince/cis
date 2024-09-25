@@ -178,25 +178,25 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 {
     global $conn;
 
-    $serial_count = $serial_number_end - $serial_number_start + 1;
+    // $serial_count = $serial_number_end - $serial_number_start + 1;
 
-    if ($serial_count == $paper_number) {
+    // if ($serial_count == $paper_number) {
         
         $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
         if ($query = mysqli_query($conn, $sqli)) {
             return 1; 
         } else {
             return 2;
-        }
-        } else {
-            return 3;
+        // }
+        // } else {
+            // return 3;
         }
     }
 
 
 
 
-function Insert_Student_Info($std_index, $program, $faculty, $major, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $divition, $senate_on)
+function Insert_Student_Info($std_index, $program, $faculty, $major, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $division, $senate_on)
 {
 
     global $conn;
@@ -212,9 +212,9 @@ function Insert_Student_Info($std_index, $program, $faculty, $major, $nationalit
 
         $std_info_last_id = Get_Std_Info_Last_Id();
 
-        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `faculty`, `major`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `divition`, `senate_on`)
+        $sqli_2 = "INSERT INTO `student_cert_info`(`student_basic_info_id`, `program`, `faculty`, `major`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `division`, `senate_on`)
           VALUES
-           ('$std_info_last_id','$program','$faculty','$major','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$divition', '$senate_on')";
+           ('$std_info_last_id','$program','$faculty','$major','$nationality','$national_number','$ministery_number', '$certificate_type', '$cert_printed_place', '$cert_printed_at','$gpa','$cgpa','$total_graduate_hour', '$mode','$division', '$senate_on')";
 
         if ($query_2 = mysqli_query($conn, $sqli_2)) {
 
@@ -260,6 +260,24 @@ function Get_Requests_Data($request_id_de){
        }
 
 }
+
+function Get_std_cert_Data($std_index){
+    global $conn;
+
+    $sql = "SELECT * FROM `student_basic_info`bi, `student_cert_info`si WHERE bi.student_basic_info_id = si.student_basic_info_id and bi.std_index = '$std_index'";
+
+    if($query = mysqli_query($conn, $sql)){
+
+        $row = mysqli_fetch_array($query);
+        return $row;
+
+       }
+
+}
+
+
+
+
 
 function Total_Request(){
     global $conn;
@@ -370,6 +388,23 @@ function  Get_Faculty_Name($faculty_code){
         }
 
 }
+// function Get_Class($cert_type){
+
+//     global $conn;
+
+//     $sql = "SELECT * FROM `student_cert_info` WHERE `certificate_type` = '$cert_type' ";
+//     if($query = mysqli_query($conn, $sql)){
+//         $row = mysqli_fetch_array($query);
+//             return $row['certificate_type'];
+
+//     }else{
+//             echo $query;
+//         }
+
+// }
+
+
+
 
 
 function Get_Major(){
@@ -402,6 +437,39 @@ function Get_Major_Name($major_code){
         }
 
 }
+
+// 
+// function Get_Student_Faculty_Code($std_index) {
+//     global $sis_con;
+//     $query = "SELECT `faculty_code`  FROM `faculty` WHERE `stud_id` =  '$std_index'";
+//     $result = mysqli_query($sis_con, $query);
+//     $row = mysqli_fetch_assoc($result);
+//     return $row['faculty_code'];
+// }
+
+
+// function Get_Student_Major_Code($std_index) {
+//     global $sis_con;
+//     $query = "SELECT `major_code` FROM `major` WHERE `stud_id` = '$std_index'";
+//     $result = mysqli_query($sis_con, $query);
+//     $row = mysqli_fetch_assoc($result);
+//     return $row['major_code'];
+// }
+// // 
+
+function Get_Batch($std_index, $batch){
+    global $sis_con;
+
+    $sqli = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch'";
+
+    if ($query = mysqli_query($sis_con, $sqli)) {
+        return $query;
+    } else {
+        echo $sqli;
+        die();
+    }
+}
+
 
 
 
@@ -582,7 +650,80 @@ function Stud_Index($std_index)
 // }
 
 
+function Get_Format_Date($date) {
+    $dateTime = DateTime::createFromFormat('Y-m-d', $date);
+    
+    // Check if the date was created successfully
+    if (!$dateTime) {
+        return "Invalid date format. Please use d-m-Y format.";
+    }
 
+    // Get the day and apply the appropriate suffix (st, nd, rd, th)
+    $day = $dateTime->format('j');
+    $daySuffix = getDaySuffix($day);
+
+    // Format the date to "jS of F Y"
+    return $day . $daySuffix . ' of ' . $dateTime->format('F Y');
+}
+
+// Helper function to get the suffix for the day
+function getDaySuffix($day) {
+    if ($day % 100 >= 11 && $day % 100 <= 13) {
+        return 'th';
+    }
+    switch ($day % 10) {
+        case 1: return '<sup>st</sup>';
+        case 2: return '<sup>nd</sup>';
+        case 3: return '<sup>rd</sup>';
+        default: return '<sup>th</sup>';
+    }
+}
+
+function N_Date($nudate) {
+    // Create a DateTime object from the input date
+    $dateTime = new DateTime($nudate);
+
+    // Format the date as "d.m.Y" (day.month.year)
+    return $dateTime->format('d.m.Y');
+}
+
+function Get_Place_Issue($place){
+    if($place==1){
+        return 'Khartoum';
+    }
+    if($place==2){
+        return 'Cairo';
+    }
+}
+
+function Get_Mode($get_mode){
+    if($get_mode==1){
+        return  'First Class';
+    }
+    if($get_mode==2){
+        return  'Second Class';
+    }
+    if($get_mode==2){
+        return  'Third Class';
+    }
+
+}
+function Get_Division($get_division){
+    if($get_division==1){
+        return 'Division One';
+    }
+    if($get_division==2){
+        return 'Division Two';
+    }
+    if($get_division==2){
+        return 'Division Three';
+    }
+
+}
+
+
+
+     
 
 ?>
 

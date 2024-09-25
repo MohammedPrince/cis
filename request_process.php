@@ -142,6 +142,7 @@ if(isset($_POST['send_request'])){
 
         
     }
+    
 ?>
 <!--  -->
 
@@ -333,21 +334,41 @@ if(isset($_POST['send_request'])){
 
  
     <div class="card-footer">
-        
-        <a href="master_temp.php?std=<?php echo $request_data['std_index'];  ?>" name="print"  class="btn btn-info  btn-sm float-right"><i>
-        <ion-icon name="print-outline"></ion-icon>
-        </i>Print</a>
+    <?php 
+    if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2")) {
+        if ($request_data['certificate_type'] == "1") {
+            ?>
+            <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
+                <i><ion-icon name="print-outline"></ion-icon></i> Print
+            </a>
+            <?php 
+        } elseif ($request_data['certificate_type'] == "2") {
+            ?>
+            <a href="bachelor_transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
+                <i><ion-icon name="print-outline"></ion-icon></i> Print
+            </a>
+            <?php 
+        }
+    } 
+?>
 
+        
+
+
+?>
         <div class="text-center">
-            <button type="submit" name="return" class="btn btn-primary btn-sm float-center"><i>
+            <a href="request_process.php?return" name="return" class="btn btn-primary btn-sm float-center"><i>
                 <ion-icon name="trash-bin-outline"></ion-icon>
-            </i>Return</button>
+            </i>Return</a>
 
         </div>
+
     
-        <button type="submit" name="cancel" class="btn btn-danger btn-sm float-left" ><i>
+        <a href="request_process.php?cancel" name="cancel" class="btn btn-danger btn-sm float-left" ><i>
         <ion-icon name="trash-bin-outline"></ion-icon>
-        </i>Cancel</button>
+        </i>Cancel</a>
+
+        
         
 
     </div>
