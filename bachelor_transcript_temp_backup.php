@@ -1,31 +1,27 @@
-<?php include("include/functions.php");
-
-if(isset($_GET['std'])){
-
-    $std_index = $_GET['std'];
-  
-    $stud_index = Stud_Index($std_index);
-  
-    $student_profile_common = student_profile_common_sql($std_index);
-    $current_sem = $student_profile_common['curr_sem'];
-    $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
-    $total_hours = Total_Hours($std_index);
-    stud_course_mark_sql($std_index);
-   $std_cert_data  = Get_std_cert_Data($std_index);
-  
-  }
-// Function to retrieve the course name based on the course code
-function Get_Course_Name($code) {
-    global $sis_con;
-    $sqli = "SELECT * FROM `course_details` WHERE `course_code` = '$code' ";
-    $query = mysqli_query($sis_con, $sqli);
-    $row = mysqli_fetch_array($query);
-    return $row['course_name'];
-}
+<?php 
+include("include/functions.php");
 
 
 ?>
 
+
+<?php
+
+if(isset($_GET['std'])){
+
+  $std_index = $_GET['std'];
+
+  $stud_index = Stud_Index($std_index);
+
+  $student_profile_common = student_profile_common_sql($std_index);
+  $current_sem = $student_profile_common['curr_sem'];
+  $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
+  $total_hours = Total_Hours($std_index);
+  stud_course_mark_sql($std_index);
+ $std_cert_data  = Get_std_cert_Data($std_index);
+
+}
+?>
 <html xmlns:v="urn:schemas-microsoft-com:vml"
     xmlns:o="urn:schemas-microsoft-com:office:office"
     xmlns:w="urn:schemas-microsoft-com:office:word"
@@ -982,192 +978,16 @@ mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-f
 major-bidi'>
                 <o:p>&nbsp;</o:p>
             </span></p>
-<?php
 
 
-
-
-
-
-
-// Retrieve the maximum semester value (assuming we go up to semester 10)
-$sem_sql = "SELECT MAX(curr_sem) AS newsem FROM `student_profile_common` WHERE `stud_id` = '201403018'";
-$sem_query = mysqli_query($sis_con, $sem_sql);
-$sem_res = mysqli_fetch_array($sem_query);
-$newsem = $sem_res['newsem'];
-
-// Loop through each semester (from 1 to the max semester found)
-for ($i = 1; $i <= min(10, $newsem); $i++) {
-    
-    // Query to get courses for the current semester
-    $sql_2 = "SELECT * FROM `stud_course_mark` cm 
-              WHERE cm.batch = '2014' 
-              AND cm.stud_id = '201403018' 
-              AND `faculty_code` = '3' 
-              AND `major_code` = '3' 
-              AND cm.semester = $i  
-              ORDER BY `semester` ASC";
-    
-    $query_2 = mysqli_query($sis_con, $sql_2);
-
-    // Check if there are courses for the current semester
-    if (mysqli_num_rows($query_2) > 0) {
-        // Output semester title
-        echo "
-        
-        <td width=624
-                    colspan=8
-                    valign=top
-                    style='width:6.5in;border:none;border-bottom:
-  solid windowtext 1.0pt;mso-border-bottom-alt:solid windowtext .5pt;
-  background:white;mso-background-themecolor:background1;padding:0in 5.4pt 0in 5.4pt;
-  height:13.0pt'>
-                    <p class=MsoNormal
-                        style='margin-bottom:0in;text-align:justify;line-height:
-  normal'><b><span lang=EN-US
-                                style='font-size:9.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Semester $i <span class=GramE>One:-</span>November
-                                2017- February 2018</span></b><b><span lang=EN-US
-                                style='font-size:9.0pt;
-  font-family:'Times New Roman',serif;mso-ascii-theme-font:major-bidi;
-  mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi'>
-                                <o:p></o:p>
-                            </span></b></p>
-                </td>
-        
-        ";
-
-    
-        
-        // Start table for the semester
-        echo "<table class=MsoTableGrid
-            border=1
-            cellspacing=0
-            cellpadding=0
-            style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt'>";
-        echo "<tr style='mso-yfti-irow:1;height:13.0pt'>";
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Code</th>";
-
-
-        echo "<th style='font-size:8.0pt;
-  font-family:'Times New Roman',serif;mso-ascii-theme-font:major-bidi;
-  mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:black;
-  mso-color-alt:windowtext'>Cr.H</th>";
-
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Subject</th>";
-
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Grade</th>";
-
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Code</th>";
-
-
-        echo "<th style='font-size:8.0pt;
-  font-family:'Times New Roman',serif;mso-ascii-theme-font:major-bidi;
-  mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi;color:black;
-  mso-color-alt:windowtext'>Cr.H</th>";
-
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Subject</th>";
-
-        echo "<th style='font-size:8.0pt;font-family:'Times New Roman',serif;
-  mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>Grade</th>";
-        echo "</tr>";
-
-        echo "<tbody>";
-
-        $row_count = 0;
-
-        // Display courses in pairs for the current semester
-        while ($stud_res = mysqli_fetch_array($query_2)) {
-            $CourseCode = $stud_res['course_code'];
-            $CourseName = Get_Course_Name($stud_res['course_code']);
-            $CRSLoad = $stud_res['weightage'];  // Credit Hours
-            $Grade = $stud_res['grade'];
-            
-            // Pairing rows (2 subjects per row)
-            if ($row_count % 2 == 0) {
-                // Open a new row
-                echo "<tr>";
-            }
-            
-            // Display subject details
-            echo "<td align='center'>" . $CourseCode . "</td>";
-            echo "<td align='center'>" . $CRSLoad . "</td>";
-            echo "<td align='left'>" . $CourseName . "</td>";
-            echo "<td align='center'>" . $Grade . "</td>";
-
-            $row_count++;
-
-            if ($row_count % 2 == 0) {
-                // Close the row after two courses
-                echo "</tr>";
-            }
-        }
-
-        // Close the last row if there is an odd number of subjects
-        if ($row_count % 2 != 0) {
-            echo "<td style = 'border:none;' colspan='4'></td></tr>"; // Empty cells for second column if odd number of courses
-        }
-        echo "</tbody>";
-        // Retrieve GPA and CGPA for the current semester
-        $sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '201602018' and `semester` = '$i'";
-        $query = mysqli_query($sis_con, $sql);
-        $trans_res = mysqli_fetch_array($query);
-        $gpa = $trans_res['gpa'];
-        $cgpa = $trans_res['cgpa'];
-
-
-        // Retrieve GPA and CGPA for the current semester from pre-fetched data
-
-
-        // GPA and CGPA in the footer of the table
-     
-        echo "<tfoot>";
-        echo "<tr>
-                <td colspan='4'><strong>GPA: {$gpa}</strong></td>
-                <td colspan='4'><strong>CGPA: {$cgpa}</strong></td>
-              </tr>";
-        echo "</tfoot>";
-
-        // Display GPA and CGPA at the end of the table
-        // echo "<tr>";
-        // echo "<td style = 'border:none' colspan='4' align='center'><strong>GPA: $gpa</strong></td>";
-        // echo "<td style = 'border:none' colspan='4' align='center'><strong>CGPA: $cgpa</strong></td>";
-        // echo "</tr>";
-
-        // End of the table for the current semester
-        echo "</table><br>";
-    }
-}
-?>
-            
         <!-- table start ###########################################################################-->
-        <!-- <table class=MsoTableGrid
+        <table class=MsoTableGrid
             border=1
             cellspacing=0
             cellpadding=0
             style='border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
  mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt'>
-
             <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.0pt'>
-
                 <td width=624
                     colspan=8
                     valign=top
@@ -1188,13 +1008,9 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
                                 <o:p></o:p>
                             </span></b></p>
                 </td>
-
-
             </tr>
 
-
             <tr style='mso-yfti-irow:1;height:13.0pt'>
-
                 <td width=62
                     valign=top
                     style='width:46.4pt;border:solid windowtext 1.0pt;
@@ -1233,6 +1049,9 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
                                 <o:p></o:p>
                             </span></b></p>
                 </td>
+
+
+
                 <td width=159
                     valign=top
                     style='width:118.95pt;border-top:none;border-left:
@@ -1354,6 +1173,8 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
                             </span></b></p>
                 </td>
             </tr>
+
+            
             <tr style='mso-yfti-irow:2'>
                 <td width=62
                     valign=top
@@ -1421,7 +1242,7 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt'>
-                    <p class=MsoNormal
+                    <p class=MsoNormal`
                         style='margin-bottom:0in;text-align:justify;line-height:
   normal;background:white;mso-background-themecolor:background1'><span lang=EN-US
                             style='font-size:8.0pt;font-family:"Times New Roman",serif;
@@ -1445,7 +1266,7 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
   line-height:normal;background:white;mso-background-themecolor:background1'><span lang=EN-US
                             style='font-size:8.0pt;font-family:"Times New Roman",serif;
   mso-ascii-theme-font:major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:
-  major-bidi;color:black;mso-color-alt:windowtext'>3</span><span lang=EN-US
+  major-bidi;color:black;mso-color-alt:windowtext'>3</span><span lang=EN-US`
                             style='font-size:8.0pt;font-family:"Times New Roman",serif;mso-ascii-theme-font:
   major-bidi;mso-hansi-theme-font:major-bidi;mso-bidi-theme-font:major-bidi'>
                             <o:p></o:p>
@@ -1842,7 +1663,7 @@ for ($i = 1; $i <= min(10, $newsem); $i++) {
         </table>
         <br>
         <br>
-        table End -->
+        <!-- table End -->
 
 
         <!-- footer start -->

@@ -23,125 +23,64 @@ function Get_Course_Name($code){
 
 
 
+    <style>
+            table, th, td
+    {  
+font-size:8.0pt;
+font-family:"Times New Roman",serif;
+  color:black;
+  border:1px solid black;
+  border-collapse: collapse;
+  margin-top: 20px;
 
-    <table id="table" width="60%" align="center" border="0" cellpadding="0" cellspacing="0" class="pic_box">
-    <!-- style="height: 20px;" -->
-        <tr>
+    }
+    th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
 
-            <!-- <td colspan="5" class="titleBar">
-                <div align="center"><strong><em>Transcript Report</em></strong></div>
-            </td> -->
-
-        </tr>
-
-        
- 
-
-
-
-        <tr>
-
-            <td colspan="5">
-                <div align="center">
-
-                    <table id="my-table" width="95%" border="0" align="center" cellspacing="1" class="bgtableblack">
-  <p align="center">
-                   
-                    
-                        <tr class="table_content" style="height: 20px;">
-                        
-         <center>
-                    <tr>
-
-<td colspan="5"><br>
-    <table width="137%" border="0" align="center" cellspacing="1" class="bgtableblack" style="border:dotted">
-    <center>
-    <div align="center"><em>
-                            <h3>Transcript Report</h3>
-                        </em></div>
-                    </p>
-                    </center>
-        <tr>
-            <td class="contentFontBold">
-                <div align="right">Major:</div>
-            </td>
-            <td class="contentFont">
-                <?php // echo $main_details['Dept']; ?>
-            </td>
-
-            <td class="contentFontBold">
-                <div align="right">Student ID</div>
-            </td>
-            <td class="contentFont">
-              <?php //echo $stud_index; ?>  
-              <!-- this hidden text field to get std index value into pdf function; -->
-             <input id="stdindex" type="hidden" value="<?php // echo $stud_index; ?>" name=""> 
-            </td>
-        </tr>
-
-        <tr>
-            <td class="contentFontBold">
-                <div align="right">Batch:</div>
-            </td>
-            <td class="contentFont">
-                <?php //echo $main_details['AcademicYear']; ?>
-            </td>
-
-            <td class="contentFontBold">
-                <div align="right">Student Name</div>
-            </td>
+    </style>
+    <table>
+     
 
 
-            <td class="contentFont">
-                <?php //echo $main_details['StdNameEn']; ?>
-                <!-- this hidden text field to get std name value into pdf function; -->
-             <input id="stdname" type="hidden" value="<?php //echo $main_details['StdNameEn']; ?>" name=""> 
-            </td>
-        </tr>
 
-
-       
-
-    </table>
-</td>
 
 </tr>
 
-</center>
 
 
-                            <td width="10%" style="border:ridge; border-right-style:hidden">
-                                <div align="center"><strong>Semester </strong></div>
+
+                            <td>
+                                <div><strong>Semester </strong></div>
                             </td>
 
-                            <td width="49%" colspan="2"
-                                style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Course</strong></div>
+                            <td><strong>Course</strong></div>
                             </td>
 
 
-                            <td width="7%" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Crs Load</strong></div>
+                            <td >
+                                <div><strong>Crs Load</strong></div>
                             </td>
 
-                            <td width="7%" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Grade</strong></div>
+                            <td >
+                                <div ><strong>Grade</strong></div>
                             </td>
 
-                            <td width="7%" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Sub Grade I</strong></div>
+                            <td >
+                                <div><strong>Sub Grade I</strong></div>
                             </td>
 
-                            <td width="7%" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Sub Grade II</strong></div>
+                            <td >
+                                <div><strong>Sub Grade II</strong></div>
                             </td>
 
-                            <td width="7%" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
-                                <div align="center"><strong>Point</strong></div>
+                            <td >
+                                <div ><strong>Point</strong></div>
                             </td>
 
-                            <td width="20%" colspan="2" style="border:ridge; border-left-style:hidden">
-                                <div align="center"><strong>Remarks</strong></div>
+                            <td >
+                                <div><strong>Remarks</strong></div>
                             </td>
 
 
@@ -183,53 +122,53 @@ $newsem = $sem_res['newsem'];
   
   
   ?>
-                        <tr class="table_content" style="height: 10px;">
+                        <tr >
                         <!-- font-size:100% -->
                             <td>
                                 <!-- <div align="center">1</div> -->
-                                <div align="center"><?php echo $Semester;  ?></div>
+                                <div ><?php echo $Semester;  ?></div>
 
                             </td>
 
-                            <td colspan="2">
+                            <td >
                                 <!-- <div align="left">ITGM201 -- Human Organizations</div> -->
-                                <div align="left"><?php echo $Course;  ?></div>
+                                <div ><?php echo $Course;  ?></div>
 
                             </td>
 
 
                             <td>
                                 <!-- <div align="center">3</div> -->
-                                <div align="center"><?php echo $CRSLoad;  ?></div>
+                                <div ><?php echo $CRSLoad;  ?></div>
 
                             </td>
 
                             <td>
                                 <!-- <div align="center">C</div> -->
-                                <div align="center"><?php echo $Grade;  ?></div>
+                                <div ><?php echo $Grade;  ?></div>
 
                             </td>
 
                             <td >
                                 <!-- <div align="center">C</div> -->
-                                <div align="center"><?php echo $S1grade;  ?></div>
+                                <div ><?php echo $S1grade;  ?></div>
 
                             </td>
 
                             <td>
                                 <!-- <div align="center">C</div> -->
-                                <div align="center"><?php echo $S2grade;  ?></div>
+                                <div ><?php echo $S2grade;  ?></div>
 
                             </td>
 
                             <td>
                                 <!-- <div align="center">2.17</div> -->
-                                <div align="center"><?php echo  round($size,2)  ?></div>
+                                <div><?php echo  round($size,2)  ?></div>
 
                             </td>
 
-                            <td colspan="2">
-                                <div align="center"> </div>
+                            <td >
+                                <div > </div>
                             </td>
                         </tr>
 
@@ -259,12 +198,12 @@ $query = mysqli_query($sis_con, $sql);
     // $acc_status = $trans_res['Status'];
 ?>
 <!--<tfoot style="border:thick">-->
-<tr class="table_content" style="height: 15px;">
-                    <td colspan="2" style="border:ridge; border-right-style:hidden"> <strong>GPA:</strong> <?php echo round($gpa, 2); ?></td>
-                    <td colspan="2" style="border:ridge; border-left-style:hidden; border-right-style:hidden;">
+<tr >
+                    <td > <strong>GPA:</strong> <?php echo round($gpa, 2); ?></td>
+                    <td>
                         <strong>CGPA:</strong> <?php echo round($cgpa, 2); ?>
                     </td>
-                    <td colspan="5" style="border:ridge; border-left-style:hidden"><strong>Status:</strong> <?php echo $acc_status; ?>
+                    <td ><strong>Status:</strong> <?php echo $acc_status; ?>
                     </td>
                 </tr>
                 <!--</tfoot>-->
@@ -281,23 +220,23 @@ $query = mysqli_query($sis_con, $sql);
 
         <tr>
 
-            <td colspan="5">
+            <td >
 
         </tr>
 
         <tr>
 
-            <td width="29%">
-                <div align="right"></div>
+            <td >
+                <div ></div>
             </td>
 
-            <td width="4%">&nbsp;</td>
+            <td >&nbsp;</td>
 
-            <td width="14%">
-                <div align="center"></div>
+            <td >
+                <div ></div>
             </td>
 
-            <td width="11%">
+            <td >
                 <br>
                 
                     <input type="button" value=" Print" onClick="window.print();return false;" class="noPrint" /> 
@@ -306,7 +245,7 @@ $query = mysqli_query($sis_con, $sql);
                
             </td>
 
-            <td width="42%"></td>
+            <td ></td>
 
         </tr>
 
