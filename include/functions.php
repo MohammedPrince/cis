@@ -548,7 +548,7 @@ function Stud_Index($std_index)
       }
       function stud_course_mark_sql($std_index){
         global $sis_con;
-
+// add batch + faculty + major + index
             $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' " ;
             if($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)){
                 $row = mysqli_fetch_array($stud_course_mark_sql_query);
@@ -573,6 +573,7 @@ function Stud_Index($std_index)
 
       function Total_Hours($stud_index){
         global $sis_con;
+        // let max batch of stud in  
         $total_hours_sql = "SELECT SUM(course_units) AS unit FROM `stud_course_mark` WHERE `stud_id` = '$stud_index'";
         if($total_hours_query = mysqli_query($sis_con, $total_hours_sql)){
             $row = mysqli_fetch_assoc($total_hours_query);

@@ -18,6 +18,7 @@ if(isset($_GET['std'])){
 // Function to retrieve the course name based on the course code
 function Get_Course_Name($code) {
     global $sis_con;
+// add batch + faculty + major 
     $sqli = "SELECT * FROM `course_details` WHERE `course_code` = '$code' ";
     $query = mysqli_query($sis_con, $sqli);
     $row = mysqli_fetch_array($query);
@@ -25,7 +26,7 @@ function Get_Course_Name($code) {
 }
 
 
-echo " <style>
+echo "<style>
         tbody tr:last-child tfoot {
             border-bottom: none; /* Remove border for the last row of tbody */
         }
