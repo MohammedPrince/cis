@@ -225,7 +225,7 @@ if (isset($_POST['send_request'])){
           $current_sem = $student_profile_common['curr_sem'];
           $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
           $total_hours = Total_Hours($std_index);
-          stud_course_mark_sql($std_index);
+          stud_course_mark_sql($std_index, $batch, $faculty, $major);
         // stud_sql($std_index);
 
         }

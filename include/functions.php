@@ -555,6 +555,7 @@ function Stud_Index($std_index)
                 return $row;
             }else{
                 echo $stud_course_mark_sql;
+                
             }
       }
       
