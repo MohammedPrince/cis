@@ -338,22 +338,6 @@ function Get_Requests()
     }
 }
 
-// sis
-// function Get_Program()
-// {
-//     global $conn;
-
-//     $sqli = "SELECT * FROM `program` WHERE dell_program = 0";
-//     if ($query = mysqli_query($conn, $sqli)) {
-
-//         return $query;
-
-//     } else {
-//         echo $sqli;
-//         die;
-
-//     }
-// }
 
 
 
@@ -388,21 +372,6 @@ function  Get_Faculty_Name($faculty_code){
         }
 
 }
-// function Get_Class($cert_type){
-
-//     global $conn;
-
-//     $sql = "SELECT * FROM `student_cert_info` WHERE `certificate_type` = '$cert_type' ";
-//     if($query = mysqli_query($conn, $sql)){
-//         $row = mysqli_fetch_array($query);
-//             return $row['certificate_type'];
-
-//     }else{
-//             echo $query;
-//         }
-
-// }
-
 
 
 
@@ -534,7 +503,8 @@ function Stud_Index($std_index)
 
       function student_profile_common_sql($std_index){
         global $sis_con;
-           $student_profile_common_sql = "SELECT * FROM `student_profile_common` WHERE `stud_id` = '$std_index' " ;
+            $student_profile_common_sql = "SELECT * FROM `student_profile_common` WHERE `stud_id` = '$std_index' " ;
+        //   and `curr_sem` = 10 or 6
            if($student_profile_common_sql = mysqli_query($sis_con, $student_profile_common_sql)){
 
             $row = mysqli_fetch_array($student_profile_common_sql);
@@ -546,10 +516,10 @@ function Stud_Index($std_index)
 
 
       }
-      function stud_course_mark_sql($std_index){
+      function stud_course_mark_sql($std_index, $batch, $major){
         global $sis_con;
 // add batch + faculty + major + index
-            $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' " ;
+            $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' and `batch` = '$batch' and `major_code` = '$major'" ;
             if($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)){
                 $row = mysqli_fetch_array($stud_course_mark_sql_query);
                 return $row;
@@ -645,9 +615,6 @@ function Stud_Index($std_index)
 
 //     global $conn;
 //     $sqli = "SELECT * FROM `papers` WHERE `dell_paper` = 0 ";
-
-
-
 
 // }
 

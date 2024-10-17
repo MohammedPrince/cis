@@ -8,65 +8,6 @@ $get_major = Get_Major();
 
 if(isset($_POST['send_request'])){
 
-   
-// && $_SERVER['REQUEST_METHOD'] == 'POST'
-//         $std_photo = $_FILES['std_photo'];
-    
-//         $image_name = $_FILES['std_photo']['name'];
-//         $image_type = $_FILES['std_photo']['type'];
-//         $image_temp = $_FILES['std_photo']['tmp_name'];
-//         $image_size = $_FILES['std_photo']['size'];
-
-//         move_uploaded_file($image_temp, 'C:\xampp\htdocs\GitRepo\cis\uploads\\' . $image_name);
-
-// $target_dir = 'C:\xampp\htdocs\GitRepo\cis\uploads';
-// $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-// $uploadOk = 1;
-// $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-// // Check if image file is a actual image or fake image
-// if(isset($_POST["send_request"])) {
-//   $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-//   if($check !== false) {
-//     echo "File is an image - " . $check["mime"] . ".";
-//     $uploadOk = 1;
-//   } else {
-//     echo "File is not an image.";
-//     $uploadOk = 0;
-//   }
-// }
-
-// // Check if file already exists
-// if (file_exists($target_file)) {
-//   echo "Sorry, file already exists.";
-//   $uploadOk = 0;
-// }
-
-// // Check file size
-// if ($_FILES["fileToUpload"]["size"] > 500000) {
-//   echo "Sorry, your file is too large.";
-//   $uploadOk = 0;
-// }
-
-// // Allow certain file formats
-// if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-// && $imageFileType != "gif" ) {
-//   echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-//   $uploadOk = 0;
-// }
-
-// // Check if $uploadOk is set to 0 by an error
-// if ($uploadOk == 0) {
-//   echo "Sorry, your file was not uploaded.";
-// // if everything is ok, try to upload file
-// } else {
-//   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-//     echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-//   } else {
-//     echo "Sorry, there was an error uploading your file.";
-//   }
-// }
-
 
     $std_index = $_POST['std_index'];
     $program = $_POST['program'];
@@ -106,7 +47,8 @@ if(isset($_POST['send_request'])){
     $division = $_POST['division'];
     $senate_on = $_POST['senate_on'];
 
-
+    $get_batch = Get_Batch($std_index, $batch);
+// echo $get_batch;
     $insert_student_info = Insert_Student_Info($std_index,
         $program,
         $faculty,
@@ -221,12 +163,30 @@ if (isset($_POST['send_request'])){
             echo $alert = alerts(3,'Index is not Valid');
            
         }else{
+          $student_profile = student_profile_common_sql($std_index);
+          $std_current_sem = $student_profile['curr_sem'];
+
+          if($std_current_sem == 10 || $std_current_sem == 6){
           $student_profile_common = student_profile_common_sql($std_index);
           $current_sem = $student_profile_common['curr_sem'];
           $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
           $total_hours = Total_Hours($std_index);
-          stud_course_mark_sql($std_index, $batch, $faculty, $major);
-        // stud_sql($std_index);
+          $batch = $student_profile_common['batch'];
+          $major = $student_profile_common['major_code'];
+          $faculty = $student_profile_common['faculty_code'];
+          stud_course_mark_sql($std_index, $batch, $major);
+            
+          // stud_sql($std_index);
+          }else{
+
+            echo $alert = alerts(3,'This Student Not Graduated Yet');
+
+
+          }
+
+
+
+
 
         }
 
@@ -271,7 +231,7 @@ if (isset($_POST['send_request'])){
 
                 <option value="<?php  echo $student_profile_common['program_code'];  ?>" selected>
 
-                <?php  
+                <?php   
                 
                 echo Get_Program($student_profile_common['program_code']);
                 ?>
@@ -516,7 +476,7 @@ if (isset($_POST['send_request'])){
          <div class="card-body">
          <label for="">Student Full Nmae in English</label>
          <div class="col-8">
-             <input type="text" name="std_full_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?>" class="form-control" placeholder="Student Full Nmae..." required>
+             <input type="text" name="std_full_name_en" value="<?php if(isset($stud_index)  && isset($student_profile_common)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?>" class="form-control" placeholder="Student Full Nmae..." required>
             </div>
         </div>
         <!-- Full Name in Arabic end-->
@@ -534,16 +494,16 @@ if (isset($_POST['send_request'])){
         <label for="">English Name</label>
         <div class="row">
             <div class="col-3">
-                <input type="text" name="std_first_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name'] ; else echo "";  ?>" class="form-control" placeholder="First Name..." required>
+                <input type="text" name="std_first_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_name'] ; else echo "";  ?>" class="form-control" placeholder="First Name..." required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_second_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_surname']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
+                <input type="text" name="std_second_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_surname']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
             </div>
             <!-- <div class="col-3">
-                <input type="text" name="std_third_name_en" value="<?php if(isset($stud_index)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="Third Name..." required>
+                <input type="text" name="std_third_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="Third Name..." required>
             </div> -->
             <div class="col-3">
-                <input type="text" name="std_fourth_name_en" value="<?php if(isset($stud_index)) echo $stud_index['familyname']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
+                <input type="text" name="std_fourth_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['familyname']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
             </div>
         </div>
     </div>
