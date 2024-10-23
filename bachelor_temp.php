@@ -1,7 +1,5 @@
 <?php 
 include("include/functions.php");
-
-
 ?>
 
 
@@ -9,16 +7,20 @@ include("include/functions.php");
 
 if(isset($_GET['std'])){
 
-   $std_index = $_GET['std'];
+  $std_index = $_GET['std'];
 
-   $stud_index = Stud_Index($std_index);
+  $stud_index = Stud_Index($std_index);
 
-   $student_profile_common = student_profile_common_sql($std_index);
-   $current_sem = $student_profile_common['curr_sem'];
-   $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
-   $total_hours = Total_Hours($std_index);
-   stud_course_mark_sql($std_index, $batch, $major);
-  $std_cert_data  = Get_std_cert_Data($std_index);
+  $student_profile_common = student_profile_common_sql($std_index);
+  $batch = $student_profile_common['batch'];
+  $major = $student_profile_common['major_code'];
+  $faculty = $student_profile_common['faculty_code'];
+  $current_sem = $student_profile_common['curr_sem'];
+  $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
+  $total_hours = Total_Hours($std_index);
+  stud_course_mark_sql($std_index, $batch, $major);
+ $std_cert_data  = Get_std_cert_Data($std_index);
+ 
   
 
 }
@@ -49,28 +51,32 @@ if(isset($_GET['std'])){
         .header {
             /* font-size: smaller; */
             position: relative;
-            top: 120px;
+            margin-top: 140px;
             text-align: left;
-            margin-left: 1cm;
-            margin-bottom: 1cm;
+            /* margin-left: 1cm; */
+            /* margin-bottom: 5px; */
         }
         h1 {
-  
-  text-align: center;
-  font-size: 11pt;
+          text-align: center;
+          font-size: 11pt;
+          margin-bottom: 0px;
 }
-        .main-content {
+
+/* space from mid page */
+        /* .main-content {
           padding-left: 1cm;
           margin-top: 2.5cm;
-          /* margin-bottom: 0 cm; */
+          margin-bottom: 0px;
           align-items: normal;
-        }
+        } */
+
+
         p.big {
   line-height: 1.9;
 }
 p{
   /* position: relative; */
-  top: 80px;
+  top: 10px;
 }
         /* .name {
             text-decoration: underline;
@@ -98,16 +104,20 @@ p{
         }
         .footer {
           margin-left: 1cm;
+          margin-top: 45px;
         }
      
-      
     </style>
 </head>
 <body>
+
     <div class="header" >
+        <div class="header" >
         <p>Nationality No: <?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?></p>
+        <!-- un code from darabase -->
         <p>University No:</p>
         <h1><?php  echo Get_Faculty_Name($student_profile_common['faculty_code']); ?></h1>
+    
     </div>
     <br>
     <div class="main-content">

@@ -17,9 +17,10 @@ if(isset($_GET['std'])){
    $current_sem = $student_profile_common['curr_sem'];
    $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
    $total_hours = Total_Hours($std_index);
-   stud_course_mark_sql($std_index);
+   stud_course_mark_sql($std_index, $batch, $major);
 
-  //  $get_date = Get_Date($std_cert_id);
+
+  //$get_date = Get_Date($std_cert_id);
 }
 ?>
 

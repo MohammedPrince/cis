@@ -275,8 +275,103 @@ function Get_std_cert_Data($std_index){
 
 }
 
+// paper_id paramiter in this function 
+// function to get paper_id
+// http://localhost/gitrepo/cis/set_serial_number.php?paper_id=2
+
+// Function to decrement paper number
+function Print_Paper($current_paper_id) {
+    global $conn;
+    
+    // Get the current paper details
+    $sql = "SELECT paper_id, paper_number, dell_paper FROM papers WHERE paper_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $current_paper_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $paper = $result->fetch_assoc();
+        $paperNumber = $paper['paper_number'];
+        $dellPaper = $paper['dell_paper'];
+        
+        // Check if we have papers to print
+        if ($paperNumber > 0) {
+            // Decrease paper number and increment dell_paper
+            $paperNumber--;
+            $dellPaper++;
+            
+            // Update the paper record in the database
+            $updateSql = "UPDATE papers SET paper_number = ?, dell_paper = ?, updated_at = CURRENT_TIMESTAMP WHERE paper_id = ?";
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->bind_param("iii", $paperNumber, $dellPaper, $current_paper_id);
+            $updateStmt->execute();
+            
+            echo "Printed paper for paper_id: $current_paper_id. Remaining papers: $paperNumber.\n";
+        }
+        
+        // If paper_number is 0, move to the next paper_id
+        if ($paperNumber == 0) {
+            echo "Paper number is 0. Moving to the next paper_id.\n";
+            
+            // Get the next paper_id
+            $nextSql = "SELECT paper_id FROM papers WHERE paper_id > ? ORDER BY paper_id ASC LIMIT 1";
+            $nextStmt = $conn->prepare($nextSql);
+            $nextStmt->bind_param("i", $current_paper_id);
+            $nextStmt->execute();
+            $nextResult = $nextStmt->get_result();
+            
+            if ($nextResult->num_rows > 0) {
+                $nextPaper = $nextResult->fetch_assoc();
+                $nextPaperId = $nextPaper['paper_id'];
+                
+                // Recursively call the function for the next paper_id
+                Print_Paper($nextPaperId);
+            } else {
+                return 3;
+                // echo "No more papers to print.\n";
+            }
+        }
+    } else {
+        return 4;
+        // echo "Paper Seris not found plase Insert New Seris.\n";
+    }
+    
+    $stmt->close();
+    $conn->close();
+}
 
 
+
+
+function Total_Request_Return(){
+    global $conn;
+    $sqli = "SELECT SUM(return_request) AS  total_return_request FROM `request` WHERE `return_request` = '1' AND `dell_request` = '0'";
+    if($sqli_query = mysqli_query($conn, $sqli)){
+        $row = mysqli_fetch_assoc($sqli_query);
+        $num_rows = $row['total_return_request'];
+        return $num_rows;
+
+    }else{
+            echo $sqli;
+        }
+
+  }
+
+
+function Total_Request_Canceled(){
+    global $conn;
+    $sqli = "SELECT SUM(canceled_request) AS  total_request_canceled FROM `request` WHERE `canceled_request` = '1' AND `dell_request` = '0'";
+    if($sqli_query = mysqli_query($conn, $sqli)){
+        $row = mysqli_fetch_assoc($sqli_query);
+        $num_rows = $row['total_request_canceled'];
+        return $num_rows;
+
+    }else{
+            echo $sqli;
+        }
+
+  }
 
 
 function Total_Request(){

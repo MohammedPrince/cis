@@ -8,7 +8,12 @@ include("include/header.php");
 <?php 
 
 $total_request = Total_Request();
+$total_request_canceled = Total_Request_Canceled();
+$total_request_return = Total_Request_Return();
 
+// http://localhost/gitrepo/cis/set_serial_number.php?paper_id=2
+$current_paper_id = "";
+$current_paper_id = Print_Paper($current_paper_id);
 
 ?>
 
@@ -70,8 +75,8 @@ $total_request = Total_Request();
 
 <div class="small-box bg-warning">
 <div class="inner">
-<h3>44</h3>
-<p>Total Request Rejected</p>
+<h3><?php if(isset($total_request_return)) echo $total_request_return; else echo "" ;?></h3>
+<p>Total Request Return</p>
 </div>
 <div class="icon">
 <i class="ion ion-person-add"></i>
@@ -120,8 +125,8 @@ $total_request = Total_Request();
 <div class="col-lg-3 col-4">
 <div class="small-box bg-danger">
 <div class="inner">
-<h3>65</h3>
-<p>Total Request Damage</p>
+<h3><?php if(isset($total_request_canceled)) echo $total_request_canceled; else echo "" ;?></h3>
+<p>Total Request Canceled</p>
 </div>
 <div class="icon">
 <i class="ion ion-pie-graph"></i>

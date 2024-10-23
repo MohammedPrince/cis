@@ -321,13 +321,13 @@ if(isset($_POST['send_request'])){
 
 
 <div class="card card-info">
-    <div class="card-header">
-    <h3 class="card-title">Editing Process</h3>
+    <!-- <div class="card-header"> -->
+    <!-- <h3 class="card-title">Editing Process</h3>
     </div>
     <div class="card-body">
     <label>Reply with Comment(Optional)</label>
     <textarea class="form-control" rows="3" placeholder="Enter your comment here ..."></textarea>
-    </div>
+    </div> -->
 
 
 
@@ -355,7 +355,7 @@ if(isset($_POST['send_request'])){
         
 
 
-?>
+
         <div class="text-center">
             <a href="request_process.php?return" name="return" class="btn btn-primary btn-sm float-center"><i>
                 <ion-icon name="trash-bin-outline"></ion-icon>
@@ -371,7 +371,7 @@ if(isset($_POST['send_request'])){
         
         
 
-    </div>
+    <!-- </div> -->
     <!-- end -->
 
 </div>

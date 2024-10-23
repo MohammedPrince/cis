@@ -47,7 +47,7 @@ if(isset($_POST['send_request'])){
     $division = $_POST['division'];
     $senate_on = $_POST['senate_on'];
 
-    $get_batch = Get_Batch($std_index, $batch);
+    // $get_batch = Get_Batch($std_index, $batch);
 // echo $get_batch;
     $insert_student_info = Insert_Student_Info($std_index,
         $program,

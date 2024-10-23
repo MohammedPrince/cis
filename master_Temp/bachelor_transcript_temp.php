@@ -10,7 +10,7 @@ if(isset($_GET['std'])){
     $current_sem = $student_profile_common['curr_sem'];
     $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
     $total_hours = Total_Hours($std_index);
-    stud_course_mark_sql($std_index);
+    stud_course_mark_sql($std_index, $batch, $major);
    $std_cert_data  = Get_std_cert_Data($std_index);
   
   }
