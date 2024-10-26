@@ -275,6 +275,22 @@ function Get_std_cert_Data($std_index){
 
 }
 
+function Cancel_Request($cancel_id) {
+    global $conn;
+
+    $NEWdell = base64_decode($cancel_id);
+
+    $sqli = "UPDATE `request` SET canceled_request = 1 WHERE `request_id` = $NEWdell AND `dell_request` = 0";
+
+    if ($query = mysqli_query($conn, $sqli)) {
+        return 1; 
+    } else {
+        echo $sqli;
+        die();
+    }
+}
+
+
 // paper_id paramiter in this function 
 // function to get paper_id
 // http://localhost/gitrepo/cis/set_serial_number.php?paper_id=2

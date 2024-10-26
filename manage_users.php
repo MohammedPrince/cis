@@ -58,6 +58,7 @@ $get_users = Get_users();
                                         echo $alert = alerts(3,"User Not Save or User is already exist");
                                     }
                                 }
+                                
                                 if(isset($_GET['delet_id'])){
                                     $delet_id = $_GET['delet_id'];
                                     $delet_user =  Delet_user($delet_id);

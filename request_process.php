@@ -363,8 +363,19 @@ if(isset($_POST['send_request'])){
 
         </div>
 
-    
-        <a href="request_process.php?cancel" name="cancel" class="btn btn-danger btn-sm float-left" ><i>
+    <?php 
+    if(isset($_GET['cancel_id'])){
+
+        $cancel_id = $_GET['request_id'];
+
+        $cancel_id =  Cancel_Request($cancel_id);
+
+        if ($cancel_id == 1){
+            echo $alert = alerts(4,'Request Canceled successfully');
+        }
+    }
+    ?>
+        <a href="request_process.php?cancel_id=" onClick="return confirm('Are you sure you want cancel this request ?')" name="cancel" class="btn btn-danger btn-sm float-left" target="_self" ><i>
         <ion-icon name="trash-bin-outline"></ion-icon>
         </i>Cancel</a>
 
