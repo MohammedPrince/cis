@@ -1,6 +1,7 @@
 <?php
 include("include/functions.php");
 
+
 if(isset($_GET['std'])){
     $std_index = $_GET['std'];
     $stud_index = Stud_Index($std_index);
@@ -30,71 +31,37 @@ function Get_Course_Name($code) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Transcript</title>
-    <style>
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 4px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 5mm;
-        }
-        th, td {
-            font-size: 4px;
-            border: 0.5px solid black;
-            padding: 1px;
-        }
-        h3 {
-            font-size: 4px;
-        }
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-        tfoot td {
-            font-size: 4px;
-            padding: 2px;
-            border: none;
-        }
-        @media print {
-            @page {
-                size: A4;
-            }
-        }
-        .semester_summary {
-            text-align: center;
-            margin-top: 0px;
-            margin-bottom: 0px;
-            font-size: 4px;
-            font-weight: bold;
-        }
-        .tab {
-            display: inline-block;
-            margin-left: 25px;
-        }
-        h1 {
-            text-align: center;
-            font-size: 5px;
-        }
-        h3 {
-            /* display: inline-block; */
-            font-size: 5px;
-        }
-    </style>
+    <link rel="icon" type="image" href="include/dist/img/fu.png">
+    <link rel="stylesheet" href="./include/dist/css/style.css">
+    <title> <?php echo $stud_index['stud_name'];// . " " . $stud_index['stud_surname']; ?> Transcript</title>
 </head>
 <body>
-    <br>
-    <br>
-<p>Nationality No: <?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?></p>
-<p>University No:</p>
+<br><br><br><br><br><br>    <br><br><br><br><br>
+<p class="top_main_body" id="ghazi">Nationality No: <?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?></p>
+<p class="top_main_body">University No:</p>
 
 <h1><?php  echo Get_Faculty_Name($student_profile_common['faculty_code']); ?></h1>
 
-    <h3>This is to certify that
-        <?php echo isset($stud_index) ? $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] : "____________"; ?>
-        has successfully passed the Administration <?php echo  Get_Mode($std_cert_data['mode']); ?>, by the senate of the university on the <?php  echo Get_Format_Date($std_cert_data['senate_on']);  ?>. He/She has completed all the <?php  echo $total_hours;?> Credit Hours of the program (Full Time) with a /<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['cgpa']; else echo "" ;?>/.<br> Below are the details of his/her grades throughout the Ten semesters of the course of study.
-    </h3>
+    <p class="main_body">This is to certify that <b><u>
+        <?php echo "/  " . $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] . "  /"; ?></u></b>
+       <b>(
+          <?php   
+
+if($student_profile_common['nationality_code'] == 0){
+  echo 'Foreign';
+}
+if($student_profile_common['nationality_code'] == 1){
+  echo 'Sudanese Nationality';
+
+}
+if($student_profile_common['nationality_code'] == 4){
+  echo 'Refugees';
+
+}
+?>)</b>
+
+        has successfully passed the <strong><u>Administration </u><?php echo  Get_Mode($std_cert_data['mode']); ?></strong>, by the senate of the university on the <strong><?php  echo Get_Format_Date($std_cert_data['senate_on']);  ?></strong>. He/She has completed all the <strong><?php  echo $total_hours;?> Credit Hours</strong> of the program <strong>(Full Time)</strong> with a <strong>CGPA <?php if(isset($stud_transcript_sql)) echo "/  " . $stud_transcript_sql['cgpa'] . "  /"; else echo "" ;?></strong>.<br> Below are the details of his/her grades throughout the Ten semesters of the course of study.
+    </p>
 
     <?php
     // Retrieve the maximum semester value (assuming we go up to semester 10)
@@ -134,7 +101,7 @@ function Get_Course_Name($code) {
             echo "<th>Grade</th>";
             echo "</tr>";
 
-            echo "<tbody>";
+            // echo "<tbody>";
 
             $row_count = 0;
 
@@ -148,7 +115,7 @@ function Get_Course_Name($code) {
                 // Pairing rows (2 subjects per row)
                 if ($row_count % 2 == 0) {
                     // Open a new row
-                    echo "<tr>";
+                    // echo "<tr>";
                 }
                 
                 // Display subject details
@@ -186,6 +153,42 @@ function Get_Course_Name($code) {
         }
     }
     ?>
+<div class="signatures">
+
+        <div class="signature">
+          <strong>
+            <p>Ust. Kawther Abu Elnaja</p>
+            The University Registrar
+            </strong>
+        </div>
+        <div class="signature">
+        <strong>
+            <p>Dr. Isameldeen Mohamed Khair</p>
+            Deputy President for Academic Affairs
+          </div>
+        </strong>
+    </div>
+
+ 
+
+        <div class="grading_system">
+            <p><u><b>The 4 point system is used CGPA of 2 is required to award degree</b></u></p>
+            <p><Strong>A,A- Excellent
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            B+,B, B- Good
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            C+,C Pass&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            C-,D+,D Conditionally Passing</Strong></p>
+            <p><Strong>F &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Fall &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Z&nbsp;Unauthorized Absence, Falling &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                P Passing a P/F Course</Strong></p>
+            <p><Strong>I &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; complete 
+            &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+            W&nbsp;Withdraw</Strong></p>
+        </div>
+
+        <p>Date of Issue: <?php echo  Transcript_Date_Format($std_cert_data['cert_printed_at']); ?></p>
+    </div>
 
 </body>
 </html>

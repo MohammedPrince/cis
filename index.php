@@ -17,6 +17,7 @@ include("include/functions.php");
     <link rel="icon"
         type="image"
         href="include/dist/img/fu.png">
+     
 
 
     <link rel="stylesheet"

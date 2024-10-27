@@ -12,8 +12,8 @@ $total_request_canceled = Total_Request_Canceled();
 $total_request_return = Total_Request_Return();
 
 // http://localhost/gitrepo/cis/set_serial_number.php?paper_id=2
-$current_paper_id = "";
-$current_paper_id = Print_Paper($current_paper_id);
+// $current_paper_id = "";
+// $current_paper_id = Print_Paper($current_paper_id);
 
 ?>
 

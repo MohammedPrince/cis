@@ -643,6 +643,7 @@ function Stud_Index($std_index)
     // get Bachelor cgpa and gpa
        function stud_transcript_sql($std_index, $current_sem){
         global $sis_con;
+        // $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$std_index' AND `faculty_code` =  '$faculty' AND `major_code ` = '$major' AND `semester` = '$current_sem' " ;
         $stud_transcript_sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$std_index' AND `semester` = '$current_sem' " ;
         if($stud_transcript_query = mysqli_query($sis_con, $stud_transcript_sql)){
             $row = mysqli_fetch_array($stud_transcript_query);
@@ -759,12 +760,19 @@ function getDaySuffix($day) {
     }
 }
 
-function N_Date($nudate) {
+function Grafuation_Date_Format($nudate) {
     // Create a DateTime object from the input date
     $dateTime = new DateTime($nudate);
 
     // Format the date as "d.m.Y" (day.month.year)
     return $dateTime->format('d.m.Y');
+}
+function Transcript_Date_Format($nudate) {
+    // Create a DateTime object from the input date
+    $dateTime = new DateTime($nudate);
+
+    // Format the date as "d.m.Y" (day.month.year)
+    return $dateTime->format('d/m/Y');
 }
 
 function Get_Place_Issue($place){

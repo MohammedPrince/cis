@@ -160,7 +160,7 @@ by the University Senate on the <b><?php  echo Get_Format_Date($std_cert_data['s
     </div>
 
     <div class="footer">
-        <p>Date and place of issue: <?php $place ="2"; echo Get_Place_Issue($place); ?>, <?php echo  N_Date($std_cert_data['cert_printed_at']); ?></p>
+        <p>Date and place of issue: <?php $place ="2"; echo Get_Place_Issue($place); ?>, <?php echo  Grafuation_Date_Format($std_cert_data['cert_printed_at']); ?></p>
     </div>
 </body>
 </html>

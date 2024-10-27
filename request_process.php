@@ -344,7 +344,7 @@ if(isset($_POST['send_request'])){
             <?php 
         } elseif ($request_data['certificate_type'] == "2") {
             ?>
-            <a href="bachelor_transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
+            <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
                 <i><ion-icon name="print-outline"></ion-icon></i> Print
             </a>
             <?php 
@@ -354,10 +354,10 @@ if(isset($_POST['send_request'])){
 
         
 
-
+<!-- sent return_id  -->
 
         <div class="text-center">
-            <a href="request_process.php?return" name="return" class="btn btn-primary btn-sm float-center"><i>
+            <a href="request_process.php?return=" name="return" class="btn btn-primary btn-sm float-center"><i>
                 <ion-icon name="trash-bin-outline"></ion-icon>
             </i>Return</a>
 
