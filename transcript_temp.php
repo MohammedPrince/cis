@@ -36,7 +36,7 @@ function Get_Course_Name($code) {
     <title> <?php echo $stud_index['stud_name'];// . " " . $stud_index['stud_surname']; ?> Transcript</title>
 </head>
 <body>
-<br><br><br><br><br><br>    <br><br><br><br><br>
+<br><br><br><br><br><br>    <br>
 <p class="top_main_body" id="ghazi">Nationality No: <?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?></p>
 <p class="top_main_body">University No:</p>
 
@@ -139,7 +139,7 @@ if($student_profile_common['nationality_code'] == 4){
             echo "</tbody>";
 
             // Retrieve GPA and CGPA for the current semester
-            $sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '201602018' and `semester` = '$i'";
+            $sql = "SELECT * FROM `stud_transcript_table` WHERE `stud_id` = '$std_index' and `semester` = '$i'";
             $query = mysqli_query($sis_con, $sql);
             $trans_res = mysqli_fetch_array($query);
             $gpa = $trans_res['gpa'];

@@ -356,12 +356,12 @@ if(isset($_POST['send_request'])){
 
 <!-- sent return_id  -->
 
-        <div class="text-center">
+        <!-- <div class="text-center">
             <a href="request_process.php?return=" name="return" class="btn btn-primary btn-sm float-center"><i>
                 <ion-icon name="trash-bin-outline"></ion-icon>
             </i>Return</a>
 
-        </div>
+        </div> -->
 
     <?php 
     if(isset($_GET['cancel_id'])){
@@ -375,9 +375,9 @@ if(isset($_POST['send_request'])){
         }
     }
     ?>
-        <a href="request_process.php?cancel_id=" onClick="return confirm('Are you sure you want cancel this request ?')" name="cancel" class="btn btn-danger btn-sm float-left" target="_self" ><i>
-        <ion-icon name="trash-bin-outline"></ion-icon>
-        </i>Cancel</a>
+        <!-- <a href="request_process.php?cancel_id=" onClick="return confirm('Are you sure you want cancel this request ?')" name="cancel" class="btn btn-danger btn-sm float-left" target="_self" ><i> -->
+        <!-- <ion-icon name="trash-bin-outline"></ion-icon> -->
+        <!-- </i>Cancel</a> -->
 
         
         
