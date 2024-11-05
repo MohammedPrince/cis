@@ -164,7 +164,7 @@ function Update_user_info($updated_password)
 function Get_paper()
 {
     global $conn;
-    $sqli = "SELECT * FROM `papers` WHERE `dell_paper` = 0";
+    $sqli = "SELECT * FROM `papers` WHERE `dell_paper` = 0 ORDER BY `paper_number` DESC";
     if ($query = mysqli_query($conn, $sqli)) {
         return $query;
     } else {
@@ -178,20 +178,30 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 {
     global $conn;
 
-    // $serial_count = $serial_number_end - $serial_number_start + 1;
+    // Convert serial numbers to integers for comparison
+    $serial_start = (int)$serial_number_start;
+    $serial_end = (int)$serial_number_end;
 
-    // if ($serial_count == $paper_number) {
-        
-        $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
-        if ($query = mysqli_query($conn, $sqli)) {
-            return 1; 
-        } else {
-            return 2;
-        // }
-        // } else {
-            // return 3;
-        }
+    // Calculate the total number of serial numbers
+    $total_serials = $serial_end - $serial_start + 1;
+
+    // Validate that the total number of serials does not exceed paper_number
+    if ($total_serials > $paper_number) {
+        return 3; // Return a specific code for validation failure
     }
+
+    // Prepare the SQL statement
+    $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) 
+             VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
+
+    // Execute the query
+    if ($query = mysqli_query($conn, $sqli)) {
+        return 1; // Success
+    } else {
+        return 2; // Query execution failure
+    }
+}
+    
 
 
 
@@ -260,6 +270,52 @@ function Get_Requests_Data($request_id_de){
        }
 
 }
+
+function  Delete_Requests($delet_id){
+    global $conn;
+
+    $NEWdell = base64_decode($delet_id);
+    $sqli = "UPDATE `request` SET dell_request = 1 WHERE `request_id` = $NEWdell";
+
+
+    if ($query = mysqli_query($conn, $sqli)) {
+        return 1;
+    } else {
+
+        echo $sqli;
+
+        die();
+
+    }
+
+}
+
+
+function Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number) {
+    global $conn;
+
+    $sqli = "UPDATE `student_basic_info` SET `std_full_name_en` = '$std_full_name_en', `std_full_name_ar` = '$std_full_name_ar' WHERE `std_index` = '$std_index' AND `dell_std_basic_info` = 0";
+    $query_1 = mysqli_query($conn, $sqli);
+    
+    $sqli_2 = "UPDATE `student_cert_info` SET `national_number` = '$national_number', `ministery_number` = '$ministery_number' WHERE  `dell_std_cert_info` = 0";
+    $query_2 = mysqli_query($conn, $sqli_2);
+
+    if ($query_1 && $query_2) {
+        // return 1;
+        ?>
+        <script>
+    window.location = './request_process.php?updated&request_id='+ <?php echo json_encode($request_id_de); ?>;
+       </script>
+        
+        <!-- // echo  $sqli; -->
+<?php
+    } else {
+        
+        return 2;
+    }
+    
+}
+
 
 function Get_std_cert_Data($std_index){
     global $conn;
@@ -360,27 +416,42 @@ function Print_Paper($current_paper_id) {
 
 
 
-function Total_Request_Return(){
+// function Total_Request_Return(){
+//     global $conn;
+//     $sqli = "SELECT SUM(return_request) AS  total_return_request FROM `request` WHERE `return_request` = '1' AND `dell_request` = '0'";
+//     if($sqli_query = mysqli_query($conn, $sqli)){
+//         $row = mysqli_fetch_assoc($sqli_query);
+//         $num_rows = $row['total_return_request'];
+//         return $num_rows;
+
+//     }else{
+//             echo $sqli;
+//         }
+
+//   }
+function Total_Paper(){
     global $conn;
-    $sqli = "SELECT SUM(return_request) AS  total_return_request FROM `request` WHERE `return_request` = '1' AND `dell_request` = '0'";
+    $sqli = "SELECT SUM(paper_number) AS  total_paper FROM `papers` WHERE `dell_paper` = 0";
     if($sqli_query = mysqli_query($conn, $sqli)){
         $row = mysqli_fetch_assoc($sqli_query);
-        $num_rows = $row['total_return_request'];
+        $num_rows = $row['total_paper'];
         return $num_rows;
 
     }else{
             echo $sqli;
         }
 
-  }
+
+}
 
 
-function Total_Request_Canceled(){
+function Total_Request_Delete(){
     global $conn;
-    $sqli = "SELECT SUM(canceled_request) AS  total_request_canceled FROM `request` WHERE `canceled_request` = '1' AND `dell_request` = '0'";
+    // $sqli = "SELECT SUM(canceled_request) AS  total_request_canceled FROM `request` WHERE `canceled_request` = '1' AND `dell_request` = '1'";
+    $sqli = "SELECT SUM(dell_request) AS  total_request_delete FROM `request` WHERE  `dell_request` = '1'";
     if($sqli_query = mysqli_query($conn, $sqli)){
         $row = mysqli_fetch_assoc($sqli_query);
-        $num_rows = $row['total_request_canceled'];
+        $num_rows = $row['total_request_delete'];
         return $num_rows;
 
     }else{
@@ -439,7 +510,7 @@ function Get_Requests()
     global $conn;
 
     $sqli = "SELECT * FROM `student_basic_info`bi, `student_cert_info`si, `request`r,`users`u WHERE bi.student_basic_info_id = si.student_basic_info_id AND si.std_cert_id = r.`std_cert_id` AND u.user_id  = r.user_id AND
-    r.dell_request = 0 ORDER BY r.request_id ASC";
+    r.dell_request = 0 ORDER BY r.request_id DESC";
 
     if ($query = mysqli_query($conn, $sqli)) {
         return $query;
@@ -610,6 +681,33 @@ function Stud_Index($std_index)
 }
 
 
+// get update data from cis database
+function Student_Basic_Info($std_index){
+    global $conn;
+    $sqli = "SELECT * FROM `student_basic_info` WHERE `std_index` = '$std_index' AND `dell_std_basic_info` = '0'";
+    if($sqli = mysqli_query($conn, $sqli)){
+
+        $row = mysqli_fetch_array($sqli);
+        return $row;
+
+       }else{
+        return 3;
+       }
+}
+
+function Student_Cert_Info($student_basic_info_id){
+    global $conn;
+    $sqli = "SELECT * FROM `student_cert_info` WHERE `student_basic_info_id` = '$student_basic_info_id' AND `dell_std_cert_info` = '0' ";
+    if($sqli = mysqli_query($conn, $sqli)){
+
+        $row = mysqli_fetch_array($sqli);
+        return $row;
+
+       }else{
+        return 3;
+       }
+
+}
 
 
       function student_profile_common_sql($std_index){
@@ -808,10 +906,17 @@ function Get_Division($get_division){
     }
 
 }
+// Function to retrieve the course name based on the course code
+function Get_Course_Name($code) {
+    global $sis_con;
+    $sqli = "SELECT * FROM `course_details` WHERE `course_code` = '$code' ";
+    $query = mysqli_query($sis_con, $sqli);
+    $row = mysqli_fetch_array($query);
+    return $row['course_name'];
+}
 
 
 
      
 
 ?>
-

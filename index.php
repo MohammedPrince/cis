@@ -12,7 +12,7 @@ include("include/functions.php");
     <meta charset="utf-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1">
-    <title>Certificat Information System</title>
+    <title>CIS</title>
 
     <link rel="icon"
         type="image"
@@ -66,19 +66,13 @@ include("include/functions.php");
 
             <div class="card card-outline card-primary">
                 <span class="input-group-icon text-center"><img src="include/dist/img/fu.png"
-                        width="65"
-                        height="65"
+                        width="140"
+                        height="140"
                         alt=""></span>
                 <div class="card-header text-center">
-                    <a href="#"
-                        class="h5">Certificat Information System</a>
-                    <?php 
-                // if(isset($_SESSION["user_id"])){
+             
+                    <p class="h5">Certificate Information System (CIS)</p>
 
-                //     echo $_SESSION["user_id"];
-                // }
-                
-                ?>
                 </div>
 
                 <div class="card-body ">
@@ -114,7 +108,7 @@ include("include/functions.php");
 
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit"
+                            <button  type="submit"
                                 name="submit"
                                 class="btn btn-primary btn-block">Log In</button>
                         </div>

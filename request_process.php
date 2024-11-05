@@ -1,21 +1,28 @@
 <?php include("include/header.php");?>
 
 
-
-
-
-
-
 <?php
 
 if(isset($_GET['request_id'])){
 
  $request_id_de = base64_decode($_GET['request_id']);
-
+ $request_encrypted = $_GET['request_id'];
  $request_data = Get_Requests_Data($request_id_de);
  
-}else{
+}
 
+if(isset($_GET['std'])){
+    $std_index = $_GET['std'];
+    $stud_index = Stud_Index($std_index);
+    $student_profile_common = student_profile_common_sql($std_index);
+    $batch = $student_profile_common['batch'];
+    $major = $student_profile_common['major_code'];
+    $faculty = $student_profile_common['faculty_code'];
+    $current_sem = $student_profile_common['curr_sem'];
+    $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
+    $total_hours = Total_Hours($std_index);
+    stud_course_mark_sql($std_index, $batch, $major);
+    $std_cert_data  = Get_std_cert_Data($std_index);
 }
 
 
@@ -24,6 +31,7 @@ if(isset($_GET['request_id'])){
 if(isset($_POST['send_request'])){
 
     $std_index = $_POST['std_index'];
+  
     $program = $_POST['program'];
     $faculty = $_POST['Faculty'];
     $majer = $_POST['majer'];
@@ -93,6 +101,25 @@ if(isset($_POST['send_request'])){
 
 }
 
+if (isset($_POST['update_request_info'])){
+
+    // $request_id_de = base64_decode($_GET['request_id']);
+
+    $request_id_de = $_POST['request_id_de'];
+    $std_index = $_POST['std_index'];
+
+    $national_number = $_POST['national_number'];
+    $ministery_number = $_POST['ministery_number'];
+
+    $std_full_name_en = $_POST['std_full_name_en'];
+    $std_full_name_ar = $_POST['std_full_name_ar'];
+    
+    $update_request_info = Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number);
+}
+
+
+
+
 ?>
 
 <div class="content-wrapper">
@@ -106,7 +133,7 @@ if(isset($_POST['send_request'])){
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active">New Certificate</li>
+                            <li class="breadcrumb-item active">Request Process</li>
                         </ol>
                     </div>
                     <!--  -->
@@ -146,12 +173,32 @@ if(isset($_POST['send_request'])){
 ?>
 <!--  -->
 
+<html>
+
+</html>
+
+<form action="request_process.php" method="POST">
 
 <!-- start of the card search -->
+<?php
+        if(isset($_POST['update_request_info'])){
+       
+            // if ($update_request_info == 2){
+            //     echo $alert = alerts(3,"Error unaple to update");
+            // }
+        }
+        if(isset($_GET['updated'])){
+            echo $alert = alerts(1,"Student Information Change successfully");
+            
+        }
+        
+        ?>
 <div class="card card-info">
     <div class="card-header">
+
     <h3 class="card-title">Academic Information</h3>
     </div>
+
     <div class="card-body">
         <label>Student Index</label>
         <input type="text" value="<?php if(isset($request_data))  echo $request_data['std_index']; else echo ""; ?>" name="std_index"  class="form-control" placeholder="Student Full Nmae..." readonly>
@@ -159,10 +206,9 @@ if(isset($_POST['send_request'])){
         
     </div>
     <!-- end -->
+    <input type="hidden" value="<?php if(isset($request_data))  echo $request_encrypted;?>" name="request_id_de" >
+
     
-
-
-<form action="new_certificate.php" method="POST">
 
 
 
@@ -190,62 +236,53 @@ if(isset($_POST['send_request'])){
 </div>
 
 <!--  end of first card  in left side left -->
-<div class="card card-info">
+<!-- <div class="card card-info">
     <div class="card-header">
     <h3 class="card-title">Graduates information</h3>
-    </div>
+    </div> -->
             <!-- start certificat type  -->
-            <!-- <div class="card-body">
+        <!-- <div class="card-body">
         <label>Certificat Type</label>
         <select class="form-control" name="certificate_type" required="required">
 
-            <option value="">Chose type...</option>
+         <option value="">Chose type...</option> -->
             <?php 
-            // if (isset($request_data))
-            //   {?>
-                <option value="<?php
-                //  if(isset($request_data))  echo $request_data['certificate_type']; else echo "" ;   ?>" selected></option>
+           // if (isset($request_data))
+              //{?>
+            <!-- <option value="
+            
+            <?php
+               // if(isset($request_data))  echo $request_data['certificate_type']; else echo "" ;   ?>
+               
+               //" selected></option>
                  <?php
-                //  } 
-                //  else { ?>
+                 //} 
+                  //else { ?>
                 <?php 
                 // if (isset($request_data)) {
-                //     if ($request_data['certificate_type']==1) {
+                //     if($request_data['certificate_type']==1) {
                 //         echo "Graduation";
-                //     }if($request_data['certificate_type']==2) {
+                //     }
+                //     if($request_data['certificate_type']==2) {
                 //         echo "Transcript";
                 //     }
                     
                 // }
                 // }?>
-        
-                    
-                    
-            <option value="1">Graduation</option>
+       
+             <option value="1">Graduation</option>
             <option value="2">Transcript</option>
         </select>
-    </div> -->
-
+    </div>  -->
 
          <!-- start Printed At -->
-         <div class="card-body">
+         <!-- <div class="card-body">
         <label>Printed At</label>
         <input type="date" value="<?php if(isset($request_data))  echo  $request_data['cert_printed_at']; else echo "" ;   ?>" name="cert_printed_at" class="form-control" required>
         
     </div>
-
-
-         
-
-
-    <div class="card-footer"><br></div>
-
-    
-
-
-
-
-    </div>
+<div class="card-footer"><br></div>
+</div> -->
 <!-- end of div of left side row -->
 </div>
 
@@ -260,7 +297,7 @@ if(isset($_POST['send_request'])){
 
          <!-- Full Name in Arabic -->
          <div class="card-body">
-         <label for="">Student Full Nmae in English</label>
+         <label for="">Student Full Name in English</label>
          <div class="col-8">
              <input type="text" name="std_full_name_en" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_full_name_en'] ?>" class="form-control" placeholder="Student Full Nmae..." required>
             </div>
@@ -276,7 +313,7 @@ if(isset($_POST['send_request'])){
         <!-- Full Name in Arabic end-->
 
     <!-- English name -->
-    <div class="card-body">
+    <!-- <div class="card-body">
         <label for="">English Name</label>
         <div class="row">
             <div class="col-3">
@@ -284,111 +321,105 @@ if(isset($_POST['send_request'])){
             </div>
             <div class="col-3">
                 <input type="text" name="std_second_name_en" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_second_name_en']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
-            </div>
+            </div> -->
             <!-- <div class="col-3">
                 <input type="text" name="std_third_name_en" value="" class="form-control" placeholder="Third Name..." required>
             </div> -->
-            <div class="col-3">
+            <!-- <div class="col-3">
                 <input type="text" name="std_fourth_name_en" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_fourth_name_en']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
             </div> 
         </div>
-    </div>
+    </div> -->
     <!-- english name end-->
 
 
 
     <!-- Arabic name -->
-    <div class="card-body">
+    <!-- <div class="card-body">
         <label for="">Arabic Name</label>
         <div class="row">
             <div class="col-3">
                 <input type="text" name="std_fourth_name_ar" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_fourth_name_ar'] ; else echo "";  ?>" class="form-control" placeholder="...الاسم الرابع" required>
-            </div>
+            </div> -->
             <!-- <div class="col-3">
                 <input type="text" name="std_third_name_ar" class="form-control" placeholder="...الاسم الثالث" required>
             </div> -->
-            <div class="col-3">
+            <!-- <div class="col-3">
                 <input type="text" name="std_second_name_ar" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_second_name_ar'] ; else echo "";  ?>" class="form-control" placeholder="...أسم العائلة" required>
             </div>
             <div class="col-3">
                 <input type="text" name="std_first_name_ar" value="<?php if(isset($_GET['request_id'])) echo $request_data['std_first_name_ar'] ; else echo "";  ?>" class="form-control" placeholder="...الاسم الاول" required>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Arabic name end-->
 
 </div>
 
 
-<div class="card card-info">
-    <!-- <div class="card-header"> -->
-    <!-- <h3 class="card-title">Editing Process</h3>
-    </div>
-    <div class="card-body">
-    <label>Reply with Comment(Optional)</label>
-    <textarea class="form-control" rows="3" placeholder="Enter your comment here ..."></textarea>
-    </div> -->
-
-
-
-
- 
-    <div class="card-footer">
-    <?php 
-    if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2")) {
-        if ($request_data['certificate_type'] == "1") {
-            ?>
-            <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
-                <i><ion-icon name="print-outline"></ion-icon></i> Print
-            </a>
-            <?php 
-        } elseif ($request_data['certificate_type'] == "2") {
-            ?>
-            <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm float-right">
-                <i><ion-icon name="print-outline"></ion-icon></i> Print
-            </a>
-            <?php 
-        }
-    } 
-?>
-
-        
-
-<!-- sent return_id  -->
-
-        <!-- <div class="text-center">
-            <a href="request_process.php?return=" name="return" class="btn btn-primary btn-sm float-center"><i>
-                <ion-icon name="trash-bin-outline"></ion-icon>
-            </i>Return</a>
-
+    <div class="card card-info">
+        <!-- <div class="card-header"> -->
+        <!-- <h3 class="card-title">Editing Process</h3>
+        </div>
+        <div class="card-body">
+        <label>Reply with Comment(Optional)</label>
+        <textarea class="form-control" rows="3" placeholder="Enter your comment here ..."></textarea>
         </div> -->
+        
+        <div class="card-footer d-flex justify-content-between align-items-center">
+    <div class="mr-auto">
+        <a href="request.php" name="cancel_request_info" class="btn btn-danger btn-sm">
+            <i><ion-icon name="return-down-back-outline"></ion-icon></i> Back
+        </a>
+    </div>
 
+    <div class="text-center">
+        <button type="submit" name="update_request_info" class="btn btn-primary btn-sm">
+            <i><ion-icon name="arrow-up-circle-outline"></ion-icon></i> Update
+        </button>
+    </div>
+
+    <div class="ml-auto">
     <?php 
-    if(isset($_GET['cancel_id'])){
 
-        $cancel_id = $_GET['request_id'];
 
-        $cancel_id =  Cancel_Request($cancel_id);
 
-        if ($cancel_id == 1){
-            echo $alert = alerts(4,'Request Canceled successfully');
-        }
+if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2")) {
+    if ($request_data['certificate_type'] == "1") {
+        ?>
+        <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm">
+            <i><ion-icon name="print-outline"></ion-icon></i> Print
+        </a>
+        <?php 
+    } elseif ($request_data['certificate_type'] == "2") {
+        ?>
+        <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm">
+            <i><ion-icon name="print-outline"></ion-icon></i> Print
+        </a>
+        <?php 
     }
-    ?>
-        <!-- <a href="request_process.php?cancel_id=" onClick="return confirm('Are you sure you want cancel this request ?')" name="cancel" class="btn btn-danger btn-sm float-left" target="_self" ><i> -->
-        <!-- <ion-icon name="trash-bin-outline"></ion-icon> -->
-        <!-- </i>Cancel</a> -->
+} 
+//interner
+// if (isset($request_data['certificate_type']) && 
+//     in_array($request_data['certificate_type'], ["1", "2"]) && 
+//     isset($request_data['std_index'])) {
+    
+//     $std_index = $request_data['std_index'];
+//     $print_url = ($request_data['certificate_type'] == "1") ? 
+//                  "bachelor_temp.php?std=$std_index" : 
+//                  "transcript_temp.php?std=$std_index";
+//     ?>
+<!-- //     <a href="<//?php echo $print_url; ?>" name="print" class="btn btn-info btn-sm">
+//         <i><ion-icon name="print-outline"></ion-icon></i> Print
+//     </a> -->
+    <?php 
+// } else {
+//     echo "<p>Error: Unable to generate print link. Please check the certificate type and student index.</p>";
+// }
 
-        
-        
-
-    <!-- </div> -->
-    <!-- end -->
-
+?>
+    </div>
 </div>
-
-
-
 
 
 

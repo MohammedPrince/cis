@@ -1,0 +1,79 @@
+@page {
+        
+  margin: 0;
+  size: A4;
+}
+
+body {
+  font-family: 'Times New Roman';
+  font-size: 10pt;
+  line-height: 1.3;
+
+ 
+  margin-inline-start: 30px;
+  
+  }
+
+  .header {
+
+    
+    font-size: 7pt;
+    margin-block-start: 4cm;
+    
+  }
+  h1 {
+
+    text-align: center;
+    font-size: 9pt;
+    margin-right: 20px;
+    margin-bottom: 0px;
+}
+
+/* space from mid page */
+  .main-content {
+    font-size: 8pt;
+    padding-left: 0cm;
+    margin-top: 0cm;
+    margin-bottom: 0px;
+    align-items: normal;
+  }
+
+
+  p.big {
+line-height: 1.9;
+
+}
+p{
+/* position: relative; */
+font-size: 11;
+}
+  /* .name {
+      text-decoration: underline;
+      font-weight: bold;
+      margin: 0.5cm 0;
+  } */
+  .degree {
+      
+      font-weight: bold;
+      margin: 0.5cm 0;
+  }
+  
+  .signatures {
+    font-size: 9pt;
+    font-family: 'Monotype Corsiva';
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2cm;
+  }
+  .signatures p {
+      font-family: 'Times New Roman', Times, serif; /* Change to Times New Roman */
+  }
+  .signature {
+      text-align: center;
+      width: 45%;
+  }
+  .footer {
+    padding-left: 0cm;
+    margin-left: 0cm;
+    margin-top: 45px;
+  }

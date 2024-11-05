@@ -17,7 +17,15 @@ $get_requests = Get_Requests();
         $user_type =  $_POST['user_type'];
 
         $adduser = Add_user($user_full_name,$username,$user_email,$password,$user_type);
-         }                 
+         } 
+         
+         if(isset($_GET['delet_id'])){
+            $delet_id = $_GET['delet_id'];
+            $delet_request =  Delete_Requests($delet_id);
+            if ($delet_request == 1){
+                echo $alert = alerts(4,'Request deleted successfully');
+            }
+        }
  ?>
 
 <div class="content-wrapper">
@@ -53,8 +61,11 @@ $get_requests = Get_Requests();
                         <th  class="center-align">Request From</th>
                         <th  class="center-align">Student Full Name</th>
                         <th  class="center-align">Student Index</th>
-                        <th  class="center-align">Statuse</th>
-                        <th  class="center-align">Action</th>
+                        <th  class="center-align">Type</th>
+                        <th  class="center-align">Statuses</th>
+                        <th  class="center-align">Action
+                        <th ></th>
+                        
                         <th  class="center-align">Files</th>
                     </tr>
                     </thead>
@@ -78,13 +89,29 @@ $get_requests = Get_Requests();
              ?></td>
 
             <td class="center-align">
+                <?php 
+                if ($row['certificate_type'] == "1") {
+                    echo "Graduation";    
+                } elseif ($row['certificate_type'] == "2") {
+                    echo "Transcript";    
+                }
+        ?>
+            </td>
+        
+
+            <td class="center-align">
             <a  class="btn btn-primary"  class="btn btn-info btn-sm" href="#">
            </i>Printed</a>
             </td>
 
             <td class="center-align">
                 <a  class="btn btn-info"  class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
-                    <i class="fas fa-eye"></i> View</a>
+                    <i class="fas fa-eye"></i> View</a>&nbsp;&nbsp;&nbsp;            
+                    
+                <!-- <a  class="btn btn-danger"  class="btn btn-info btn-sm" href="request.php?delet_request_id=<?php //echo base64_encode($row['delet_request_id']); ?>" onClick="return confirm('Are you sure you want  delete this Request ?')"  class="btn btn-outline btn-danger" target="_self"> -->
+                <a class="btn btn-danger btn-sm" href="request.php?delet_id=<?php  echo base64_encode($row['request_id']);  ?>" onClick="return confirm('Are you sure you want  delete this Request ?')"  class="btn btn-outline btn-danger" target="_self">
+
+                    <i class="fas fa-eye"></i> Delete</a>
             </td>
 
             <!-- if condyion if the request Statuse hase ben done and Printed this form will be allow nither that

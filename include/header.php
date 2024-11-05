@@ -16,9 +16,9 @@ if(!isset($_SESSION["user_id"])){
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Certificat Information System</title>
+        <title>CIS</title>
 
-    <link rel="icon" type="image" href="include/dist/img/fu.png">
+        <link rel="icon" type="image" href="include/dist/img/fu.png">
 
         
         <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
@@ -152,7 +152,7 @@ if(!isset($_SESSION["user_id"])){
         
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="include/dist/img/user.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block"> 

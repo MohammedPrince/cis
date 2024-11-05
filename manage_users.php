@@ -3,6 +3,7 @@ include("include/header.php");
 
 $get_users = Get_users();
 
+
 ?>
 <?php
     if(isset($_POST['adduser'])){
@@ -43,7 +44,7 @@ $get_users = Get_users();
         <form action="manage_users.php" method="POST">
                         <div class="card card-info">
                             <div class="card-header">
-                                <h3 class="card-title">Add User</h3>
+                                <h3 title='Add a new user' class="card-title">Add User</h3>
                             </div>
                             <!-- start User Fullname-->
                             <div class="card-body">
@@ -67,7 +68,7 @@ $get_users = Get_users();
                                     }
                                 }
                                 ?>
-                                <label for="">User Fullname &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp; &ensp;&ensp; &ensp;Username</label>
+                                <label for="">User Full Name &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp; &ensp;&ensp; &ensp;Username</label>
                                 <div class="row">
                                 <div class="col-4">
                                     <input type="text" name="user_full_name" class="form-control" placeholder="User Fullname..." required>
@@ -129,15 +130,16 @@ $get_users = Get_users();
                         <!-- end of div of left side row -->
                     </form>
 </div>
-      
-        
-                    
+                 
 <!-- table start -->
 <section class="content-header">
 <div class="container-fluid"></div>
     <div class="card">
+        <div class="card card-info">
         <div class="card-header">
-            <h3 class="card-title">Manage All Useres</h3>
+                 <h3 title='Manage all User' class="card-title">Manage All Users</h3>
+
+             </div>
             <div class="card-tools">
                 <!-- <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -156,7 +158,7 @@ $get_users = Get_users();
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Fullname</th>
+                        <th>Full Name</th>
                         <th>User Type</th>
                         <th>User Email</th>
                         <th>Added Date</th>

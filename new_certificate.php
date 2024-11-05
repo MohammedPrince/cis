@@ -145,7 +145,7 @@ if (isset($_POST['send_request'])){
 <!-- start of the card search -->
 <div class="card card-info">
     <div class="card-header">
-    <h3 class="card-title">Academic Information</h3>
+    <h3 title='Academic Basic Information'  class="card-title">Academic Information</h3>
     </div>
 
     <!-- search start -->
@@ -166,7 +166,7 @@ if (isset($_POST['send_request'])){
           $student_profile = student_profile_common_sql($std_index);
           $std_current_sem = $student_profile['curr_sem'];
 
-          if($std_current_sem == 10 || $std_current_sem == 6){
+          if($std_current_sem == 10 || $std_current_sem == 6 && $student_profile['program_code'] == 2 || $std_current_sem == 4 && $student_profile['program_code'] == 3 ){
           $student_profile_common = student_profile_common_sql($std_index);
           $current_sem = $student_profile_common['curr_sem'];
           $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
@@ -205,7 +205,7 @@ if (isset($_POST['send_request'])){
         <label for="">Student Index</label>
         <div class="input-group input-group-sm">
 
-            <input type="text" name="std_index" class="form-control" required>
+            <input title="Student Index" type="text" name="std_index" class="form-control" required>
 
             <span class="input-group-append">
                 <button type="submit" name="check_index" class="btn btn-info btn-flat">Check!</button>
@@ -223,9 +223,9 @@ if (isset($_POST['send_request'])){
      <!-- start Education card -->
     <div class="card-body">
         <label>Education Program</label>
-        <select class="form-control" name="program" readonly>
+        <select title="Student education program" class="form-control" name="program" readonly>
 
-            <option value="">Chose Education Level...</option>
+            <option  value="">Chose Education Level...</option>
 
             <?php if(isset($student_profile_common)) {  ?>
 
@@ -265,7 +265,7 @@ if (isset($_POST['send_request'])){
     <?php }else{ ?>
         
 
-        <select class="form-control" name="faculty" id="faculty" required="required">
+        <select title="Student faculty" class="form-control" name="faculty" id="faculty" required="required">
             <option value="">Select Faculty...</option>
             
             <?php while($row=mysqli_fetch_array($get_faculty)){  ?>
@@ -299,7 +299,7 @@ if (isset($_POST['send_request'])){
 <?php }else{ ?>
     
 
-    <select class="form-control" name="major" id="major" required="required">
+    <select title="Student major" class="form-control" name="major" id="major" required="required">
         <option value="">Select Major...</option>
         
 
@@ -335,13 +335,13 @@ if (isset($_POST['send_request'])){
     <div class="card-body">
     <label>Nationality</label>
        
-            <select class="form-control" name="nationality"  readonly="readonly" required="required">
+            <select title="Student nationality"  class="form-control" name="nationality"  readonly required="required">
             <option value="">Select Nationality...</option>
 
             <?php if(isset($student_profile_common)) {  ?>
 
 
-                <option  value="<?php  echo $student_profile_common['nationality_code'];  ?>" selected>
+                <option value="<?php  echo $student_profile_common['nationality_code'];  ?>" selected>
 
                  <?php  
                  
@@ -367,7 +367,7 @@ if (isset($_POST['send_request'])){
     <div class="card-body">
         <label for="">National Number</label>
     <div class="col-12">
-    <input type="text" name="national_number" value="<?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?>" class="form-control" placeholder="National numbe..." required>
+    <input title="Student number" type="text" name="national_number" value="<?php if(isset($student_profile_common)) echo $student_profile_common['identity_no']; else echo "" ;?>" class="form-control" placeholder="National numbe..." required>
     </div>
     </div>
     <!-- end -->
@@ -376,7 +376,7 @@ if (isset($_POST['send_request'])){
     <div class="card-body">
         <label for="">Ministery Numbe</label>
     <div class="col-12">
-    <input type="text" value="<?php if(isset($student_profile_common)) echo $student_profile_common['embassy_code']; else echo "" ;?>"  name="ministery_number" class="form-control" placeholder="National numbe..." required>
+    <input title="Student ministery number" type="text" value="<?php if(isset($student_profile_common)) echo $student_profile_common['embassy_code']; else echo "" ;?>"  name="ministery_number" class="form-control" placeholder="National numbe..." required>
     </div>
     </div>
     <!-- end -->
@@ -389,12 +389,12 @@ if (isset($_POST['send_request'])){
 <!--  end of first card  in left side left -->
 <div class="card card-info">
     <div class="card-header">
-    <h3 class="card-title">Graduates information</h3>
+    <h3 title='Graduates Basic Information ' class="card-title">Graduates information</h3>
     </div>
             <!-- start certificat type  -->
             <div class="card-body">
         <label>Certificat Type</label>
-        <select class="form-control" name="certificate_type" required="required">
+        <select title="Certificat type" class="form-control" name="certificate_type" required="required">
             <option value="">Chose type...</option>
             <option value="1">Graduation</option>
             <option value="2">Transcript</option>
@@ -405,7 +405,7 @@ if (isset($_POST['send_request'])){
         <!-- start Printed Place -->
         <div class="card-body">
         <label>Printed Place</label>
-        <select class="form-control" name="cert_printed_place" required="required">
+        <select title="Certificat printed place" class="form-control" name="cert_printed_place" required="required">
             <option value="">Chose place...</option>
             <option value="1">Khartoum</option>
             <option value="2">Cairo</option>
@@ -417,7 +417,7 @@ if (isset($_POST['send_request'])){
          <!-- start Printed At -->
          <div class="card-body">
         <label>Printed At</label>
-        <input type="date" name="cert_printed_at" class="form-control" required>
+        <input title="Certificat printed at" type="date" name="cert_printed_at" class="form-control" required>
         
     </div>
     <!-- end Printed Place -->
@@ -425,7 +425,7 @@ if (isset($_POST['send_request'])){
          <!-- current sem  -->
          <div class="card-body">
         <label>Current Semester </label>
-        <input type="text" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['semester']; else echo "" ;?>" name="curr_semester" class="form-control" readonly>
+        <input title="Student current semester" type="text" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['semester']; else echo "" ;?>" name="curr_semester" class="form-control" readonly>
         
     </div>
     <!-- end current sem  -->
@@ -436,17 +436,17 @@ if (isset($_POST['send_request'])){
     <div class="row">
         <div class="col-4">
             <label for="">GPA</label>
-            <input type="number" name="gpa" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['gpa']; else echo "" ;?>" class="form-control" placeholder="GPA..." readonly>
+            <input title="Studentcurrent GPA" type="number" name="gpa" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['gpa']; else echo "" ;?>" class="form-control" placeholder="GPA..." readonly>
         </div>
         
         <div class="col-4">
             <label for="">CGPA</label>
-            <input type="number" name="cgpa" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['cgpa']; else echo "" ;?>"  class="form-control" placeholder="CGPA..." readonly>
+            <input title="Student current CGPA" type="number" name="cgpa" value="<?php if(isset($stud_transcript_sql)) echo $stud_transcript_sql['cgpa']; else echo "" ;?>"  class="form-control" placeholder="CGPA..." readonly>
         </div>
 
         <div class="col-4">
             <label for="">Total Hours</label>
-            <input type="number" name="total_graduate_hour" value="<?php if(isset($total_hours)) echo $total_hours; else echo "" ;?>" name="total_graduate_hour" min="0" step="1" class="form-control" placeholder="Hours..." readonly>
+            <input title="Student total hours" type="number" name="total_graduate_hour" value="<?php if(isset($total_hours)) echo $total_hours; else echo "" ;?>" name="total_graduate_hour" min="0" step="1" class="form-control" placeholder="Hours..." readonly>
         </div>
 
     </div>
@@ -469,22 +469,22 @@ if (isset($_POST['send_request'])){
 <div class="col-md-6">
     <div class="card card-info">
     <div class="card-header">
-    <h3 class="card-title">Personal Information</h3>
+    <h3 title='Student Basic Information' class="card-title">Personal Information</h3>
     </div>
 
          <!-- Full Name in Arabic -->
          <div class="card-body">
-         <label for="">Student Full Nmae in English</label>
+         <label for="">Student Full Name in English</label>
          <div class="col-8">
-             <input type="text" name="std_full_name_en" value="<?php if(isset($stud_index)  && isset($student_profile_common)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?>" class="form-control" placeholder="Student Full Nmae..." required>
+             <input title="Student full name in english" type="text" name="std_full_name_en" value="<?php if(isset($stud_index)  && isset($student_profile_common)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?>" class="form-control" placeholder="Student Full Nmae..." required>
             </div>
         </div>
         <!-- Full Name in Arabic end-->
          <!-- Full Name in Arabic -->
          <div class="card-body">
-         <label for="">Student Full Nmae in Arabic</label>
+         <label for="">Student Full Name in Arabic</label>
          <div class="col-8">
-             <input type="text" name="std_full_name_ar" class="form-control" placeholder="...أسم الطالب كامل " required>
+             <input title="أسم الطالب كامل" type="text" name="std_full_name_ar" class="form-control" placeholder="...أسم الطالب كامل " required>
             </div>
         </div>
         <!-- Full Name in Arabic end-->
@@ -494,16 +494,16 @@ if (isset($_POST['send_request'])){
         <label for="">English Name</label>
         <div class="row">
             <div class="col-3">
-                <input type="text" name="std_first_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_name'] ; else echo "";  ?>" class="form-control" placeholder="First Name..." required>
+                <input title="Student first name" type="text" name="std_first_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_name'] ; else echo "";  ?>" class="form-control" placeholder="First Name..." required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_second_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_surname']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
+                <input title="Student second and third name" type="text" name="std_second_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_surname']; else echo "";  ?>" class="form-control" placeholder="Second Name..." required>
             </div>
             <!-- <div class="col-3">
                 <input type="text" name="std_third_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['stud_name']; else echo "";  ?>" class="form-control" placeholder="Third Name..." required>
             </div> -->
             <div class="col-3">
-                <input type="text" name="std_fourth_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['familyname']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
+                <input title="Student fourth name" type="text" name="std_fourth_name_en" value="<?php if(isset($stud_index) && isset($student_profile_common)) echo $stud_index['familyname']; else echo "";  ?>" class="form-control" placeholder="Fourth Name..." required>
             </div>
         </div>
     </div>
@@ -514,16 +514,16 @@ if (isset($_POST['send_request'])){
         <label for="">Arabic Name</label>
         <div class="row">
             <div class="col-3">
-                <input type="text" name="std_fourth_name_ar" class="form-control" placeholder="...الاسم الرابع" required>
+                <input title="الاسم الرابع للطالب " type="text" name="std_fourth_name_ar" class="form-control" placeholder="...الاسم الرابع" required>
             </div>
             <!-- <div class="col-3">
                 <input type="text" name="std_third_name_ar" class="form-control" placeholder="...الاسم الثالث" required>
             </div> -->
             <div class="col-3">
-                <input type="text" name="std_second_name_ar" class="form-control" placeholder="...أسم العائلة" required>
+                <input title="الاسم الثاني و الثالث للطالب " type="text" name="std_second_name_ar" class="form-control" placeholder="...أسم العائلة" required>
             </div>
             <div class="col-3">
-                <input type="text" name="std_first_name_ar" class="form-control" placeholder="...الاسم الاول" required>
+                <input title="الاسم الاول للطالب " type="text" name="std_first_name_ar" class="form-control" placeholder="...الاسم الاول" required>
             </div>
         </div>
     </div>
@@ -536,11 +536,13 @@ if (isset($_POST['send_request'])){
         <label for="">Email &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;  &ensp;&ensp; &ensp;&ensp; &ensp;&ensp;Mobail</label>           
         <div class="row">
             <div class="col-5">
-                <input type="email" name="std_email" class="form-control" placeholder="name@mail.com" required>
+                <input title="Student email" type="email" name="std_email" class="form-control" placeholder="name@mail.com" required>
             </div>
             <div class="col-5">
-                <input type="tel" name="std_mobail" class="form-control" placeholder="+249-110-104-257" required>
-            </div>
+    <input title="Student phone number" type="tel" name="std_mobail" class="form-control" placeholder="123-456-7890" required
+           pattern="[0-9]{10}" maxlength="10" title="Please enter exactly 10 digits">
+</div>
+
         </div>
     </div>
     <!-- email  and mobail end-->
@@ -592,7 +594,7 @@ if (isset($_POST['send_request'])){
 
 <div class="card card-info">
     <div class="card-header">
-    <h3 class="card-title">Graduates information</h3>
+    <h3 title='Graduates Basic Information' class="card-title">Graduates information</h3>
     </div>
     <!-- start -->
      <!-- dependant multi select -->
@@ -627,12 +629,12 @@ if (isset($_POST['send_request'])){
         <input type="date" name="senate_on" class="form-control" required>
     </div>
     <br><br>    
-    <div class="card-footer">
-        <button type="submit" name="send_request" class="btn btn-info float-right"><i>
-        <ion-icon name="send-outline"></ion-icon>
-        </i>Eddit Request</button>
-        <!-- <button type="submit"class="btn btn-default " >Cancel</button> -->
-    </div>
+    <div class="card-footer" style="display: flex; justify-content: center;">
+    <button type="submit" name="send_request" class="btn btn-info">
+        <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
+    </button>
+</div>
+
     <!-- end -->
 
 </div>

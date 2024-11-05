@@ -29,9 +29,10 @@ if(isset($_GET['std'])){
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Degree Certificate</title>
+    <link rel="icon" type="image" href="include/dist/img/fu.png">
+    <title> <?php echo "[" . $std_cert_data['std_full_name_en'] . "-" . $stud_index['stud_id'] . "]-"; ?> Master</title>
     <style>
       @page {
         
@@ -40,6 +41,7 @@ if(isset($_GET['std'])){
       }
 
       body {
+        margin-inline-start: -0.5px;
         font-family: 'Times New Roman';
         font-size: 8pt;
         line-height: 1.3;
@@ -49,21 +51,23 @@ if(isset($_GET['std'])){
         }
       
         .header {
-            /* font-size: smaller; */
+          font-weight: bold;
+            font-size: 6px;
             position: relative;
-            top: 120px;
+            top: 100px;
             text-align: left;
+            margin-top: 0cm;
             margin-left: 1cm;
             margin-bottom: 1cm;
         }
         h1 {
   
   text-align: center;
-  font-size: 11pt;
+  font-size: 9pt;
 }
         .main-content {
           padding-left: 1cm;
-          margin-top: 2.5cm;
+          margin-top: 45px;
           /* margin-bottom: 0 cm; */
           text-align: center; 
         }
@@ -79,13 +83,15 @@ if(isset($_GET['std'])){
             font-family: 'Algerian';
         }
         .space{
-            line-height: 2;
+          font-size: 8px;
+            /* line-height: 1.5; */
         }
-        /* .name {
+        .name {
+          font-size: 18px;
             text-decoration: underline;
             font-weight: bold;
             margin: 0.5cm 0;
-        } */
+        }
         .degree {
             
             font-weight: bold;
@@ -102,8 +108,11 @@ if(isset($_GET['std'])){
             font-family: 'Times New Roman', Times, serif; /* Change to Times New Roman */
         }
         .signature {
-            text-align: center;
-            width: 45%;
+          text-align: center;
+          margin-left: 15px;
+          font-size: 10px;
+            width: 35%;
+            
         }
         .footer {
           margin-left: 1cm;
@@ -120,11 +129,20 @@ if(isset($_GET['std'])){
     </div>
     <br>
     <div class="main-content">
-        <p class="space"> In pursuance of the Authority vested in it by the Act of the University and upon the recommendation Of the Faculty of Postgraduate Studies And approval of the Senate Confers upon
+        <p class="space" >In pursuance of the Authority vested in it by the Act of<br>
+        the University and upon the recommendation<br>
+        Of the Faculty of Postgraduate Studies<br>
+        And approval of the Senate<br>
         <br>
+        Confers upon
+        <br>
+      
+
+        <div class="name">
             <b><u> <?php if(isset($stud_index)) echo $stud_index['stud_name'] . " " . $stud_index['stud_surname'] . " " . $stud_index['familyname'] ; else echo "";  ?></b></u> 
            <br>
-        (<b>
+           </div>
+        (<b style="font-size: 8px">
           <?php   
             if($student_profile_common['nationality_code'] == 0){
             echo 'Foreign';
@@ -140,11 +158,11 @@ if(isset($_GET['std'])){
             ?>
             </b>)
          
-   <p >Who has successfully completed the requirements The degree of </p> <b class="font_change"><?php  echo  Get_Major_Name($student_profile_common['program_code']); ?></b> </b> 
+   <p style="font-size: 8px">Who has successfully completed the requirements The degree of </p> <b class="font_change"><?php  echo  Get_Major_Name($student_profile_common['program_code']); ?></b> </b> 
   <br>
    <b class="font_change"><?php  echo "(" . Get_Major_Name($student_profile_common['major_code']) . ")" ; ?></b> </b>
    
-   <p><b> on <?php  echo Get_Format_Date($std_cert_data['senate_on']);  ?></b>.</p>
+   <p><b> on <?php  echo Get_Format_Date($std_cert_data['senate_on']);   ?></b>.</p>
    
    
 </p>
@@ -166,7 +184,39 @@ if(isset($_GET['std'])){
     </div>
 
     <div class="footer">
-        <p>Date and place of issue: <?php $place ="2"; echo Get_Place_Issue($place); ?>, <?php echo  N_Date($std_cert_data['cert_printed_at']); ?></p>
+    <p>Date and place of issue: <?php $place ="2"; echo Get_Place_Issue($place); ?>, <?php echo  Grafuation_Date_Format($std_cert_data['cert_printed_at']); ?></p>
     </div>
 </body>
 </html>
+
+
+
+<!-- Print button, initially visible -->
+<div style="display: flex; justify-content: center;">
+    <button id="printButton" onclick="printCertificate()" 
+            style="padding: 15px 30px; font-size: 13px; border-radius: 8px;">
+        Print Certificate
+    </button>
+</div>
+
+
+<div id="certificate" style="display:none;">
+    <!-- Certificate content goes here -->
+</div>
+
+<script>
+    // Function to print the certificate and hide the print button
+    function printCertificate() {
+        const printButton = document.getElementById("printButton");
+        printButton.style.display = "none";  // Hide button before printing
+
+        // Listen for print completion and then show the button again
+        window.onafterprint = () => {
+            printButton.style.display = "block";  // Show button after printing
+        };
+
+        window.print();  // Print page
+    }
+
+    
+</script>

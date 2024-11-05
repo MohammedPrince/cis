@@ -19,7 +19,7 @@ if (isset($_GET['std'])){
         $total_hours = Total_Hours($std_index);
         stud_course_mark_sql($std_index, $batch, $major);
         $std_cert_data = Get_std_cert_Data($std_index);
-  
+    
   } 
     
   else {
@@ -52,15 +52,112 @@ if (isset($_GET['std'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image" href="include/dist/img/fu.png">
-    <link rel="stylesheet" href="./include/dist/css/transcript_temp.css">
-    <title> <?php echo "[" . $std_cert_data['std_full_name_en'] . "-" . $stud_index['stud_id'] . "]-"; ?> Transcript</title>
+    <title> <?php echo "[" . $std_cert_data['std_full_name_en'] . "-" . $stud_index['stud_id'] . "]-"; ?> Master Transcript</title>
 </head>
-<!-- <style>
-</style> -->
+
+<style>
+    
+@media print {
+    @page {
+        size: A4;
+    }
+}
+
+body {
+    margin-block-start: 0px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4px;
+}
+
+.top_main_body{
+  margin-top: 20%;
+    font-size: 14px;
+
+}
+.top_main_body-secand{
+    font-size: 14px;
+
+}
+
+
+
+.main_body{
+    
+    font-size: 11px;
+    line-height: 1.1;
+}
+
+h3 {
+    font-size: 5px;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 25px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 11px;
+}
+h3 {
+    /* display: inline-block; */
+    font-size: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1mm;
+}
+
+th{
+    /* background: #eeee; */
+    background: #D6D6D6;
+}
+th, td {
+    /* border: solid 1px #999; */
+   
+    font-size: 4px;
+    border: 0.5px solid black;
+    padding: 1px;
+}
+
+
+/* line of border */
+/* tbody tr:last-child td {
+    border-bottom: none;
+    
+} */
+
+.semester_summary {
+    text-align: center;
+    margin-left: 32px;
+    font-size: 5px;
+    font-weight: bold;
+}
+
+.signatures {
+
+      display: flex;
+      justify-content: space-between;
+      margin-top:15%;
+  }
+
+  .signature {
+    text-align: center;
+    width: 45%;
+}
+.grading_system {
+font-size: 4px;
+}
+</style>
+
+
 <body>
 
 <p class="top_main_body">Nationality No: <?php if(isset($stud_index)) echo $std_cert_data['national_number']; else echo "" ;?></p>
-<p class="top_main_body">University No: <?php if(isset($stud_index)) echo $std_cert_data['ministery_number']; else echo "" ;?></p>
+<p class="top_main_body-secand">University No: <?php if(isset($stud_index)) echo $std_cert_data['ministery_number']; else echo "" ;?></p>
 
 <h1><?php  echo Get_Faculty_Name($student_profile_common['faculty_code']); ?></h1>
 
@@ -81,7 +178,7 @@ if($student_profile_common['nationality_code'] == 4){
 
 }
 ?>)</b>
-has successfully passed the <strong><u>Administration </u><?php echo  Get_Mode($std_cert_data['mode']); ?></strong>, by the senate of the university on the <strong><?php  echo Get_Format_Date($std_cert_data['senate_on']);  ?></strong>. He/She has completed all the <strong><?php  echo $total_hours;?> Credit Hours</strong> of the program <strong>(Full Time)</strong> with a <strong>CGPA <?php if(isset($stud_transcript_sql)) echo "/  " . $stud_transcript_sql['cgpa'] . "  /"; else echo "" ;?></strong>.<br> Below are the details of his/her grades throughout the Ten semesters of the course of study.</p>
+has successfully passed the prescribed examinations and is hereby awarded the degree of <strong><u><?php echo Get_Major_Name($student_profile_common['major_code']); ?></u></strong> by the senate of the university on the <strong><?php  echo Get_Format_Date($std_cert_data['senate_on']);  ?></strong>. With a <strong>CGPA <?php if(isset($stud_transcript_sql)) echo "/  " . $stud_transcript_sql['cgpa'] . "  /"; else echo "" ;?></strong>.<br> Below are the details of the grades he obtained.</p>
 
     <?php
     // Retrieve the maximum semester value (assuming we go up to semester 10)

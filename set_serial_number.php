@@ -61,7 +61,7 @@ if(isset($_POST['insert'])){
                                 if($insert_paper == 1){
                                     echo $alert = alerts(1,"Total Paper Added is " . $paper_number . " With serial number Start with FU" . $serial_number_start);
                                     }
-                                if ($insert_paper == 2){
+                                if ($insert_paper == 3){
                                         echo $alert = alerts(4,"Mismatch! The number of serial numbers does not match the number of papers.");
                                         }
                                       
@@ -128,16 +128,13 @@ if(isset($_POST['insert'])){
         </table>
     </div>
 </div>
-                            
-                        </div>
-                        </div>
-
-                        </div>
-                    </section>
-                    <!-- table end-->
-          
-        </div>
-    </div>
+</div>
+</div>
+ </div>
+</section>
+<!-- table end-->
+</div>
+</div>
 
 
 </div>

@@ -29,12 +29,15 @@ include("include/header.php");
 <section class="content">
     <div class="container-fluid">
         <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
                     
         <div class="card card-info ">
         <div class="card-header">
             <h3 class="card-title">Profile Information</h3>
         </div>
+
+
+        
         <div class="card-body box-profile">
         <?php
         if(isset($_POST['Update_user_info'])){
@@ -79,22 +82,22 @@ include("include/header.php");
 <form action="profile.php" method="POST">
     <div class="card-body">
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Email Address</label>
             <?php
             if (isset($_SESSION)) {
-                echo "<input type='email' class='form-control' id='exampleInputEmail1' disabled value=' " . $_SESSION['user_email'] . "'> ";}?>
+                echo "<input title='Current User Email' type='email' class='form-control' id='exampleInputEmail1' disabled value=' " . $_SESSION['user_email'] . "'> ";}?>
         </div>
         
         <div class="form-group">
             <label for="exampleInputPassword1">Current Password</label>
             <?php
             if (isset($_SESSION)) {
-                echo "<input type='password' class='form-control' id='exampleInputPassword1' disabled value=' placeholder='Password'> ";}?>
+                echo "<input title='Current User Password' type='password' class='form-control' id='exampleInputPassword1' disabled value=' placeholder='Password'> ";}?>
          </div>
          
          <div class="form-group">
             <label for="exampleInputPassword1">New Password</label>
-            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+            <input title="Enter User Password" type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
          </div>
         </div>
        
