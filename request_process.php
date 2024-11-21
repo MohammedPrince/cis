@@ -1,4 +1,7 @@
-<?php include("include/header.php");?>
+<?php include("include/header.php");
+$get_users = Get_users();
+$get_requests = Get_Requests();
+?>
 
 
 <?php
@@ -21,7 +24,7 @@ if(isset($_GET['std'])){
     $current_sem = $student_profile_common['curr_sem'];
     $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
     $total_hours = Total_Hours($std_index);
-    stud_course_mark_sql($std_index, $batch, $major);
+    stud_course_mark_sql($std_index, $batch, $major, $grade);
     $std_cert_data  = Get_std_cert_Data($std_index);
 }
 
@@ -113,8 +116,21 @@ if (isset($_POST['update_request_info'])){
 
     $std_full_name_en = $_POST['std_full_name_en'];
     $std_full_name_ar = $_POST['std_full_name_ar'];
+
+    // Check if all required fields are not empty
+    if (!empty($request_id_de) && 
+        !empty($std_index) && 
+        !empty($national_number) && 
+        !empty($ministery_number) && 
+        !empty($std_full_name_en) && 
+        !empty($std_full_name_ar))
+        {
+
+            $update_request_info = Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number);
+        } else {
+            echo "<p>Error: All fields are required.</p>";
+        }
     
-    $update_request_info = Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number);
 }
 
 
@@ -164,7 +180,7 @@ if (isset($_POST['update_request_info'])){
         $current_sem = $student_profile_common['curr_sem'];
         $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
         $total_hours = Total_Hours($std_index);
-        stud_course_mark_sql($std_index, $batch, $major);
+        stud_course_mark_sql($std_index, $batch, $major, $grade);
         // stud_sql($std_index);
 
         
@@ -357,74 +373,67 @@ if (isset($_POST['update_request_info'])){
 </div>
 
 
-    <div class="card card-info">
-        <!-- <div class="card-header"> -->
-        <!-- <h3 class="card-title">Editing Process</h3>
-        </div>
-        <div class="card-body">
+<style>
+    .btn-equal {
+        width: 150px; /* Set a fixed width for all buttons */
+        display: inline-block; /* Ensure buttons are inline */
+    }
+</style>
+
+<div class="card card-info">
+    <!-- <div class="card-body">
         <label>Reply with Comment(Optional)</label>
         <textarea class="form-control" rows="3" placeholder="Enter your comment here ..."></textarea>
-        </div> -->
-        
-        <div class="card-footer d-flex justify-content-between align-items-center">
-    <div class="mr-auto">
-        <a href="request.php" name="cancel_request_info" class="btn btn-danger btn-sm">
-            <i><ion-icon name="return-down-back-outline"></ion-icon></i> Back
-        </a>
-    </div>
+    </div> -->
 
-    <div class="text-center">
-        <button type="submit" name="update_request_info" class="btn btn-primary btn-sm">
-            <i><ion-icon name="arrow-up-circle-outline"></ion-icon></i> Update
-        </button>
-    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <div class="mr-auto">
+            <a href="request.php" name="cancel_request_info" class="btn btn-danger btn-sm btn-equal">
+                <i><ion-icon name="return-down-back-outline"></ion-icon></i> Back
+            </a>
+        </div>
 
-    <div class="ml-auto">
-    <?php 
+        <div class="text-center">
+            <button type="submit" name="update_request_info" class="btn btn-primary btn-sm btn-equal">
+                <i><ion-icon name="arrow-up-circle-outline"></ion-icon></i> Update
+            </button>
+        </div>
 
-
-
-if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2")) {
-    if ($request_data['certificate_type'] == "1") {
-        ?>
-        <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm">
-            <i><ion-icon name="print-outline"></ion-icon></i> Print
-        </a>
-        <?php 
-    } elseif ($request_data['certificate_type'] == "2") {
-        ?>
-        <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm">
-            <i><ion-icon name="print-outline"></ion-icon></i> Print
-        </a>
-        <?php 
-    }
-} 
-//interner
-// if (isset($request_data['certificate_type']) && 
-//     in_array($request_data['certificate_type'], ["1", "2"]) && 
-//     isset($request_data['std_index'])) {
-    
-//     $std_index = $request_data['std_index'];
-//     $print_url = ($request_data['certificate_type'] == "1") ? 
-//                  "bachelor_temp.php?std=$std_index" : 
-//                  "transcript_temp.php?std=$std_index";
-//     ?>
-<!-- //     <a href="<//?php echo $print_url; ?>" name="print" class="btn btn-info btn-sm">
-//         <i><ion-icon name="print-outline"></ion-icon></i> Print
-//     </a> -->
-    <?php 
-// } else {
-//     echo "<p>Error: Unable to generate print link. Please check the certificate type and student index.</p>";
-// }
-
-?>
+        <div class="ml-auto">
+            <?php 
+            if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2" || $request_data['certificate_type'] == "3")) {
+                if ($request_data['certificate_type'] == "1") {
+                    ?>
+                    <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm btn-equal">
+                        <i><ion-icon name="print-outline"></ion-icon></i> Print Graduation
+                    </a>
+                    <?php 
+                } elseif ($request_data['certificate_type'] == "2") {
+                    ?>
+                    <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm btn-equal">
+                        <i><ion-icon name="print-outline"></ion-icon></i> Print Transcript
+                    </a>
+                    <?php 
+                } elseif ($request_data['certificate_type'] == "3") {
+                    ?>
+                    <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-dark btn-sm btn-equal">
+                        <i><ion-icon name="print-outline"></ion-icon></i> Print Graduation
+                    </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+                    <a href="transcript_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print" class="btn btn-info btn-sm btn-equal">
+                        <i><ion-icon name="print-outline"></ion-icon></i> Print Transcript
+                    </a>
+                    <?php 
+                }
+            }
+            ?>
+        </div>
     </div>
 </div>
 
 
 
 
-</div>
+
 </div>
 </div>
 </section>
@@ -433,6 +442,7 @@ if (isset($request_data['certificate_type']) && ($request_data['certificate_type
 </div>
 
 
-<?php include("include/footer.php");?>
+<?php include("include/footer.php");  
+?>
 
 

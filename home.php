@@ -64,6 +64,7 @@ $total_request_delete = Total_Request_Delete();
 <div class="inner">
 <h3>13</sup></h3>
 <p>Total Printed</p>
+
 </div>
 <div class="icon">
 <i class="ion ion-stats-bars"></i>

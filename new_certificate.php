@@ -69,7 +69,6 @@ if(isset($_POST['send_request'])){
         
         $std_fourth_name_en, 
         $std_fourth_name_ar,
-       
         $std_second_name_ar, 
         $std_first_name_ar, 
         $std_email, 
@@ -162,7 +161,9 @@ if (isset($_POST['send_request'])){
 
             echo $alert = alerts(3,'Index is not Valid');
            
-        }else{
+        }
+        
+        else{
           $student_profile = student_profile_common_sql($std_index);
           $std_current_sem = $student_profile['curr_sem'];
 
@@ -174,31 +175,65 @@ if (isset($_POST['send_request'])){
           $batch = $student_profile_common['batch'];
           $major = $student_profile_common['major_code'];
           $faculty = $student_profile_common['faculty_code'];
-          stud_course_mark_sql($std_index, $batch, $major);
-            
-          // stud_sql($std_index);
-          }else{
 
-            echo $alert = alerts(3,'This Student Not Graduated Yet');
+          $f_grades =  stud_course_mark_sql($std_index, $batch, $major, $faculty);
 
+            // Check if there are any 'F' grades
+            if (empty($f_grades)) {
+              
+                // echo "<tr>
+                        // <td colspan='3'>The student has no 'F' grades and is eligible to graduate.</td>
+                    //   </tr>";
+            } else {
+                echo "
+                    <div><h5>Student Grades</h5></div>
 
-          }
+                <table border='1' style='width: 100%; border-collapse: collapse;'>";
+                echo "<tr>
+                        <th >At Semester</th>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Grade</th>
+                        <th>Sub Grade 1</th>
+                        <th>Sub Grade 2</th>
+                      </tr>";
+                foreach ($f_grades as $grade) {
+                    $course_name = Get_Course_Name($grade['course_code']);
+                    $sub_grade1 = $grade['sub_grade1'];
+                    $sub_grade2 = $grade['sub_grade2'];
 
-
-
-
-
+                     // Check if sub_grade1 or sub_grade2 is not 'F'
+                     if ($sub_grade1 !== 'F' || $sub_grade2 !== 'F') {
+                        echo "<tr>
+                                <td>Semester {$grade['semester']}</td>
+                                <td>{$grade['course_code']}</td>
+                                <td>$course_name</td>
+                                <td>F</td>
+                                <td>$sub_grade1</td>
+                                <td>$sub_grade2</td>
+                              </tr>";
+                    } else {
+                        // If both sub_grades are 'F', display them as is
+                        echo "<tr>
+                                <td>Semester {$grade['semester']}</td>
+                                <td>{$grade['course_code']}</td>
+                                <td>$course_name</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                              </tr>";
+                    }
+                }
+                // End the table
+                echo "</table>";
+            }
+        } else {
+            echo $alert = alerts(3, 'This Student Not Graduated Yet');
         }
-
     }
-
-
+}
     ?>
     <!--search  end -->
-
- 
-
-
 
 <form action="new_certificate.php" method="POST">
 
@@ -398,6 +433,7 @@ if (isset($_POST['send_request'])){
             <option value="">Chose type...</option>
             <option value="1">Graduation</option>
             <option value="2">Transcript</option>
+            <option value="3">Graduation & Transcript</option>
         </select>
     </div>
     <!-- end  certificat type -->
@@ -533,7 +569,7 @@ if (isset($_POST['send_request'])){
 
     <!-- email  and mobail-->
     <div class="card-body">
-        <label for="">Email &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;  &ensp;&ensp; &ensp;&ensp; &ensp;&ensp;Mobail</label>           
+        <label for="">Email &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; &ensp;&ensp;&ensp;  &ensp;&ensp; &ensp;&ensp; &ensp;&ensp; &ensp;&ensp;Mobail</label>           
         <div class="row">
             <div class="col-5">
                 <input title="Student email" type="email" name="std_email" class="form-control" placeholder="name@mail.com" required>

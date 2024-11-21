@@ -20,8 +20,8 @@ if(isset($_GET['std'])){
   $current_sem = $student_profile_common['curr_sem'];
   $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
   $total_hours = Total_Hours($std_index);
-  stud_course_mark_sql($std_index, $batch, $major);
- $std_cert_data  = Get_std_cert_Data($std_index);
+  stud_course_mark_sql($std_index, $batch, $major, $faculty);
+  $std_cert_data  = Get_std_cert_Data($std_index);
 
 }
 ?>
@@ -191,32 +191,48 @@ if(isset($_GET['std'])){
 
 
 
-<!-- Print button, initially visible -->
-<div style="display: flex; justify-content: center;">
-    <button id="printButton" onclick="printCertificate()" 
-            style="padding: 15px 30px; font-size: 13px; border-radius: 8px;">
-        Print Certificate
+<div style="display: flex; justify-content: center; align-items: center;">
+
+    <button id="backButton" onclick="goBack()" style="padding: 15px 30px; font-size: 13px; border-radius: 8px;">
+        Back to Request
     </button>
-</div>
+
+    <div style="width: 400px;"></div> <!-- Spacer -->
+
+    <button id="printButton" onclick="printCertificate()" style="padding: 15px 30px; font-size: 13px; border-radius: 8px; margin-right: 40px;">
+        Print The Certificate
+    </button>
 
 
-<div id="certificate" style="display:none;">
-    <!-- Certificate content goes here -->
 </div>
 
 <script>
-    // Function to print the certificate and hide the print button
-    function printCertificate() {
-        const printButton = document.getElementById("printButton");
-        printButton.style.display = "none";  // Hide button before printing
+function printCertificate() {
+    const printButton = document.getElementById("printButton");
+    const backButton = document.getElementById("backButton");
 
-        // Listen for print completion and then show the button again
-        window.onafterprint = () => {
-            printButton.style.display = "block";  // Show button after printing
-        };
+    // Hide both buttons before printing
+    printButton.style.display = "none";  
+    backButton.style.display = "none";  
 
-        window.print();  // Print page
-    }
+    // Listen for print completion and then show the buttons again
+    window.onafterprint = () => {
+        printButton.style.display = "block";  // Show print button after printing
+        backButton.style.display = "block";    // Show back button after printing
+    };
 
-    
+    window.print();  // Print page
+}
+
+function goBack() {
+    const printButton = document.getElementById("printButton");
+    const backButton = document.getElementById("backButton");
+
+    // Hide both buttons when going back
+    printButton.style.display = "none";  
+    backButton.style.display = "none";  
+
+    // Navigate back to the previous page
+    window.history.back();
+}
 </script>

@@ -4,6 +4,7 @@ include("include/header.php");
 $get_users = Get_users();
 $get_requests = Get_Requests();
 
+
 ?>
 
 
@@ -55,86 +56,99 @@ $get_requests = Get_Requests();
                     <div class="card-body">
 
                     <table id="example2" class="table table-bordered table-hover">
-                    <thead>
-                    <tr>
-                        <th  class="center-align"># Number</th>
-                        <th  class="center-align">Request From</th>
-                        <th  class="center-align">Student Full Name</th>
-                        <th  class="center-align">Student Index</th>
-                        <th  class="center-align">Type</th>
-                        <th  class="center-align">Statuses</th>
-                        <th  class="center-align">Action
-                        <th ></th>
-                        
-                        <th  class="center-align">Files</th>
-                    </tr>
-                    </thead>
-                    <?php
-    $i = 1;
-    while($row = mysqli_fetch_array($get_requests)){ ?>
-    <tbody>
+    <thead>
         <tr>
-            <td class="center-align"><?php
-            echo $i++; 
-            ?></td>
-             <td class="center-align"><?php
-             echo $row['user_full_name']; 
-             ?></td>
-             <td class="center-align"><?php
-              echo $row['std_full_name_en']; 
-             ?></td>
-               <td class="center-align">
+            <th class="center-align"># Number</th>
             <?php
-              echo $row['std_index']; 
-             ?></td>
-
-            <td class="center-align">
-                <?php 
-                if ($row['certificate_type'] == "1") {
-                    echo "Graduation";    
-                } elseif ($row['certificate_type'] == "2") {
-                    echo "Transcript";    
-                }
-        ?>
-            </td>
-        
-
-            <td class="center-align">
-            <a  class="btn btn-primary"  class="btn btn-info btn-sm" href="#">
-           </i>Printed</a>
-            </td>
-
-            <td class="center-align">
-                <a  class="btn btn-info"  class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
-                    <i class="fas fa-eye"></i> View</a>&nbsp;&nbsp;&nbsp;            
+            // Change header based on user type
+            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 3) {
+                echo '<th >My Requests</th>
+                <th class="center-align">Student Full Name</th>
+                <th class="center-align">Student Index</th>
+                <th class="center-align">Type</th>
+                <th class="center-align">Program Type</th>
+                
+                <th class="center-align">Action</th>
+            
+            ';
+            }
+           // <th class="center-align">Request Status</th>
+            else {
+                echo '<th class="center-align">Request From</th>
+                    <th class="center-align">Student Full Name</th>
+                    <th class="center-align">Student Index</th>
+                    <th class="center-align">Type</th>
+                    <th class="center-align">Program Type</th>
                     
-                <!-- <a  class="btn btn-danger"  class="btn btn-info btn-sm" href="request.php?delet_request_id=<?php //echo base64_encode($row['delet_request_id']); ?>" onClick="return confirm('Are you sure you want  delete this Request ?')"  class="btn btn-outline btn-danger" target="_self"> -->
-                <a class="btn btn-danger btn-sm" href="request.php?delet_id=<?php  echo base64_encode($row['request_id']);  ?>" onClick="return confirm('Are you sure you want  delete this Request ?')"  class="btn btn-outline btn-danger" target="_self">
-
-                    <i class="fas fa-eye"></i> Delete</a>
-            </td>
-
-            <!-- if condyion if the request Statuse hase ben done and Printed this form will be allow nither that
-              -->
-            <form action="request.php"  method="POST" enctype="multipart/form-data">
-            <td>       
-                    <input type="file" name="doc"  value="">
-                   <button class="btn btn-success btn-sm"><ion-icon name="cloud-upload-outline"></ion-icon> Upload</button> 
-                </td>
-
-            </form>
+                    <th class="center-align">Action</th>
+                ';
+            }
+            ?>
+            
             
         </tr>
-            <style>
-            .center-align {
-                            text-align: center;
-                        }
-                    </style>
-                </tbody>
-            <?php 
-            } 
-            ?>
-            </table>
+    </thead>
+    <tbody>
+        <?php
+        
+        $i = 1;
+        while ($row = mysqli_fetch_array($get_requests)) { ?>
+            <tr>
+                <td class="center-align"><?php echo $i++; ?></td>
+              
+                    <td class="center-align"><?php echo $row['user_full_name']; ?></td>
+          
+                <td class="center-align"><?php echo $row['std_full_name_en']; ?></td>
+                <td class="center-align"><?php echo $row['std_index']; ?></td>
+                <td class="center-align">
+                    <?php 
+                    if ($row['certificate_type'] == "1") {
+                        echo "Graduation";    
+                    } elseif ($row['certificate_type'] == "2") {
+                        echo "Transcript";    
+                    } elseif ($row['certificate_type'] == "3") {
+                        echo "Graduation & Transcript";       
+                    }
+                    ?>
+                </td>
+                <td class="center-align">
+                    <?php  
+                    if ($row['program'] == 1) {
+                        echo "Bachelor";    
+                    } elseif ($row['program'] == "2") {
+                        echo "Diploma";    
+                    } elseif ($row['program'] == "3") {
+                        echo "Master";       
+                    }
+                    ?>
+                <!-- </td>
+
+                <td> -->
+                
+                </td>
+
+                <td class="center-align">
+            <?php if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 3) { ?>
+                <a class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
+                    <i class="fas fa-eye"></i> View
+                </a>
+            <?php } else { ?>
+                <a class="btn btn-info btn-sm" href="request_process.php?request_id=<?php echo base64_encode($row['request_id']); ?>">
+                    <i class="fas fa-eye"></i> View
+                </a>
+                <a class="btn btn-danger btn-sm" href="request.php?delet_id=<?php echo base64_encode($row['request_id']); ?>" onClick="return confirm('Are you sure you want to delete this Request?')">
+                    <i class="fas fa-trash"></i> Delete
+                </a>
+            <?php } ?>
+</td>
+
+               
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+
+
         </div>
     </div>
 </div>

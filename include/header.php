@@ -62,9 +62,9 @@ if(!isset($_SESSION["user_id"])){
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="./new_certificate.php" class="nav-link"><ion-icon name="document-outline"></ion-icon> &ensp; New Certificate</a>
                     </li>
-
+<!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="./request.php" class="nav-link"><ion-icon name="cloud-upload-outline"></ion-icon> &ensp; Upload Document</a>
+                        <a href="./request.php" class="nav-link"><ion-icon name="git-compare-outline"></ion-icon> &ensp; All Requests</a>
                         
                     </li>
 

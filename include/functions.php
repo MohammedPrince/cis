@@ -509,14 +509,31 @@ function Get_Requests()
 {
     global $conn;
 
-    $sqli = "SELECT * FROM `student_basic_info`bi, `student_cert_info`si, `request`r,`users`u WHERE bi.student_basic_info_id = si.student_basic_info_id AND si.std_cert_id = r.`std_cert_id` AND u.user_id  = r.user_id AND
-    r.dell_request = 0 ORDER BY r.request_id DESC";
+    // Check user type
+    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 3) {
+        // If user type is 3, fetch only their requests
+        $user_id = $_SESSION['user_id']; // Assuming you have user_id in session
+        $sqli = "SELECT * FROM `student_basic_info` bi, `student_cert_info` si, `request` r, `users` u 
+                 WHERE bi.student_basic_info_id = si.student_basic_info_id 
+                 AND si.std_cert_id = r.`std_cert_id` 
+                 AND u.user_id = r.user_id 
+                 AND r.dell_request = 0 
+                 AND r.user_id = '$user_id' 
+                 ORDER BY r.request_id DESC";
+    } else {
+        // Fetch all requests for other user types
+        $sqli = "SELECT * FROM `student_basic_info` bi, `student_cert_info` si, `request` r, `users` u 
+                 WHERE bi.student_basic_info_id = si.student_basic_info_id 
+                 AND si.std_cert_id = r.`std_cert_id` 
+                 AND u.user_id = r.user_id 
+                 AND r.dell_request = 0 
+                 ORDER BY r.request_id DESC";
+    }
 
     if ($query = mysqli_query($conn, $sqli)) {
         return $query;
-
     } else {
-        echo $sqli;
+        echo $sqli; // For debugging
     }
 }
 
@@ -725,19 +742,105 @@ function Student_Cert_Info($student_basic_info_id){
 
 
       }
-      function stud_course_mark_sql($std_index, $batch, $major){
-        global $sis_con;
-// add batch + faculty + major + index
-            $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' and `batch` = '$batch' and `major_code` = '$major'" ;
-            if($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)){
-                $row = mysqli_fetch_array($stud_course_mark_sql_query);
-                return $row;
-            }else{
-                echo $stud_course_mark_sql;
+    //   old function
+//       function stud_course_mark_sql($std_index, $batch, $major, $grade){
+//         global $sis_con;
+// // add batch + faculty + major + index
+//             $stud_course_mark_sql = "SELECT * FROM `stud_course_mark` WHERE `stud_id` = '$std_index' and `batch` = '$batch' and `major_code` = '$major' and `grade` = '$grade' " ;
+//             if($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)){
+//                 $row = mysqli_fetch_array($stud_course_mark_sql_query);
+//                 return $row;
+//             }else{
+//                 echo $stud_course_mark_sql;
                 
-            }
-      }
-      
+//             }
+//       }
+
+// function stud_course_mark_sql($std_index, $batch, $major) {
+//     global $sis_con;
+
+//     // Query to count the number of 'F' grades for the student
+//     $stud_course_mark_sql = "SELECT COUNT(*) as f_count FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `major_code` = '$major' AND `grade` = 'F'";
+
+//     // Execute the query
+//     if ($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)) {
+//         $row = mysqli_fetch_array($stud_course_mark_sql_query);
+//         $f_count = $row['f_count'];
+//         return $f_count;
+
+//     } else {
+//         // Output the SQL error for debugging
+//         echo "Error in query: " . mysqli_error($sis_con);
+//         echo "SQL: " . $stud_course_mark_sql;
+//     }
+// }
+// ********************************************** to display the number of F std have and the name of those F's**********************
+function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
+    global $sis_con;
+
+    // Query to get the course codes and count of 'F' grades for the student
+    $stud_course_mark_sql = "SELECT course_code, semester, grade ,sub_grade1, sub_grade2, COUNT(*) as f_count FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `major_code` = '$major' AND `faculty_code` = '$faculty' AND `grade` = 'F'  GROUP BY course_code, semester 
+                         ORDER BY semester ASC";
+
+    // Execute the query
+    $f_grades = [];
+    if ($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)) {
+        while ($row = mysqli_fetch_array($stud_course_mark_sql_query)) {
+            $f_grades[] = [
+                'course_code' => $row['course_code'],
+                'semester' => $row['semester'],
+                'f_count' => $row['f_count'],
+                'sub_grade1' => $row['sub_grade1'],
+                'sub_grade2' => $row['sub_grade2']
+            ];
+        }
+        return $f_grades;
+         // Return the array of F grades
+    } else {
+        // Output the SQL error for debugging
+        echo "Error in query: " . mysqli_error($sis_con);
+        return []; // Return an empty array in case of an error
+    }
+}
+
+
+// function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
+//     global $sis_con;
+
+//     // Query to get the course codes and count of 'F' grades for the student
+//     $stud_course_mark_sql = "SELECT course_code, COUNT(*) as f_count FROM `stud_course_mark`  WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `major_code` = '$major' AND `grade` = 'F' GROUP BY course_code";
+
+//     // Execute the query for F grades
+//     $f_grades = [];
+//     if ($stud_course_mark_sql_query = mysqli_query($sis_con, $stud_course_mark_sql)) {
+//         while ($row = mysqli_fetch_array($stud_course_mark_sql_query)) {
+//             $f_grades[] = [
+//                 'course_code' => $row['course_code'],
+//                 'f_count' => $row['f_count']
+//             ];
+//         }
+
+//         $sub_grades_sql = "SELECT `sub_grade1`,`sub_grade2`,`batch`,`major_code`,`faculty_code` FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `faculty_code` = '$faculty' and `major` = '$major' "; // Assuming one record per student
+//         $sub_grades1 = [];
+//         $sub_grades2 = [];
+//         if ($sub_grades_query = mysqli_query($sis_con, $sub_grades_sql)) {
+//             if ($row = mysqli_fetch_assoc($sub_grades_query)) {
+//                 $sub_grades1['sub_grade1'] = $row['sub_grade1'];
+//                 $sub_grades2['sub_grade2'] = $row['sub_grade2'];
+
+//                 stud_course_mark_sql($std_index, $batch, $major, $faculty);
+                
+//             }
+//         }
+
+
+//     } else {
+//         // Output the SQL error for debugging
+//         echo "Error in query: " . mysqli_error($sis_con);
+//     }
+// }
+
+
     // get Bachelor cgpa and gpa
        function stud_transcript_sql($std_index, $current_sem){
         global $sis_con;
@@ -915,8 +1018,5 @@ function Get_Course_Name($code) {
     return $row['course_name'];
 }
 
-
-
-     
 
 ?>
