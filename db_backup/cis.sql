@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2024 at 10:26 AM
+-- Generation Time: Nov 21, 2024 at 07:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -152,7 +152,10 @@ CREATE TABLE `papers` (
 
 INSERT INTO `papers` (`paper_id`, `paper_number`, `serial_number_start`, `serial_number_end`, `dell_paper`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 10, 'FU1', '9', 0, 0, '2024-10-23 12:30:56', '2024-10-23 12:30:56'),
-(2, 15, 'FU1', '14', 0, 0, '2024-10-23 12:31:07', '2024-10-23 12:31:07');
+(2, 15, 'FU1', '14', 0, 0, '2024-10-23 12:31:07', '2024-10-23 12:31:07'),
+(3, 20, 'FU001', '0019', 0, 0, '2024-11-17 00:47:26', '2024-11-17 00:47:26'),
+(4, 12, 'FU1245', '567', 0, 0, '2024-11-18 08:36:24', '2024-11-18 08:36:24'),
+(5, 7, 'FU70', '45', 0, 0, '2024-11-18 08:36:32', '2024-11-18 08:36:32');
 
 -- --------------------------------------------------------
 
@@ -194,18 +197,26 @@ CREATE TABLE `request` (
 --
 
 INSERT INTO `request` (`request_id`, `std_cert_id`, `user_id`, `request_status`, `request_comment`, `return_request`, `canceled_request`, `dell_request`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 0, '', 0, 1, 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
-(2, 2, 2, 0, '', 0, 0, 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
-(3, 3, 2, 0, '', 1, 0, 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
-(4, 4, 2, 0, '', 0, 0, 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
-(5, 5, 1, 0, '', 0, 0, 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
-(6, 6, 1, 0, '', 0, 0, 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
-(7, 7, 1, 0, '', 0, 0, 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
+(1, 1, 2, 0, '', 0, 1, 1, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
+(2, 2, 2, 0, '', 0, 0, 1, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
+(3, 3, 2, 0, '', 1, 0, 1, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
+(4, 4, 2, 0, '', 0, 0, 1, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
+(5, 5, 1, 0, '', 0, 0, 1, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
+(6, 6, 1, 0, '', 0, 0, 1, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
+(7, 7, 1, 0, '', 0, 0, 1, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
 (8, 8, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
-(9, 9, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
-(10, 10, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
-(11, 11, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
-(12, 12, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35');
+(9, 9, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
+(10, 10, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
+(11, 11, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
+(12, 12, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
+(13, 13, 1, 0, '', 0, 0, 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
+(14, 14, 1, 0, '', 0, 0, 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
+(15, 15, 27, 0, '', 0, 0, 1, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
+(16, 16, 1, 0, '', 0, 0, 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
+(17, 17, 1, 0, '', 0, 0, 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
+(18, 18, 1, 0, '', 0, 0, 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
+(19, 19, 1, 0, '', 0, 0, 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
+(20, 20, 3, 0, '', 0, 0, 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
 
 -- --------------------------------------------------------
 
@@ -232,7 +243,7 @@ CREATE TABLE `scanned_issue` (
 
 CREATE TABLE `student_basic_info` (
   `student_basic_info_id` int(10) UNSIGNED NOT NULL,
-  `std_index` int(11) NOT NULL,
+  `std_index` varchar(200) NOT NULL,
   `std_full_name_en` varchar(100) NOT NULL,
   `std_full_name_ar` varchar(100) NOT NULL,
   `std_first_name_en` varchar(100) NOT NULL,
@@ -258,20 +269,28 @@ CREATE TABLE `student_basic_info` (
 --
 
 INSERT INTO `student_basic_info` (`student_basic_info_id`, `std_index`, `std_full_name_en`, `std_full_name_ar`, `std_first_name_en`, `std_second_name_en`, `std_third_name_en`, `std_fourth_name_en`, `std_first_name_ar`, `std_second_name_ar`, `std_third_name_ar`, `std_fourth_name_ar`, `std_email`, `std_mobail`, `std_photo`, `std_passport`, `dell_std_basic_info`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 201705064, 'Mohamed Nihro Noah Ibrahim', 'محمد نوير نوح ابراهيم', 'Mohamed', 'Nihro Noah', '', 'Ibrahim', 'محمد', 'نوير نوح', '', 'ابراهيم ', 'moh@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
-(2, 201403018, 'Nader Nageeb   Abdrhman Hassan', 'نادر نجيب عبدالرحمن حسن', 'Nader', 'Nageeb   Abdrhman', '', 'Hassan', 'نادر ', 'نجيب عبدالرحمن', '', 'حسن', 'nadir@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
-(3, 201602018, 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
-(4, 201602005, 'Saria Abdallah Hussein Abuzeid', 'سارية عبدالله حسن ابوزيد', 'Saria', 'Abdallah Hussein', '', 'Abuzeid', 'سارية', 'عبدالله حسن', '', 'ابو زيد', 'saria@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
-(5, 201602018, 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
-(6, 201602043, 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 02:59:00', '2024-09-25 02:59:00'),
-(7, 201602043, 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 03:02:02', '2024-09-25 03:02:02'),
-(8, 201602043, 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
-(9, 201602026, 'Mogahed Musa Mohamed Abdalla ', 'مجاهد موسي حامد عبدالله', 'Mogahed', 'Musa Mohamed', '', 'Abdalla ', 'مجاهد', 'موسي حامد', '', 'عبدالله', 'M@MAIL.COM', 926262547, '', '', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
-(10, 201702006, 'WAAD ELMAMOUN AHMED ELMUSTAFA', 'ولدي محمد المامون', 'WAAD', 'ELMAMOUN', '', 'AHMED ELMUSTAFA', 'وليد', ' محمد لامامون', '', 'حسن', 'mail@mai.com', 2147483647, '', '', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
-(11, 201602043, 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
-(12, 201602043, 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
-(13, 201602043, 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
-(14, 201403006, 'Hussam Alden Abbas Mohammed Elsilawi', 'على عمر احمد على', 'Hussam Alden', 'Abbas Mohammed', '', 'Elsilawi', 'على ', 'نجيب عبدالرحمن', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35');
+(1, '201705064', 'Mohamed Nihro Noah Ibrahim', 'محمد نوير نوح ابراهيم', 'Mohamed', 'Nihro Noah', '', 'Ibrahim', 'محمد', 'نوير نوح', '', 'ابراهيم ', 'moh@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
+(2, '201403018', 'Nader Nageeb   Abdrhman Hassan', 'نادر نجيب عبدالرحمن حسن', 'Nader', 'Nageeb   Abdrhman', '', 'Hassan', 'نادر ', 'نجيب عبدالرحمن', '', 'حسن', 'nadir@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
+(3, '201602018', 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
+(4, '201602005', 'Saria Abdallah GHAZI Abuzeid', 'سارية عبدالله حسن عبدالعزيز', 'Saria', 'Abdallah Hussein', '', 'Abuzeid', 'سارية', 'عبدالله حسن', '', 'ابو زيد', 'saria@mail.com', 2147483647, '', '', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
+(5, '201602018', 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
+(6, '201602043', 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 02:59:00', '2024-09-25 02:59:00'),
+(7, '201602043', 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 03:02:02', '2024-09-25 03:02:02'),
+(8, '201602043', 'Mogahed Sied Mosa Yagoob', 'مجاهد سيد موسي يعقوب', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'مجاهد', 'سيد موسي', '', 'يعقوب', 'joho@mail.com', 2147483647, '', '', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
+(9, '201602026', 'Mogahed Musa Mohamed Abdalla ', 'مجاهد موسي حامد عبدالله', 'Mogahed', 'Musa Mohamed', '', 'Abdalla ', 'مجاهد', 'موسي حامد', '', 'عبدالله', 'M@MAIL.COM', 926262547, '', '', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
+(10, '201702006', 'WAAD ELMAMOUN AHMED ELMUSTAFA', 'ولدي محمد المامون', 'WAAD', 'ELMAMOUN', '', 'AHMED ELMUSTAFA', 'وليد', ' محمد لامامون', '', 'حسن', 'mail@mai.com', 2147483647, '', '', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
+(11, '201602043', 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
+(12, '201602043', 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
+(13, '201602043', 'Mogahed Sied Mosa Yagoob', 'غازي عبدالله عمر مصطفي ', 'Mogahed', 'Sied Mosa', '', 'Yagoob', 'غازي ', 'عمر ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
+(14, '201403006', 'Hussam Alden Abbas Mohammed Elsilawi', 'على عمر احمد على', 'Hussam Alden', 'Abbas Mohammed', '', 'Elsilawi', 'على ', 'نجيب عبدالرحمن', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 2147483647, '', '', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
+(15, '201403018', 'Nader Nageeb   Abdrhman Hassan', 'نادر نجيب عبدالرحمن حسن', 'Nader', 'Nageeb   Abdrhman', '', 'Hassan', 'نادر ', 'نجيب عبدالرحمن', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
+(16, '201403017', 'Malaz Mahdi   Abdagadir Modaser', 'ملاذ مهدي عبدالقادر مدثر', 'Malaz', 'Mahdi   Abdagadir', '', 'Modaser', 'ملاذ ', 'مهدي عبدالقادر', '', 'مدثر', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
+(17, '201602005', 'Saria Abdallah GHAZI Abuzeid', 'سارية عبدالله حسن عبدالعزيز', 'Saria', 'Abdallah Hussein', '', 'Abuzeid', 'سارية ', 'عبدالله حسن', '', 'عبدالعزيز', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
+(18, '201521004', 'Osama Siddig Khamis  Rihan', 'اسامة صديق ', 'Osama', 'Siddig Khamis ', '', 'Rihan', 'غازي ', 'عبدالله ', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
+(19, 'm19A55002', 'Nader Nageeb Abdrhman Hassan', 'نادر نجيب عبدالرحمن حسن', 'Nader', 'Nageeb', '', 'Abdrhman Hassan', 'نادر ', 'نجيب عبدالرحمن', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
+(20, '201602016', 'Mohamed Elbagir Adam Hassan Adam', ' محمد الباقر ادم حسن ادم', 'Mohamed Elbagir', 'Adam Hassan', '', 'Adam', 'محمد الباقر', 'ادم حسن', '', 'ادم', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
+(21, '201602003', 'Hisham Isameldin Mohamed Osman', 'هشام عصام الدين محمد', 'Hisham', 'Isameldin Mohamed', '', 'Osman', 'هشام', 'عصام الدين محمد', '', 'عثمان', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
+(22, '201602019', 'Ahmed Nooraldeen Mohammed Altayeb', 'أحمد نور الدين محمد الطيب', 'Ahmed', 'Nooraldeen Mohammed', '', 'Altayeb', 'احمد', 'نورالدين محمد', '', 'الطيب', 'Ghazi.Abdullah.2012@proton.me', 949926648, '', '', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
 
 -- --------------------------------------------------------
 
@@ -308,18 +327,26 @@ CREATE TABLE `student_cert_info` (
 --
 
 INSERT INTO `student_cert_info` (`std_cert_id`, `student_basic_info_id`, `program`, `faculty`, `major`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `division`, `senate_on`, `dell_std_cert_info`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, '1', 'Faculty of Architecture Engineering', 'B.Sc. in Architecture Engneering', '1', 115, 219, '2', '2', '2024-09-18', 3.8, 3.01, 216, '2', '1', '2024-09-18', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
-(2, 2, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 1111, 2191111, '2', '2', '2024-09-18', 2.8, 2.32, 195, '1', '3', '2024-09-18', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
-(3, 3, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 112, 219, '2', '2', '2024-09-18', 3.14, 2.74, 214, '2', '1', '2024-09-18', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
-(4, 4, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 119, 219, '1', '2', '2024-10-10', 2.64, 2.49, 214, '2', '2', '2024-09-18', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
-(5, 5, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 112, 219, '1', '1', '2024-09-24', 3.14, 2.74, 214, '', '', '2024-09-24', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
-(6, 8, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 1193, 219, '2', '1', '2020-02-01', 3.62, 3.32, 214, '2', '1', '2024-09-25', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
-(7, 9, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 112, 219, '1', '2', '2024-10-21', 2.76, 2.44, 214, '2', '2', '2024-10-21', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
-(8, 10, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 176, 2147483647, '1', '1', '2024-10-23', 2.61, 2.35, 212, '1', '1', '2024-10-23', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
-(9, 11, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 1193, 219, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
-(10, 12, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 1193, 219, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
-(11, 13, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 1193, 219, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
-(12, 14, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 2147483647, 219, '1', '1', '2024-10-23', 2.71, 2.72, 195, '2', '', '2024-10-23', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35');
+(1, 1, '1', 'Faculty of Architecture Engineering', 'B.Sc. in Architecture Engneering', '1', 31594785, 3215698, '2', '2', '2024-09-18', 3.8, 3.01, 216, '2', '1', '2024-09-18', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
+(2, 2, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '2', '2', '2024-09-18', 2.8, 2.32, 195, '1', '3', '2024-09-18', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
+(3, 3, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '2', '2', '2024-09-18', 3.14, 2.74, 214, '2', '1', '2024-09-18', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
+(4, 4, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-10', 2.64, 2.49, 214, '2', '2', '2024-09-18', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
+(5, 5, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '1', '2024-09-24', 3.14, 2.74, 214, '', '', '2024-09-24', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
+(6, 8, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '2', '1', '2020-02-01', 3.62, 3.32, 214, '2', '1', '2024-09-25', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
+(7, 9, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-21', 2.76, 2.44, 214, '2', '2', '2024-10-21', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
+(8, 10, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '1', '2024-10-23', 2.61, 2.35, 212, '1', '1', '2024-10-23', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
+(9, 11, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
+(10, 12, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
+(11, 13, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
+(12, 14, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '1', '1', '2024-10-23', 2.71, 2.72, 195, '2', '', '2024-10-23', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
+(13, 15, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '3', '2', '2024-11-17', 2.8, 2.32, 195, '1', '2', '2024-11-17', 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
+(14, 16, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '3', '1', '2024-11-17', 2.72, 2.25, 195, '2', '2', '2024-11-17', 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
+(15, 17, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '3', '2', '2024-11-17', 2.64, 2.49, 214, '2', '2', '2024-11-17', 0, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
+(16, 18, '1', 'Faculty of Geoinformatics', 'B.Sc. In GIS', '1', 31594785, 3215698, '3', '1', '2024-11-18', 1.67, 2.07, 340, '2', '2', '2024-11-18', 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
+(17, 19, '3', 'Faculty of Postgraduate Studies', 'Master in Information System', '1', 31594785, 3215698, '3', '2', '2024-11-18', 0, 3.25, 36, '2', '1', '2023-05-14', 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
+(18, 20, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '3', '2', '2024-11-21', 2.42, 2.12, 271, '2', '2', '2024-11-21', 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
+(19, 21, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 120, 219, '3', '2', '2024-11-21', 2.81, 2.16, 214, '1', '2', '2024-11-21', 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
+(20, 22, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 178, 219, '3', '2', '2024-11-21', 2.95, 2.16, 214, '3', '2', '2024-11-21', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
 
 -- --------------------------------------------------------
 
@@ -368,18 +395,19 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_full_name`, `username`, `user_email`, `password`, `user_type`, `user_staff_id`, `dell_user`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'Ghazi Abdallah Omer', 'ghazi', 'ghazi.abdallah@fu.edu.sd', '2d95666e2649fcfc6e3af75e09f5adb9', 1, 0, 0, 0, '2024-08-06 11:03:20', '2024-08-09 00:35:48'),
-(2, 'Kawther', 'Kawther', 'Kawther@fu.edu.sd', '2d95666e2649fcfc6e3af75e09f5adb9', 2, 0, 1, 0, '2024-08-06 11:09:23', '2024-08-09 00:35:48'),
-(3, 'Dena', 'dena', 'dena@fu.edu.sd', '2d95666e2649fcfc6e3af75e09f5adb9', 3, 0, 1, 0, '2024-08-06 11:10:04', '2024-08-09 00:35:48'),
-(18, 'Nadir Njeeb', 'nedo', 'localhost.4tj0k@passinbox.com', '2d95666e2649fcfc6e3af75e09f5adb9', 2, 0, 1, 0, '2024-08-11 05:27:14', '2024-08-11 05:27:14'),
-(19, 'kamil ahmed ', 'kamil', 'localhost.beo28@passinbox.com', '2d95666e2649fcfc6e3af75e09f5adb9', 3, 0, 1, 0, '2024-08-11 05:27:45', '2024-08-11 05:27:45'),
-(20, 'omer muhammed', 'omer', 'omer@mail.com', '2d95666e2649fcfc6e3af75e09f5adb9', 1, 0, 1, 0, '2024-08-12 09:12:20', '2024-08-12 09:12:20'),
-(21, 'Asia Ahmed', 'Asia', 'Asia.Ahmed@protonmail.com', '2d95666e2649fcfc6e3af75e09f5adb9', 3, 0, 1, 0, '2024-08-12 10:40:14', '2024-08-12 10:40:14'),
-(22, 'Nadir Njeeb', 'nedo', 'nedo@mail.com', '2d95666e2649fcfc6e3af75e09f5adb9', 2, 0, 0, 0, '2024-08-12 13:38:23', '2024-08-12 13:38:23'),
-(23, 'Nadir Njeeb', 'Nadir', 'nedo@mail.com', '2d95666e2649fcfc6e3af75e09f5adb9', 2, 0, 1, 0, '2024-08-27 02:12:59', '2024-08-27 02:12:59'),
-(24, 'Ghazi Abdallah Omer', 'Ghaz', 'omer@mail.com', '2d95666e2649fcfc6e3af75e09f5adb9', 1, 0, 1, 0, '2024-08-27 02:19:50', '2024-08-27 02:19:50'),
-(25, 'khalid', 'kh', 'khalid@fu.sd.com', '2d95666e2649fcfc6e3af75e09f5adb9', 3, 0, 1, 0, '2024-09-03 00:10:45', '2024-09-03 00:10:45'),
-(26, 'mazin', 'maz', 'mazi@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 0, 0, '2024-09-16 13:36:36', '2024-09-16 13:36:36');
+(1, 'Ghazi Abdallah Omer', 'ghazi', 'ghazi.abdallah@fu.edu.sd', '202cb962ac59075b964b07152d234b70', 1, 0, 0, 0, '2024-08-06 11:03:20', '2024-08-09 00:35:48'),
+(2, 'Kawther', 'Kawther', 'Kawther@fu.edu.sd', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-08-06 11:09:23', '2024-08-09 00:35:48'),
+(3, 'Dena', 'dena', 'dena@fu.edu.sd', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-08-06 11:10:04', '2024-08-09 00:35:48'),
+(18, 'Nadir Njeeb', 'nedo', 'localhost.4tj0k@passinbox.com', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-08-11 05:27:14', '2024-08-11 05:27:14'),
+(19, 'kamil ahmed ', 'kamil', 'localhost.beo28@passinbox.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-08-11 05:27:45', '2024-08-11 05:27:45'),
+(20, 'omer muhammed', 'omer', 'omer@mail.com', '202cb962ac59075b964b07152d234b70', 1, 0, 1, 0, '2024-08-12 09:12:20', '2024-08-12 09:12:20'),
+(21, 'Asia Ahmed', 'Asia', 'Asia.Ahmed@protonmail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-08-12 10:40:14', '2024-08-12 10:40:14'),
+(22, 'Nadir Njeeb', 'nedo', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 0, 0, '2024-08-12 13:38:23', '2024-08-12 13:38:23'),
+(23, 'Nadir Njeeb', 'Nadir', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-08-27 02:12:59', '2024-08-27 02:12:59'),
+(24, 'Ghazi Abdallah Omer', 'Ghaz', 'omer@mail.com', '202cb962ac59075b964b07152d234b70', 1, 0, 1, 0, '2024-08-27 02:19:50', '2024-08-27 02:19:50'),
+(25, 'khalid', 'kh', 'khalid@fu.sd.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-09-03 00:10:45', '2024-09-03 00:10:45'),
+(26, 'mazin', 'maz', 'mazi@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 0, 0, '2024-09-16 13:36:36', '2024-09-16 13:36:36'),
+(27, 'Muhammed Eissa', 'sia', 'sia@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 0, 0, '2024-11-17 00:37:29', '2024-11-17 00:37:29');
 
 --
 -- Indexes for dumped tables
@@ -467,7 +495,7 @@ ALTER TABLE `major`
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `paper_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `paper_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `paper_update`
@@ -479,7 +507,7 @@ ALTER TABLE `paper_update`
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `scanned_issue`
@@ -491,13 +519,13 @@ ALTER TABLE `scanned_issue`
 -- AUTO_INCREMENT for table `student_basic_info`
 --
 ALTER TABLE `student_basic_info`
-  MODIFY `student_basic_info_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `student_basic_info_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `student_cert_info`
 --
 ALTER TABLE `student_cert_info`
-  MODIFY `std_cert_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `std_cert_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tbl-log`
@@ -509,7 +537,7 @@ ALTER TABLE `tbl-log`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
