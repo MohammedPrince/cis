@@ -51,9 +51,9 @@ if(!isset($_SESSION["user_id"])){
             <nav class="main-header navbar navbar-expand navbar-white navbar-light">
                 
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                    </li>
+                    </li> -->
                     
                     <li class="nav-item d-none d-sm-inline-block">
                         <a href="home.php" class="nav-link"><ion-icon name="home-outline"></ion-icon> &ensp; Home</a>

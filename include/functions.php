@@ -790,6 +790,7 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
                 'course_code' => $row['course_code'],
                 'semester' => $row['semester'],
                 'f_count' => $row['f_count'],
+                'grade' => $row['grade'],
                 'sub_grade1' => $row['sub_grade1'],
                 'sub_grade2' => $row['sub_grade2']
             ];

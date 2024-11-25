@@ -180,7 +180,7 @@ if (isset($_POST['send_request'])){
 
             // Check if there are any 'F' grades
             if (empty($f_grades)) {
-              
+            
                 // echo "<tr>
                         // <td colspan='3'>The student has no 'F' grades and is eligible to graduate.</td>
                     //   </tr>";
@@ -199,9 +199,17 @@ if (isset($_POST['send_request'])){
                       </tr>";
                 foreach ($f_grades as $grade) {
                     $course_name = Get_Course_Name($grade['course_code']);
+                    $grade1 = $grade['grade'];
                     $sub_grade1 = $grade['sub_grade1'];
                     $sub_grade2 = $grade['sub_grade2'];
 
+                    // if ($sub_grade1 == 'F' || $sub_grade2 == 'F'){
+                    //     echo "ghazi";
+                    // }
+                    // if ($sub_grade1 == 'F' || $sub_grade2 == 'F'){
+                    //     echo "ghazi";
+                    // }
+                        
                      // Check if sub_grade1 or sub_grade2 is not 'F'
                      if ($sub_grade1 !== 'F' || $sub_grade2 !== 'F') {
                         echo "<tr>
@@ -212,7 +220,9 @@ if (isset($_POST['send_request'])){
                                 <td>$sub_grade1</td>
                                 <td>$sub_grade2</td>
                               </tr>";
-                    } else {
+                    }
+                   
+                    else {
                         // If both sub_grades are 'F', display them as is
                         echo "<tr>
                                 <td>Semester {$grade['semester']}</td>
@@ -227,12 +237,14 @@ if (isset($_POST['send_request'])){
                 // End the table
                 echo "</table>";
             }
-        } else {
+        } 
+        else {
             echo $alert = alerts(3, 'This Student Not Graduated Yet');
         }
     }
 }
     ?>
+    
     <!--search  end -->
 
 <form action="new_certificate.php" method="POST">
@@ -666,6 +678,7 @@ if (isset($_POST['send_request'])){
     </div>
     <br><br>    
     <div class="card-footer" style="display: flex; justify-content: center;">
+        <?php   ?>
     <button type="submit" name="send_request" class="btn btn-info">
         <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
     </button>

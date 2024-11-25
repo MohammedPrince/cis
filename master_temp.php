@@ -7,7 +7,7 @@ include("include/functions.php");
 
 <?php
 
-if(isset($_GET['std'])){
+if(!isset($_GET['std'])){
 
   $std_index = $_GET['std'];
 
@@ -23,6 +23,10 @@ if(isset($_GET['std'])){
   stud_course_mark_sql($std_index, $batch, $major, $faculty);
   $std_cert_data  = Get_std_cert_Data($std_index);
 
+}  else {
+  // Display error message if student index is not valid
+   header("Location: ./404.php");
+   exit();
 }
 ?>
 
