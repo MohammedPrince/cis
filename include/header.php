@@ -145,7 +145,7 @@ if(!isset($_SESSION["user_id"])){
         <!-- <img src="include/dist/img/fu_logo.png" alt="Futuer University Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
         <!-- <a href="#" class="h5">Certificat Information System</a> -->
         
-        <span class="h6" >Cirtificat Information System</span>
+        <span class="h6" >Certificate Information System</span>
     </a>
     
     <div class="sidebar">

@@ -272,7 +272,7 @@ if (isset($_POST['send_request'])){
         <label>Education Program</label>
         <select title="Student education program" class="form-control" name="program" readonly>
 
-            <option  value="">Chose Education Level...</option>
+            <option  value="">Select education level...</option>
 
             <?php if(isset($student_profile_common)) {  ?>
 
@@ -313,7 +313,7 @@ if (isset($_POST['send_request'])){
         
 
         <select title="Student faculty" class="form-control" name="faculty" id="faculty" required="required">
-            <option value="">Select Faculty...</option>
+            <option value="">Select faculty...</option>
             
             <?php while($row=mysqli_fetch_array($get_faculty)){  ?>
 
@@ -347,7 +347,7 @@ if (isset($_POST['send_request'])){
     
 
     <select title="Student major" class="form-control" name="major" id="major" required="required">
-        <option value="">Select Major...</option>
+        <option value="">Select major...</option>
         
 
    <?php } ?>
@@ -383,7 +383,7 @@ if (isset($_POST['send_request'])){
     <label>Nationality</label>
        
             <select title="Student nationality"  class="form-control" name="nationality"  readonly required="required">
-            <option value="">Select Nationality...</option>
+            <option value="">Select nationality...</option>
 
             <?php if(isset($student_profile_common)) {  ?>
 
@@ -442,7 +442,7 @@ if (isset($_POST['send_request'])){
             <div class="card-body">
         <label>Certificat Type</label>
         <select title="Certificat type" class="form-control" name="certificate_type" required="required">
-            <option value="">Chose type...</option>
+            <option value="">Select certificat type...</option>
             <option value="1">Graduation</option>
             <option value="2">Transcript</option>
             <option value="3">Graduation & Transcript</option>
@@ -454,7 +454,7 @@ if (isset($_POST['send_request'])){
         <div class="card-body">
         <label>Printed Place</label>
         <select title="Certificat printed place" class="form-control" name="cert_printed_place" required="required">
-            <option value="">Chose place...</option>
+            <option value="">Select place...</option>
             <option value="1">Khartoum</option>
             <option value="2">Cairo</option>
         </select>
