@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2024 at 07:06 AM
+-- Generation Time: Dec 02, 2024 at 02:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -152,10 +152,7 @@ CREATE TABLE `papers` (
 
 INSERT INTO `papers` (`paper_id`, `paper_number`, `serial_number_start`, `serial_number_end`, `dell_paper`, `created_by`, `created_at`, `updated_at`) VALUES
 (1, 10, 'FU1', '9', 0, 0, '2024-10-23 12:30:56', '2024-10-23 12:30:56'),
-(2, 15, 'FU1', '14', 0, 0, '2024-10-23 12:31:07', '2024-10-23 12:31:07'),
-(3, 20, 'FU001', '0019', 0, 0, '2024-11-17 00:47:26', '2024-11-17 00:47:26'),
-(4, 12, 'FU1245', '567', 0, 0, '2024-11-18 08:36:24', '2024-11-18 08:36:24'),
-(5, 7, 'FU70', '45', 0, 0, '2024-11-18 08:36:32', '2024-11-18 08:36:32');
+(7, 100, 'FU001', '0099', 0, 0, '2024-11-30 22:46:16', '2024-11-30 22:46:16');
 
 -- --------------------------------------------------------
 
@@ -201,22 +198,9 @@ INSERT INTO `request` (`request_id`, `std_cert_id`, `user_id`, `request_status`,
 (2, 2, 2, 0, '', 0, 0, 1, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
 (3, 3, 2, 0, '', 1, 0, 1, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
 (4, 4, 2, 0, '', 0, 0, 1, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
-(5, 5, 1, 0, '', 0, 0, 1, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
-(6, 6, 1, 0, '', 0, 0, 1, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
-(7, 7, 1, 0, '', 0, 0, 1, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
-(8, 8, 1, 0, '', 0, 0, 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
-(9, 9, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
-(10, 10, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
-(11, 11, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
-(12, 12, 1, 0, '', 0, 0, 1, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
-(13, 13, 1, 0, '', 0, 0, 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
-(14, 14, 1, 0, '', 0, 0, 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
-(15, 15, 27, 0, '', 0, 0, 1, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
-(16, 16, 1, 0, '', 0, 0, 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
-(17, 17, 1, 0, '', 0, 0, 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
-(18, 18, 1, 0, '', 0, 0, 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
-(19, 19, 1, 0, '', 0, 0, 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
-(20, 20, 3, 0, '', 0, 0, 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
+(24, 24, 1, 0, '', 0, 0, 0, 0, '2024-11-30 22:32:10', '2024-11-30 22:32:10'),
+(25, 25, 1, 0, '', 0, 0, 1, 0, '2024-11-30 22:32:50', '2024-11-30 22:32:50'),
+(26, 26, 1, 0, '', 0, 0, 0, 0, '2024-11-30 22:33:19', '2024-11-30 22:33:19');
 
 -- --------------------------------------------------------
 
@@ -290,7 +274,13 @@ INSERT INTO `student_basic_info` (`student_basic_info_id`, `std_index`, `std_ful
 (19, 'm19A55002', 'Nader Nageeb Abdrhman Hassan', 'نادر نجيب عبدالرحمن حسن', 'Nader', 'Nageeb', '', 'Abdrhman Hassan', 'نادر ', 'نجيب عبدالرحمن', '', 'حسن', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
 (20, '201602016', 'Mohamed Elbagir Adam Hassan Adam', ' محمد الباقر ادم حسن ادم', 'Mohamed Elbagir', 'Adam Hassan', '', 'Adam', 'محمد الباقر', 'ادم حسن', '', 'ادم', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
 (21, '201602003', 'Hisham Isameldin Mohamed Osman', 'هشام عصام الدين محمد', 'Hisham', 'Isameldin Mohamed', '', 'Osman', 'هشام', 'عصام الدين محمد', '', 'عثمان', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
-(22, '201602019', 'Ahmed Nooraldeen Mohammed Altayeb', 'أحمد نور الدين محمد الطيب', 'Ahmed', 'Nooraldeen Mohammed', '', 'Altayeb', 'احمد', 'نورالدين محمد', '', 'الطيب', 'Ghazi.Abdullah.2012@proton.me', 949926648, '', '', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
+(22, '201602019', 'Ahmed Nooraldeen Mohammed Altayeb', 'أحمد نور الدين محمد الطيب', 'Ahmed', 'Nooraldeen Mohammed', '', 'Altayeb', 'احمد', 'نورالدين محمد', '', 'الطيب', 'Ghazi.Abdullah.2012@proton.me', 949926648, '', '', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19'),
+(23, '201602018', 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-30 21:22:57', '2024-11-30 21:22:57'),
+(24, 'm19A55005', 'WAFAA Mustafa Mohammed Mohammed', 'وفاء مصطفي محمد محمد', 'wafaa', 'Mustafa', '', 'Mohammed Mohammed', 'وفاء', 'مصطفي محمد', '', 'محمد', 'wfaa@mail.me', 123456789, '', '', 0, 0, '2024-11-30 21:58:07', '2024-11-30 21:58:07'),
+(25, '201602018', 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'غازي ', 'عبدالله عمر', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-30 22:27:22', '2024-11-30 22:27:22'),
+(26, 'm19A55005', 'WAFAA Mustafa Mohammed Mohammed', 'وفاء مصطفي محمد محمد', 'wafaa', 'Mustafa', '', 'Mohammed Mohammed', 'وفاء', 'مصطفي محمد', '', 'عبدالرحمن', 'Ghazi.Abdullah.2012@proton.me', 110425700, '', '', 0, 0, '2024-11-30 22:32:10', '2024-11-30 22:32:10'),
+(27, '201602018', 'Ghazi Abdallah Omer Mustafa', 'غازي عبدالله عمر مصطفي ', 'Ghazi', 'Abdallah Omer', '', 'Mustafa', 'إسراء ', 'مصطفي محمد', '', 'عبدالعزيز', 'Ghazi.Abdullah.2012@proton.me', 1234567899, '', '', 0, 0, '2024-11-30 22:32:50', '2024-11-30 22:32:50'),
+(28, '201602016', 'Mohamed Elbagir Adam Hassan Adam', 'نادر نجيب عبدالرحمن حسن', 'Mohamed Elbagir', 'Adam Hassan', '', 'Adam', 'نادر ', 'نجيب عبدالرحمن', '', 'مصطفي ', 'Ghazi.Abdullah.2012@proton.me', 110104257, '', '', 0, 0, '2024-11-30 22:33:19', '2024-11-30 22:33:19');
 
 -- --------------------------------------------------------
 
@@ -305,8 +295,8 @@ CREATE TABLE `student_cert_info` (
   `faculty` varchar(100) NOT NULL,
   `major` varchar(100) NOT NULL,
   `nationality` varchar(100) NOT NULL,
-  `national_number` int(11) NOT NULL,
-  `ministery_number` int(11) NOT NULL,
+  `national_number` varchar(50) NOT NULL,
+  `ministery_number` varchar(50) NOT NULL,
   `certificate_type` varchar(15) NOT NULL,
   `cert_printed_place` varchar(15) NOT NULL,
   `cert_printed_at` date NOT NULL,
@@ -327,26 +317,32 @@ CREATE TABLE `student_cert_info` (
 --
 
 INSERT INTO `student_cert_info` (`std_cert_id`, `student_basic_info_id`, `program`, `faculty`, `major`, `nationality`, `national_number`, `ministery_number`, `certificate_type`, `cert_printed_place`, `cert_printed_at`, `gpa`, `cgpa`, `total_graduate_hour`, `mode`, `division`, `senate_on`, `dell_std_cert_info`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 1, '1', 'Faculty of Architecture Engineering', 'B.Sc. in Architecture Engneering', '1', 31594785, 3215698, '2', '2', '2024-09-18', 3.8, 3.01, 216, '2', '1', '2024-09-18', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
-(2, 2, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '2', '2', '2024-09-18', 2.8, 2.32, 195, '1', '3', '2024-09-18', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
-(3, 3, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '2', '2', '2024-09-18', 3.14, 2.74, 214, '2', '1', '2024-09-18', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
-(4, 4, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-10', 2.64, 2.49, 214, '2', '2', '2024-09-18', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
-(5, 5, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '1', '2024-09-24', 3.14, 2.74, 214, '', '', '2024-09-24', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
-(6, 8, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '2', '1', '2020-02-01', 3.62, 3.32, 214, '2', '1', '2024-09-25', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
-(7, 9, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-21', 2.76, 2.44, 214, '2', '2', '2024-10-21', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
-(8, 10, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '1', '2024-10-23', 2.61, 2.35, 212, '1', '1', '2024-10-23', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
-(9, 11, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
-(10, 12, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
-(11, 13, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
-(12, 14, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '1', '1', '2024-10-23', 2.71, 2.72, 195, '2', '', '2024-10-23', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
-(13, 15, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '3', '2', '2024-11-17', 2.8, 2.32, 195, '1', '2', '2024-11-17', 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
-(14, 16, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', 31594785, 3215698, '3', '1', '2024-11-17', 2.72, 2.25, 195, '2', '2', '2024-11-17', 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
-(15, 17, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '3', '2', '2024-11-17', 2.64, 2.49, 214, '2', '2', '2024-11-17', 0, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
-(16, 18, '1', 'Faculty of Geoinformatics', 'B.Sc. In GIS', '1', 31594785, 3215698, '3', '1', '2024-11-18', 1.67, 2.07, 340, '2', '2', '2024-11-18', 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
-(17, 19, '3', 'Faculty of Postgraduate Studies', 'Master in Information System', '1', 31594785, 3215698, '3', '2', '2024-11-18', 0, 3.25, 36, '2', '1', '2023-05-14', 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
-(18, 20, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 31594785, 3215698, '3', '2', '2024-11-21', 2.42, 2.12, 271, '2', '2', '2024-11-21', 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
-(19, 21, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 120, 219, '3', '2', '2024-11-21', 2.81, 2.16, 214, '1', '2', '2024-11-21', 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
-(20, 22, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', 178, 219, '3', '2', '2024-11-21', 2.95, 2.16, 214, '3', '2', '2024-11-21', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19');
+(1, 1, '1', 'Faculty of Architecture Engineering', 'B.Sc. in Architecture Engneering', '1', '112-202030', '00-0000', '2', '2', '2024-09-18', 3.8, 3.01, 216, '2', '1', '2024-09-18', 0, 0, '2024-09-18 10:09:52', '2024-09-18 10:09:52'),
+(2, 2, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', '112-202030', '00-0000', '2', '2', '2024-09-18', 2.8, 2.32, 195, '1', '3', '2024-09-18', 0, 0, '2024-09-18 10:51:30', '2024-09-18 10:51:30'),
+(3, 3, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '2', '2', '2024-09-18', 3.14, 2.74, 214, '2', '1', '2024-09-18', 0, 0, '2024-09-18 13:21:50', '2024-09-18 13:21:50'),
+(4, 4, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '2', '2024-10-10', 2.64, 2.49, 214, '2', '2', '2024-09-18', 0, 0, '2024-09-18 13:42:25', '2024-09-18 13:42:25'),
+(5, 5, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '1', '2024-09-24', 3.14, 2.74, 214, '', '', '2024-09-24', 0, 0, '2024-09-24 11:05:37', '2024-09-24 11:05:37'),
+(6, 8, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '2', '1', '2020-02-01', 3.62, 3.32, 214, '2', '1', '2024-09-25', 0, 0, '2024-09-25 03:06:20', '2024-09-25 03:06:20'),
+(7, 9, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '2', '2024-10-21', 2.76, 2.44, 214, '2', '2', '2024-10-21', 0, 0, '2024-10-21 09:56:38', '2024-10-21 09:56:38'),
+(8, 10, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '1', '2024-10-23', 2.61, 2.35, 212, '1', '1', '2024-10-23', 0, 0, '2024-10-23 09:39:02', '2024-10-23 09:39:02'),
+(9, 11, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:20', '2024-10-23 09:44:20'),
+(10, 12, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:56', '2024-10-23 09:44:56'),
+(11, 13, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '1', '2', '2024-10-23', 3.62, 3.32, 214, '3', '2', '2024-10-23', 0, 0, '2024-10-23 09:44:58', '2024-10-23 09:44:58'),
+(12, 14, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', '112-202030', '00-0000', '1', '1', '2024-10-23', 2.71, 2.72, 195, '2', '', '2024-10-23', 0, 0, '2024-10-23 09:48:35', '2024-10-23 09:48:35'),
+(13, 15, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', '112-202030', '00-0000', '3', '2', '2024-11-17', 2.8, 2.32, 195, '1', '2', '2024-11-17', 0, 0, '2024-11-16 23:17:35', '2024-11-16 23:17:35'),
+(14, 16, '1', ' Faculty of Information Technology', 'B.Sc. in Information Technology', '1', '112-202030', '00-0000', '3', '1', '2024-11-17', 2.72, 2.25, 195, '2', '2', '2024-11-17', 0, 0, '2024-11-16 23:57:14', '2024-11-16 23:57:14'),
+(15, 17, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-11-17', 2.64, 2.49, 214, '2', '2', '2024-11-17', 0, 0, '2024-11-17 00:40:26', '2024-11-17 00:40:26'),
+(16, 18, '1', 'Faculty of Geoinformatics', 'B.Sc. In GIS', '1', '112-202030', '00-0000', '3', '1', '2024-11-18', 1.67, 2.07, 340, '2', '2', '2024-11-18', 0, 0, '2024-11-17 22:53:02', '2024-11-17 22:53:02'),
+(17, 19, '3', 'Faculty of Postgraduate Studies', 'Master in Information System', '1', '112-202030', '00-0000', '3', '2', '2024-11-18', 0, 3.25, 36, '2', '1', '2023-05-14', 0, 0, '2024-11-17 23:02:09', '2024-11-17 23:02:09'),
+(18, 20, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-11-21', 2.42, 2.12, 271, '2', '2', '2024-11-21', 0, 0, '2024-11-21 00:53:19', '2024-11-21 00:53:19'),
+(19, 21, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-11-21', 2.81, 2.16, 214, '1', '2', '2024-11-21', 0, 0, '2024-11-21 02:13:12', '2024-11-21 02:13:12'),
+(20, 22, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-11-21', 2.95, 2.16, 214, '3', '2', '2024-11-21', 0, 0, '2024-11-21 04:04:19', '2024-11-21 04:04:19'),
+(21, 23, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-11-30', 3.14, 2.74, 214, '2', '2', '2024-11-30', 0, 0, '2024-11-30 21:22:57', '2024-11-30 21:22:57'),
+(22, 24, '3', 'Faculty of Postgraduate Studies', 'Master in Information System', '1', '112-202030', '00-0000', '3', '2', '2024-11-30', 0, 3.5, 36, '2', '2', '2024-11-30', 0, 0, '2024-11-30 21:58:07', '2024-11-30 21:58:07'),
+(23, 25, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-12-01', 3.14, 2.74, 214, '2', '2', '2024-12-01', 0, 0, '2024-11-30 22:27:22', '2024-11-30 22:27:22'),
+(24, 26, '3', 'Faculty of Postgraduate Studies', 'Master in Information System', '1', '112-202030', '00-0000', '3', '2', '2024-12-01', 0, 3.5, 36, '2', '3', '2024-12-01', 0, 0, '2024-11-30 22:32:10', '2024-11-30 22:32:10'),
+(25, 27, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-12-01', 3.14, 2.74, 214, '2', '2', '2024-12-01', 0, 0, '2024-11-30 22:32:50', '2024-11-30 22:32:50'),
+(26, 28, '1', 'Faculty of Computer Science', 'B.Sc. in Computer Science', '1', '112-202030', '00-0000', '3', '2', '2024-12-01', 2.42, 2.12, 271, '2', '3', '2024-12-01', 0, 0, '2024-11-30 22:33:19', '2024-11-30 22:33:19');
 
 -- --------------------------------------------------------
 
@@ -402,12 +398,16 @@ INSERT INTO `users` (`user_id`, `user_full_name`, `username`, `user_email`, `pas
 (19, 'kamil ahmed ', 'kamil', 'localhost.beo28@passinbox.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-08-11 05:27:45', '2024-08-11 05:27:45'),
 (20, 'omer muhammed', 'omer', 'omer@mail.com', '202cb962ac59075b964b07152d234b70', 1, 0, 1, 0, '2024-08-12 09:12:20', '2024-08-12 09:12:20'),
 (21, 'Asia Ahmed', 'Asia', 'Asia.Ahmed@protonmail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-08-12 10:40:14', '2024-08-12 10:40:14'),
-(22, 'Nadir Njeeb', 'nedo', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 0, 0, '2024-08-12 13:38:23', '2024-08-12 13:38:23'),
+(22, 'Nadir Njeeb', 'nedo', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-08-12 13:38:23', '2024-08-12 13:38:23'),
 (23, 'Nadir Njeeb', 'Nadir', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-08-27 02:12:59', '2024-08-27 02:12:59'),
 (24, 'Ghazi Abdallah Omer', 'Ghaz', 'omer@mail.com', '202cb962ac59075b964b07152d234b70', 1, 0, 1, 0, '2024-08-27 02:19:50', '2024-08-27 02:19:50'),
 (25, 'khalid', 'kh', 'khalid@fu.sd.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-09-03 00:10:45', '2024-09-03 00:10:45'),
-(26, 'mazin', 'maz', 'mazi@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 0, 0, '2024-09-16 13:36:36', '2024-09-16 13:36:36'),
-(27, 'Muhammed Eissa', 'sia', 'sia@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 0, 0, '2024-11-17 00:37:29', '2024-11-17 00:37:29');
+(26, 'mazin', 'maz', 'mazi@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-09-16 13:36:36', '2024-09-16 13:36:36'),
+(27, 'Muhammed Eissa', 'sia', 'sia@mail.com', '202cb962ac59075b964b07152d234b70', 3, 0, 1, 0, '2024-11-17 00:37:29', '2024-11-17 00:37:29'),
+(28, 'aa', 'aa', 'Ghazi.Abdullah.2012@proton.me', '202cb962ac59075b964b07152d234b70', 1, 0, 1, 0, '2024-11-30 21:15:41', '2024-11-30 21:15:41'),
+(29, 'Nadir Njeeb', 'admin', 'Ghazi.Abdullah.2012@proton.me', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-11-30 21:41:57', '2024-11-30 21:41:57'),
+(30, 'Nadir Njeeb', 'admin', 'Ghazi.Abdullah.2012@proton.me', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-11-30 22:03:32', '2024-11-30 22:03:32'),
+(31, 'Nadir Njeeb', 'admin', 'nedo@mail.com', '202cb962ac59075b964b07152d234b70', 2, 0, 1, 0, '2024-11-30 22:06:50', '2024-11-30 22:06:50');
 
 --
 -- Indexes for dumped tables
@@ -495,7 +495,7 @@ ALTER TABLE `major`
 -- AUTO_INCREMENT for table `papers`
 --
 ALTER TABLE `papers`
-  MODIFY `paper_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `paper_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `paper_update`
@@ -507,7 +507,7 @@ ALTER TABLE `paper_update`
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `scanned_issue`
@@ -519,13 +519,13 @@ ALTER TABLE `scanned_issue`
 -- AUTO_INCREMENT for table `student_basic_info`
 --
 ALTER TABLE `student_basic_info`
-  MODIFY `student_basic_info_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `student_basic_info_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `student_cert_info`
 --
 ALTER TABLE `student_cert_info`
-  MODIFY `std_cert_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `std_cert_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tbl-log`
@@ -537,7 +537,7 @@ ALTER TABLE `tbl-log`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `user_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
