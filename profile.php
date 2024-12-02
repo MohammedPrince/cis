@@ -1,4 +1,5 @@
 <?php
+$page = "settings";
 include("include/header.php");
 
 ?>

@@ -1,4 +1,6 @@
 <?php
+
+$page = "manage_paper";
 include("include/header.php");
 
 $get_paper = Get_paper();

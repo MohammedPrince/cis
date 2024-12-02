@@ -1,7 +1,8 @@
 
 <?php
-
+$page = "home";
 include("include/header.php");
+
 
 ?>
 

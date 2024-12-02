@@ -1,4 +1,5 @@
 <?php
+$page = "request";
 include("include/header.php");
 
 $get_users = Get_users();

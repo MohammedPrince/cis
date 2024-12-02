@@ -56,7 +56,7 @@ if(!isset($_SESSION["user_id"])){
                     </li> -->
                     
                     <li class="nav-item d-none d-sm-inline-block">
-                        <a href="home.php" class="nav-link"><ion-icon name="home-outline"></ion-icon> &ensp; Home</a>
+                        <a href="home.php" class="nav-link "><ion-icon name="home-outline"></ion-icon> &ensp; Home</a>
                     </li>
 
                     <li class="nav-item d-none d-sm-inline-block">
@@ -141,7 +141,7 @@ if(!isset($_SESSION["user_id"])){
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     
-    <a href="./home.php" class="brand-link">
+    <a href="./home.php" class="brand-link ">
         <!-- <img src="include/dist/img/fu_logo.png" alt="Futuer University Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
         <!-- <a href="#" class="h5">Certificat Information System</a> -->
         
@@ -190,16 +190,16 @@ if (isset($_SESSION)) {
         
         <!-- <li class="nav-item menu-open"> -->
         <li class="nav-item active">
-            <a href="#" class="nav-link ">
+            <a href="#" class="nav-link <?php if($page == "home") echo "active"; else echo "";  ?> ">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
-                    Dashboard
+                    Home
                     <i class="right fas fa-angle-left"></i>
                 </p>
 </a>
 <ul class="nav nav-treeview">
     <li class="nav-item">
-        <a href="home.php" class="nav-link">
+        <a href="home.php" class="nav-link <?php if($page == "home") echo "active"; else echo "";  ?>">
             <i class="nav-icon">
                 <ion-icon name="analytics-outline"></ion-icon>
             </i>
@@ -216,7 +216,7 @@ if (isset($_SESSION)) {
 if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION['user_type'])== 2){
 ?>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="#" class="nav-link <?php if($page == "manage_paper") echo "active"; else echo "";  ?>">
         <i class="nav-icon">
         <ion-icon name="copy-outline" ></ion-icon>   
         </i>
@@ -229,7 +229,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
     <ul class="nav nav-treeview">
         <!-- start of pages -->
         <li class="nav-item">
-            <a href="set_serial_number.php" class="nav-link">
+            <a href="set_serial_number.php" class="nav-link <?php if($page == "manage_paper") echo "active"; else echo "";  ?>">
             <ion-icon name="keypad-outline"></ion-icon>
                 <p> &ensp;&ensp; Set Serial Number</p>
             </a>
@@ -246,7 +246,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 
 
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="#" class="nav-link <?php if($page == "request") echo "active"; else echo "";  ?>">
     <ion-icon name="git-compare-outline"></ion-icon>
         <p>
             Requests
@@ -255,7 +255,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="./request.php" class="nav-link">
+            <a href="./request.php" class="nav-link <?php if($page == "request") echo "active"; else echo "";  ?>">
             <!-- <ion-icon name="reorder-four-outline"></ion-icon> -->
             <ion-icon name="git-pull-request-outline"></ion-icon>
                 <p> &ensp;&ensp; All Requests</p>
@@ -267,7 +267,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 
 
 <li class="nav-item">
-    <a href="header.php" class="nav-link">
+    <a href="header.php" class="nav-link <?php if($page == "new_certificate") echo "active"; else echo "";  ?>">
         <i class="nav-icon">
         <ion-icon name="print-outline"></ion-icon>
         </i>
@@ -280,7 +280,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
     <ul class="nav nav-treeview">
         <!--  -->
         <li class="nav-item">
-            <a href="new_certificate.php" class="nav-link">
+            <a href="new_certificate.php" class="nav-link <?php if($page == "new_certificate") echo "active"; else echo "";  ?>">
             <ion-icon name="document-outline"></ion-icon>
                 <p> &ensp;&ensp; New Cirtificat</p>
             </a>
@@ -296,7 +296,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION['user_type'])== 2){
 ?>
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="#" class="nav-link <?php if($page == "manage_users") echo "active"; else echo "";  ?>">
     
         <i class="nav-icon">
         <ion-icon name="person-add-outline"></ion-icon>
@@ -308,7 +308,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="manage_users.php" class="nav-link">
+            <a href="manage_users.php" class="nav-link <?php if($page == "manage_users") echo "active"; else echo "";  ?>">
             <ion-icon name="people-outline"></ion-icon>
                 
                 <p> &ensp;&ensp; All Users</p>
@@ -325,7 +325,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 </a> -->
 <!-- Here -->
 <li class="nav-item">
-    <a href="#" class="nav-link">
+    <a href="#" class="nav-link <?php if($page == "settings") echo "active"; else echo "";  ?>">
         <i class="nav-icon">
             <ion-icon name="settings-outline"></ion-icon>
         </i>
@@ -334,7 +334,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
 
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="profile.php" class="nav-link">
+            <a href="profile.php" class="nav-link <?php if($page == "settings") echo "active"; else echo "";  ?>">
             <ion-icon name="people-outline"></ion-icon>
                 
                 <p> &ensp;&ensp; View Profile</p>

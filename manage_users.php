@@ -1,4 +1,5 @@
 <?php
+$page = "manage_users";
 include("include/header.php");
 
 $get_users = Get_users();
@@ -30,7 +31,7 @@ $get_users = Get_users();
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-                            <li class="breadcrumb-item active">Manage Users</li>
+                            <li class="breadcrumb-item  ">Manage Users</li>
                         </ol>
                     </div>
                     <!--  -->

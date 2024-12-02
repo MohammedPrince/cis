@@ -1,11 +1,13 @@
-<?php include("include/header.php");?>
+<?php
+$page = "new_certificate";
+include("include/header.php");?>
 
 <?php
 
 
 $get_faculty = Get_Faculty();
 $get_major = Get_Major();
-
+$statuse = "";
 if(isset($_POST['send_request'])){
 
 
@@ -180,10 +182,10 @@ if (isset($_POST['send_request'])){
 
             // Check if there are any 'F' grades
             if (empty($f_grades)) {
+                // لو ما شايل اي مادة
+                // $statuse = "allow_0";
+
             
-                // echo "<tr>
-                        // <td colspan='3'>The student has no 'F' grades and is eligible to graduate.</td>
-                    //   </tr>";
             } else {
                 echo "
                     <div><h5>Student Grades</h5></div>
@@ -196,12 +198,30 @@ if (isset($_POST['send_request'])){
                         <th>Grade</th>
                         <th>Sub Grade 1</th>
                         <th>Sub Grade 2</th>
-                      </tr>";
+                        </tr>";
                 foreach ($f_grades as $grade) {
+
                     $course_name = Get_Course_Name($grade['course_code']);
                     $grade1 = $grade['grade'];
                     $sub_grade1 = $grade['sub_grade1'];
                     $sub_grade2 = $grade['sub_grade2'];
+
+                    // شايل مادة ونضفها
+                    if($grade1 == "F" && $sub_grade1 != "F" && $sub_grade2 == ""){
+                         $statuse = "allow1";
+                    }
+                    // شايلة مادة ونضفها بس برضو شالها تاني 
+                    if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 != "F"){
+                        $statuse = "allow_2";
+                        
+                    }
+                    // شال مادة ونضفها وشالها تاني وشالها تالت
+                    if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 == "F"){
+                        $statuse = "notallow";
+                        
+                    }
+
+
 
                     // if ($sub_grade1 == 'F' || $sub_grade2 == 'F'){
                     //     echo "ghazi";
@@ -678,13 +698,35 @@ if (isset($_POST['send_request'])){
     </div>
     <br><br>    
     <div class="card-footer" style="display: flex; justify-content: center;">
-        <?php   ?>
-    <button type="submit" name="send_request" class="btn btn-info">
-        <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
-    </button>
-</div>
 
-    <!-- end -->
+<?php
+if (isset($_POST["check_index"])  ){
+    if($statuse == "allow_0"){?>
+    <button type="submit" name="send_request" class="btn btn-info">
+    <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
+    </button>
+<?php }}?>
+
+<?php
+if (isset($_POST["check_index"])  ){
+    if($statuse == "allow_1"){?>
+    <button type="submit" name="send_request" class="btn btn-info">
+    <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
+    </button>
+<?php }}?>
+
+<?php
+if (isset($_POST["check_index_2"])  ){
+    if($statuse == "allow1"){?>
+    <button type="submit" name="send_request" class="btn btn-info">
+    <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
+    </button>
+<?php }}?>
+
+
+
+</div>
+<!-- end -->
 
 </div>
 
