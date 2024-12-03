@@ -52,6 +52,10 @@ function alerts($type, $message)
             $res = '<div class="alert alert-danger alert-dismissible" role="alert" style="text-align:center">' . $message . '</div>';
             break;
         }//Red	
+        case 5: {
+            $res = '<div class="alert alert-light alert-dismissible" role="alert" style="text-align:center">' . $message . '</div>';
+            break;
+        }//Red	
     }
     return $res;
 }

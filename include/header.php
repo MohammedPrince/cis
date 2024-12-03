@@ -141,37 +141,30 @@ if(!isset($_SESSION["user_id"])){
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     
-    <a href="./home.php" class="brand-link ">
-        <!-- <img src="include/dist/img/fu_logo.png" alt="Futuer University Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
-        <!-- <a href="#" class="h5">Certificat Information System</a> -->
-        
-        <span class="h6" >Certificate Information System</span>
-    </a>
     
     <div class="sidebar">
         
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
+            <!-- <div class="image">
                 <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block"> 
-                    
-                    <?php
-// Check if the session variable exists and display it
-if (isset($_SESSION)) {
-    // echo $_SESSION['id'];
-            echo $_SESSION['username'];
-            // Optionally, unset the session variable if no longer needed
-            // unset($_SESSION['message']);
+            </div> -->
+
+            <div class="info" style="text-align: center; margin-top: 20px;">
+    <a href="home.php" class="d-block"> 
+        <span>
+            <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image" width="100" height="100" style="display: block; margin: auto;">       
+        </span>
+        <?php
+        // Check if the session variable exists and display it
+        if (isset($_SESSION['username'])) {
+            echo "<div style='font-size: 18px; font-weight: bold; color: #fff;'>Hello again, " . htmlspecialchars($_SESSION['username']) . "!</div>";
         } else {
-            echo 'No session message found.';
+            echo "<div style='font-size: 18px; color: #fff;'>No session message found.</div>";
         }
         ?>
-
-
-</a>
+    </a>
 </div>
+
 </div>
 
 <!-- <div class="form-inline">

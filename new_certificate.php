@@ -183,7 +183,7 @@ if (isset($_POST['send_request'])){
             // Check if there are any 'F' grades
             if (empty($f_grades)) {
                 // لو ما شايل اي مادة
-                // $statuse = "allow_0";
+                $statuse = "allow";
 
             
             } else {
@@ -199,6 +199,9 @@ if (isset($_POST['send_request'])){
                         <th>Sub Grade 1</th>
                         <th>Sub Grade 2</th>
                         </tr>";
+
+        
+               
                 foreach ($f_grades as $grade) {
 
                     $course_name = Get_Course_Name($grade['course_code']);
@@ -208,15 +211,20 @@ if (isset($_POST['send_request'])){
 
                     // شايل مادة ونضفها
                     if($grade1 == "F" && $sub_grade1 != "F" && $sub_grade2 == ""){
-                         $statuse = "allow1";
+                         $statuse = "allow";
                     }
                     // شايلة مادة ونضفها بس برضو شالها تاني 
                     if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 != "F"){
-                        $statuse = "allow_2";
+                        $statuse = "allow";
                         
                     }
                     // شال مادة ونضفها وشالها تاني وشالها تالت
                     if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 == "F"){
+                        $statuse = "notallow";
+                        
+                    }
+                    // لو شايل مادة بس
+                    if ($grade1 == "F" && $sub_grade1 == "" && $sub_grade2 == ""){
                         $statuse = "notallow";
                         
                     }
@@ -257,6 +265,25 @@ if (isset($_POST['send_request'])){
                 // End the table
                 echo "</table>";
             }
+            if($statuse == "notallow"){
+                echo '
+                <br>
+                <div class="card card-secondary">
+                <div class="card-header">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                ATTENTION PLEASE.
+                </div>
+                <div class="card-body"> 
+                <h6> 
+                A student <b>cannot receive</b> a certificae because he/she has a <b>failing grade</b>. All failing grades must be <b>removed</b> in order for the student to receive a certificae.
+               
+                </h6>
+
+                </div>
+                </div>
+                
+                ';   
+                }
         } 
         else {
             echo $alert = alerts(3, 'This Student Not Graduated Yet');
@@ -701,27 +728,17 @@ if (isset($_POST['send_request'])){
 
 <?php
 if (isset($_POST["check_index"])  ){
-    if($statuse == "allow_0"){?>
-    <button type="submit" name="send_request" class="btn btn-info">
+    if($statuse == "allow"){?>
+    <button type="submit" name="send_request" class="btn btn-info" >
     <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
     </button>
-<?php }}?>
+<?php }
+else {
+//    echo 'A student cannot receive a certificae because he/she has a failing grade. All failing grades must be removed in order for the student to receive a diploma.';
+}
+}?>
 
-<?php
-if (isset($_POST["check_index"])  ){
-    if($statuse == "allow_1"){?>
-    <button type="submit" name="send_request" class="btn btn-info">
-    <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
-    </button>
-<?php }}?>
 
-<?php
-if (isset($_POST["check_index_2"])  ){
-    if($statuse == "allow1"){?>
-    <button type="submit" name="send_request" class="btn btn-info">
-    <i><ion-icon name="bookmark-outline"></ion-icon></i> Save to Request
-    </button>
-<?php }}?>
 
 
 
