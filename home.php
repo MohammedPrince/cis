@@ -1,10 +1,23 @@
 
 <?php
-
+$page = "home";
 include("include/header.php");
+
 
 ?>
 
+<?php 
+
+$total_request = Total_Request();
+$total_paper = Total_Paper();
+$total_request_delete = Total_Request_Delete();
+// $total_request_return = Total_Request_Return();
+
+// http://localhost/gitrepo/cis/set_serial_number.php?paper_id=2
+// $current_paper_id = "";
+// $current_paper_id = Print_Paper($current_paper_id);
+
+?>
 
 <div class="content-wrapper">
     <!-- start of nave link active -->
@@ -36,13 +49,13 @@ include("include/header.php");
 
 <div class="small-box bg-info">
 <div class="inner">
-<h3>150</h3>
+<h3><?php if(isset($total_paper)) echo $total_paper; else echo "" ;?></h3>
 <p>Total Reminded Paper</p>
 </div>
 <div class="icon">
 <i class="ion ion-bag"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+
 </div>
 </div>
 
@@ -50,29 +63,30 @@ include("include/header.php");
 
 <div class="small-box bg-success">
 <div class="inner">
-<h3>53<sup style="font-size: 20px">%</sup></h3>
+<h3>13</sup></h3>
 <p>Total Printed</p>
+
 </div>
 <div class="icon">
 <i class="ion ion-stats-bars"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+<!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 </div>
 </div>
 
-<div class="col-lg-2 col-4">
+<!-- <div class="col-lg-2 col-8"> -->
 
-<div class="small-box bg-warning">
-<div class="inner">
-<h3>44</h3>
-<p>Total Request Rejected</p>
-</div>
+<!-- <div class="small-box bg-warning">
+<div class="inner"> -->
+<h3><?php //if(isset($total_request_return)) echo $total_request_return; else echo "" ;?></h3>
+<!-- <p>Total Request Return</p> -->
+<!-- </div>
 <div class="icon">
 <i class="ion ion-person-add"></i>
-</div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-</div>
-</div>
+</div> -->
+<!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
+<!-- </div> -->
+<!-- </div> -->
 
 <!-- <div class="col-lg-2 col-4">
 <div class="small-box bg-green">
@@ -88,21 +102,20 @@ include("include/header.php");
 </div> -->
 
 
-
-
-
-
 <!--  -->
 <div class="col-lg-2 col-4">
-<div class="small-box bg-secondary">
+<div class="small-box bg-warning">
+<!-- <div class="small-box bg-secondary"> -->
 <div class="inner">
-<h3>65</h3>
+<h3 >
+   <?php if(isset($total_request)) echo $total_request; else echo "" ;?>
+</h3>
 <p>Total Request Inprogress</p>
 </div>
 <div class="icon">
 <i class="ion ion-pie-graph"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+<!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 </div>
 </div>
 
@@ -110,13 +123,13 @@ include("include/header.php");
 <div class="col-lg-3 col-4">
 <div class="small-box bg-danger">
 <div class="inner">
-<h3>65</h3>
-<p>Total Request Damage</p>
+<h3><?php if(isset($total_request_delete)) echo $total_request_delete; else echo "" ;?></h3>
+<p>Total Request Delete</p>
 </div>
 <div class="icon">
 <i class="ion ion-pie-graph"></i>
 </div>
-<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+<!-- <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a> -->
 </div>
 </div>
 

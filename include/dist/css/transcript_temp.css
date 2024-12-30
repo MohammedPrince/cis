@@ -1,0 +1,96 @@
+
+@media print {
+    @page {
+        size: A4;
+    }
+}
+
+body {
+    
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 4px;
+}
+.header{
+    margin-top: 2.8cm;
+}
+.top_main_body{
+    
+    font-size: 11px;
+    margin-inline-start: -0.5px;
+    margin-block-start: 2.9cm;
+}
+
+
+
+.main_body{
+    
+    font-size: 11px;
+    line-height: 1.1;
+}
+
+h3 {
+    font-size: 5px;
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 25px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 11px;
+}
+h3 {
+    /* display: inline-block; */
+    font-size: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1mm;
+}
+
+th{
+    /* background: #eeee; */
+    background: #D6D6D6;
+}
+th, td {
+    /* border: solid 1px #999; */
+   
+    font-size: 4px;
+    border: 0.5px solid black;
+    padding: 1px;
+}
+
+
+/* line of border */
+/* tbody tr:last-child td {
+    border-bottom: none;
+    
+} */
+
+.semester_summary {
+    text-align: center;
+    margin-left: 32px;
+    font-size: 5pt;
+    font-weight: bold;
+}
+
+.signatures {
+
+      display: flex;
+      justify-content: space-between;
+      margin-top:30px;
+  }
+
+  .signature {
+    text-align: center;
+    width: 45%;
+}
+.grading_system {
+margin-top:10px;
+font-size: 3pt;
+}
+

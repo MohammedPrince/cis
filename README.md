@@ -7,6 +7,8 @@ git push origin dev
 //to check branch name
 git status
 
+> [!CAUTION]
+Rename coulmn `divition` into `division`  @ `student_cert_info`
 ## Amendments to the second meeting
 1. Index page ~ icon remove 
 2. Naming all page in CamilStyle
