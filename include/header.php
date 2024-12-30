@@ -275,7 +275,7 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
         <li class="nav-item">
             <a href="new_certificate.php" class="nav-link <?php if($page == "new_certificate") echo "active"; else echo "";  ?>">
             <ion-icon name="document-outline"></ion-icon>
-                <p> &ensp;&ensp; New Cirtificat</p>
+                <p> &ensp;&ensp; New Certificate</p>
             </a>
         </li>
         <!--  -->
