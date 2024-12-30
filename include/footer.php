@@ -1,9 +1,9 @@
 
 <footer class="main-footer">
-  <strong>Copyright © <?php date("Y") ?> All rights reserved for <a href="https://fu.edu.sd/" target="_blank">The Future University.</a></strong>
+  <strong>Copyright © <?php date("Y") ?> All rights reserved for <a href="https://beta.fu.edu.sd/Home">The Future University.</a>.</strong>
 All rights reserved.
 <div class="float-right d-none d-sm-inline-block">
-<b>Developed by </b> <a href="https://fu.edu.sd/CESD" target="_blank">CESD</a>
+<b>Developed by </b>CESD
 
 </div>
 </footer>

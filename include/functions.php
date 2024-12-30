@@ -196,7 +196,7 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 
     // Prepare the SQL statement
     $sqli = "INSERT INTO `papers`(`paper_number`,`serial_number_start`,`serial_number_end`) 
-             VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
+        VALUES ('$paper_number', CONCAT('FU', '$serial_number_start'), '$serial_number_end')";
 
     // Execute the query
     if ($query = mysqli_query($conn, $sqli)) {
@@ -271,7 +271,7 @@ function Get_Requests_Data($request_id_de){
         $row = mysqli_fetch_array($query);
         return $row;
 
-       }
+    }
 
 }
 
@@ -527,11 +527,11 @@ function Get_Requests()
     } else {
         // Fetch all requests for other user types
         $sqli = "SELECT * FROM `student_basic_info` bi, `student_cert_info` si, `request` r, `users` u 
-                 WHERE bi.student_basic_info_id = si.student_basic_info_id 
-                 AND si.std_cert_id = r.`std_cert_id` 
-                 AND u.user_id = r.user_id 
-                 AND r.dell_request = 0 
-                 ORDER BY r.request_id DESC";
+                WHERE bi.student_basic_info_id = si.student_basic_info_id 
+                AND si.std_cert_id = r.`std_cert_id` 
+                AND u.user_id = r.user_id 
+                AND r.dell_request = 0 
+                ORDER BY r.request_id DESC";
     }
 
     if ($query = mysqli_query($conn, $sqli)) {
@@ -593,7 +593,7 @@ function Get_Major(){
         die;
 
     }
-  
+
 }
 
 function Get_Major_Name($major_code){
@@ -860,7 +860,7 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
             }
       }
 
-      function Total_Hours($stud_index){
+function Total_Hours($stud_index){
         global $sis_con;
         // let max batch of stud in  
         $total_hours_sql = "SELECT SUM(course_units) AS unit FROM `stud_course_mark` WHERE `stud_id` = '$stud_index'";
@@ -873,7 +873,7 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
                 echo $total_hours_sql;
             }
 
-      }
+    }
     //  function stud_sql($std_index){
     //    global $sis_con; 
 
@@ -903,28 +903,27 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
          
     }
 
-    function Get_Program($program_code){
-         if($program_code==1){
-            return "Bachelor";
-         }
-         if($program_code==2){
+function Get_Program($program_code){
+    if($program_code==1){
+            return "Bachelor";}
+    if($program_code==2){
             return "Diploma";
-         }
-         if($program_code==3){
+        }
+    if($program_code==3){
             return "Master";
-         }
-         if($program_code==4){
+        }
+    if($program_code==4){
             return "PhD";
-         }
-         if($program_code==5){
+        }
+    if($program_code==5){
             return "CIT";
-         }
-         if($program_code==6){
+        }
+    if($program_code==6){
             return "COA";
-         }
-         if($program_code==7){
+        }
+if($program_code==7){
             return "HND";
-         }
+        }
     }
 
 
@@ -1022,6 +1021,5 @@ function Get_Course_Name($code) {
     $row = mysqli_fetch_array($query);
     return $row['course_name'];
 }
-
 
 ?>

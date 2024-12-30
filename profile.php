@@ -10,7 +10,8 @@ include("include/header.php");
 
         $update_user_info = Update_user_info($updated_password);
     }
-?>
+?> 
+
 <!--  -->
 <div class="content-wrapper">
     <section class="content-header">

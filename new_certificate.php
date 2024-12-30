@@ -200,7 +200,8 @@ if (isset($_POST['send_request'])){
                         <th>Sub Grade 2</th>
                         </tr>";
 
-
+        
+               
                 foreach ($f_grades as $grade) {
 
                     $course_name = Get_Course_Name($grade['course_code']);
@@ -228,6 +229,14 @@ if (isset($_POST['send_request'])){
                         
                     }
 
+
+
+                    // if ($sub_grade1 == 'F' || $sub_grade2 == 'F'){
+                    //     echo "ghazi";
+                    // }
+                    // if ($sub_grade1 == 'F' || $sub_grade2 == 'F'){
+                    //     echo "ghazi";
+                    // }
                         
                      // Check if sub_grade1 or sub_grade2 is not 'F'
                      if ($sub_grade1 !== 'F' || $sub_grade2 !== 'F') {
@@ -392,7 +401,25 @@ if (isset($_POST['send_request'])){
 
 
    </select>
+    </div>
+    <!-- Major end -->
 
+    <!-- major original code start !! -->
+    <!-- <select class="form-control" name="major" id="major" required="required">
+        <option value="">Select Major...</option>
+        
+        <?php //while($row=mysqli_fetch_array($get_major)){  ?>
+
+        <option value="<?php  //echo $row['major_code'];  ?>" >
+
+        <?php  
+             //echo $row['major_desc_e'];
+        ?>
+
+        </option>
+        <?php //} ?>
+   </select> -->
+    <!-- major original code end !! -->
 
 
 

@@ -19,16 +19,15 @@ $get_requests = Get_Requests();
         $user_type =  $_POST['user_type'];
 
         $adduser = Add_user($user_full_name,$username,$user_email,$password,$user_type);
-         } 
-         
-         if(isset($_GET['delet_id'])){
+} 
+    if(isset($_GET['delet_id'])){
             $delet_id = $_GET['delet_id'];
             $delet_request =  Delete_Requests($delet_id);
             if ($delet_request == 1){
                 echo $alert = alerts(4,'Request deleted successfully');
             }
         }
- ?>
+?>
 
 <div class="content-wrapper">
     <section class="content-header">
@@ -140,7 +139,7 @@ $get_requests = Get_Requests();
                 <a class="btn btn-danger btn-sm" href="request.php?delet_id=<?php echo base64_encode($row['request_id']); ?>" onClick="return confirm('Are you sure you want to delete this Request?')">
                     <i class="fas fa-trash"></i> Delete
                 </a>
-            <?php } ?>
+            <?php } ?>  
 </td>
 
                

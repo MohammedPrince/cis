@@ -9,8 +9,5 @@ while($row = mysqli_fetch_array($query)) {
 	echo "<option value='$row[major_code]'>$row[major_desc_e]</option>";
 }
 
-
-
-
 ?>
 

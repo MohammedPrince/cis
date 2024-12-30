@@ -1,9 +1,9 @@
-<?php include("functions.php"); ?>
+<?php   include("functions.php");          ?>
 
 
 <?php
 
-if (!isset($_SESSION["user_id"])) {
+if(!isset($_SESSION["user_id"])){
 
     header("location: ./index.php");
 }
@@ -12,76 +12,71 @@ if (!isset($_SESSION["user_id"])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>CIS</title>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CIS</title>
+        <link rel="icon" type="image" href="include/dist/img/fu.png">
 
-    <link rel="icon" type="image" href="include/dist/img/fu.png">
-
-
-    <link rel="stylesheet"
-        href="https:/fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
-
-    <link rel="stylesheet" href="include/plugins/fontawesome-free/css/all.min.css">
-
-    <link rel="stylesheet" href="include/../../../code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="include/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-
-    <link rel="stylesheet" href="include/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
-    <link rel="stylesheet" href="include/plugins/jqvmap/jqvmap.min.css">
-
-    <link rel="stylesheet" href="include/dist/css/adminlte.min2167.css?v=3.2.0">
-
-    <link rel="stylesheet" href="include/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-
-    <link rel="stylesheet" href="include/plugins/daterangepicker/daterangepicker.css">
-
-    <link rel="stylesheet" href="include/plugins/summernote/summernote-bs4.min.css">
-    <!-- datatable -->
-    <link rel="stylesheet" href="include/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="include/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="include/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
-</head>
-
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
-            <ul class="navbar-nav">
-                <!-- <li class="nav-item">
+        
+        <link rel="stylesheet" href="https:/fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+        
+        <link rel="stylesheet" href="include/plugins/fontawesome-free/css/all.min.css">
+        
+        <link rel="stylesheet" href="include/../../../code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        
+        <link rel="stylesheet" href="include/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+        
+        <link rel="stylesheet" href="include/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+        
+        <link rel="stylesheet" href="include/plugins/jqvmap/jqvmap.min.css">
+        
+        <link rel="stylesheet" href="include/dist/css/adminlte.min2167.css?v=3.2.0">
+        
+        <link rel="stylesheet" href="include/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+        
+        <link rel="stylesheet" href="include/plugins/daterangepicker/daterangepicker.css">
+        
+        <link rel="stylesheet" href="include/plugins/summernote/summernote-bs4.min.css">
+        <!-- datatable -->
+        <link rel="stylesheet" href="include/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="include/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="include/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        
+    </head>
+    <body class="hold-transition sidebar-mini layout-fixed">
+        <div class="wrapper">
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                
+                <ul class="navbar-nav">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     </li> -->
+                    
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="home.php" class="nav-link "><ion-icon name="home-outline"></ion-icon> &ensp; Home</a>
+                    </li>
 
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="home.php" class="nav-link "><ion-icon name="home-outline"></ion-icon> &ensp; Home</a>
-                </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="./new_certificate.php" class="nav-link"><ion-icon name="document-outline"></ion-icon> &ensp; New Certificate</a>
+                    </li>
+<!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="./request.php" class="nav-link"><ion-icon name="git-compare-outline"></ion-icon> &ensp; All Requests</a>
+                        
+                    </li>
 
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./new_certificate.php" class="nav-link"><ion-icon name="document-outline"></ion-icon>
-                        &ensp; New Certificate</a>
-                </li>
-                <!-- <ion-icon name="cloud-upload-outline"></ion-icon> -->
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./request.php" class="nav-link"><ion-icon name="git-compare-outline"></ion-icon> &ensp; All
-                        Requests</a>
-
-                </li>
-
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./profile.php" class="nav-link"><ion-icon name="person-circle-outline"></ion-icon> &ensp;
-                        Profile</a>
-
-                </li>
-            </ul>
-
-            <ul class="navbar-nav ml-auto">
-
-                <!-- <li class="nav-item">
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="./profile.php" class="nav-link"><ion-icon name="person-circle-outline"></ion-icon> &ensp; Profile</a>
+                        
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav ml-auto">
+                    
+<!-- <li class="nav-item">
 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
     <i class="fas fa-search"></i>
 </a>
@@ -103,8 +98,8 @@ if (!isset($_SESSION["user_id"])) {
 </li> -->
 
 
-                <!-- setting -->
-                <!-- <li class="nav-item dropdown">
+<!-- setting -->
+<!-- <li class="nav-item dropdown">
     <a class="nav-link" data-toggle="dropdown" href="#">
         <i class=""><ion-icon name="options-outline"></ion-icon></i>
         <span class="badge badge-warning navbar-badge">15</span>
@@ -131,49 +126,48 @@ if (!isset($_SESSION["user_id"])) {
         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
     </div>
 </li> -->
-                <!-- setting -->
+<!-- setting -->
 
 
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
+    <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+    </li>
 
-            </ul>
-        </nav>
-
-
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+</ul>
+</nav>
 
 
-            <div class="sidebar">
-
-                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <!-- <div class="image">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    
+    
+    <div class="sidebar">
+        
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <!-- <div class="image">
                 <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image">
             </div> -->
 
-                    <div class="info" style="text-align: center; margin-top: 20px;">
-                        <a href="home.php" class="d-block">
-                            <span>
-                                <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image"
-                                    width="100" height="100" style="display: block; margin: auto;">
-                            </span>
-                            <?php
-                            // Check if the session variable exists and display it
-                            if (isset($_SESSION['username'])) {
-                                echo "<div style='font-size: 18px; font-weight: bold; color: #fff;'>Hello again, " . htmlspecialchars($_SESSION['username']) . "!</div>";
-                            } else {
-                                echo "<div style='font-size: 18px; color: #fff;'>No session message found.</div>";
-                            }
-                            ?>
-                        </a>
-                    </div>
+            <div class="info" style="text-align: center; margin-top: 20px;">
+    <a href="home.php" class="d-block"> 
+        <span>
+            <img src="include/dist/img/fu.png" class="img-circle elevation-2" alt="User Image" width="100" height="100" style="display: block; margin: auto;">       
+        </span>
+        <?php
+        // Check if the session variable exists and display it
+        if (isset($_SESSION['username'])) {
+            echo "<div style='font-size: 18px; font-weight: bold; color: #fff;'>Hello again, " . htmlspecialchars($_SESSION['username']) . "!</div>";
+        } else {
+            echo "<div style='font-size: 18px; color: #fff;'>No session message found.</div>";
+        }
+        ?>
+    </a>
+</div>
 
-                </div>
+</div>
 
-                <!-- <div class="form-inline">
+<!-- <div class="form-inline">
     <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -184,210 +178,179 @@ if (!isset($_SESSION["user_id"])) {
     </div>
 </div> -->
 
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
-
-                        <!-- <li class="nav-item menu-open"> -->
-                        <li class="nav-item <?php if ($page == 'home')
-                            echo 'menu-open'; ?>">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Home
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="home.php" class="nav-link <?php if ($page == 'home')
-                                        echo 'active'; ?>">
-                                        <i class="nav-icon">
-                                            <ion-icon name="analytics-outline"></ion-icon>
-                                        </i>
-                                        <p>Dashboard</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        
+        <!-- <li class="nav-item menu-open"> -->
+        <li class="nav-item active">
+            <a href="#" class="nav-link <?php if($page == "home") echo "active"; else echo "";  ?> ">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Home
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+</a>
+<ul class="nav nav-treeview">
+    <li class="nav-item">
+        <a href="home.php" class="nav-link <?php if($page == "home") echo "active"; else echo "";  ?>">
+            <i class="nav-icon">
+                <ion-icon name="analytics-outline"></ion-icon>
+            </i>
+            <p>Dashboard </p>
+        </a>
+    </li>
+    
+    
+</ul>
+</li>
 
 
-                        <?php
-                        if (isset($_SESSION['user_type']) && ($_SESSION['user_type']) == 1 || ($_SESSION['user_type']) == 2) {
-                            ?>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link <?php if ($page == "manage_paper")
-                                    echo "active";
-                                else
-                                    echo ""; ?>">
-                                    <i class="nav-icon">
-                                        <ion-icon name="copy-outline"></ion-icon>
-                                    </i>
-                                    <p>
-                                        Manage Paper
-                                        <i class="fas fa-angle-left right"></i>
-                                        <!-- <span class="badge badge-info right">6</span> -->
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <!-- start of pages -->
-                                    <li class="nav-item">
-                                        <a href="set_serial_number.php" class="nav-link <?php if ($page == "manage_paper")
-                                            echo "active";
-                                        else
-                                            echo ""; ?>">
-                                            <ion-icon name="keypad-outline"></ion-icon>
-                                            <p> &ensp;&ensp; Set Serial Number</p>
-                                        </a>
-                                    </li>
-                                    <!-- <li class="nav-item">
+<?php
+if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION['user_type'])== 2){
+?>
+<li class="nav-item">
+    <a href="#" class="nav-link <?php if($page == "manage_paper") echo "active"; else echo "";  ?>">
+        <i class="nav-icon">
+        <ion-icon name="copy-outline" ></ion-icon>   
+        </i>
+        <p>
+            Manage Paper
+            <i class="fas fa-angle-left right"></i>
+            <!-- <span class="badge badge-info right">6</span> -->
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <!-- start of pages -->
+        <li class="nav-item">
+            <a href="set_serial_number.php" class="nav-link <?php if($page == "manage_paper") echo "active"; else echo "";  ?>">
+            <ion-icon name="keypad-outline"></ion-icon>
+                <p> &ensp;&ensp; Set Serial Number</p>
+            </a>
+        </li>
+      <!-- <li class="nav-item">
           <a href="upload_document.php" class="nav-link">
           <ion-icon name="cloud-upload-outline"></ion-icon>
               <p> &ensp;&ensp; Upload a document</p>
             </a>
         </li> -->
-                                </ul>
-                            </li>
-                        <?php } ?>
+    </ul>
+</li>
+<?php } ?> 
 
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if ($page == "request")
-                                echo "active";
-                            else
-                                echo ""; ?>">
-                                <ion-icon name="git-compare-outline"></ion-icon>
-                                <p>
-                                    Requests
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="./request.php" class="nav-link <?php if ($page == "request")
-                                        echo "active";
-                                    else
-                                        echo ""; ?>">
-                                        <!-- <ion-icon name="reorder-four-outline"></ion-icon> -->
-                                        <ion-icon name="git-pull-request-outline"></ion-icon>
-                                        <p> &ensp;&ensp; All Requests</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+<li class="nav-item">
+    <a href="#" class="nav-link <?php if($page == "request") echo "active"; else echo "";  ?>">
+    <ion-icon name="git-compare-outline"></ion-icon>
+        <p>
+            Requests
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="./request.php" class="nav-link <?php if($page == "request") echo "active"; else echo "";  ?>">
+            <!-- <ion-icon name="reorder-four-outline"></ion-icon> -->
+            <ion-icon name="git-pull-request-outline"></ion-icon>
+                <p> &ensp;&ensp; All Requests</p>
+            </a>
+        </li>
+    </ul>
+</li> 
 
 
 
-                        <li class="nav-item">
-                            <a href="header.php" class="nav-link <?php if ($page == "new_certificate")
-                                echo "active";
-                            else
-                                echo ""; ?>">
-                                <i class="nav-icon">
-                                    <ion-icon name="print-outline"></ion-icon>
-                                </i>
-                                <p>
-                                    Print Certificate
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
+<li class="nav-item">
+    <a href="header.php" class="nav-link <?php if($page == "new_certificate") echo "active"; else echo "";  ?>">
+        <i class="nav-icon">
+        <ion-icon name="print-outline"></ion-icon>
+        </i>
+        <p>
+            Print Certificate
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    
+    <ul class="nav nav-treeview">
+        <!--  -->
+        <li class="nav-item">
+            <a href="new_certificate.php" class="nav-link <?php if($page == "new_certificate") echo "active"; else echo "";  ?>">
+            <ion-icon name="document-outline"></ion-icon>
+                <p> &ensp;&ensp; New Cirtificat</p>
+            </a>
+        </li>
+        <!--  -->
+        
 
-                            <ul class="nav nav-treeview">
-                                <!--  -->
-                                <li class="nav-item">
-                                    <a href="new_certificate.php" class="nav-link <?php if ($page == "new_certificate")
-                                        echo "active";
-                                    else
-                                        echo ""; ?>">
-                                        <ion-icon name="document-outline"></ion-icon>
-                                        <p> &ensp;&ensp; New Certificate</p>
-                                    </a>
-                                </li>
-                                <!--  -->
+</ul>
 
 
-                            </ul>
+<!-- Here -->
+<?php
+if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION['user_type'])== 2){
+?>
+<li class="nav-item">
+    <a href="#" class="nav-link <?php if($page == "manage_users") echo "active"; else echo "";  ?>">
+    
+        <i class="nav-icon">
+        <ion-icon name="person-add-outline"></ion-icon>
+        </i>
+        <p>
+            Manage Users
+            <i class="fas fa-angle-left right"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="manage_users.php" class="nav-link <?php if($page == "manage_users") echo "active"; else echo "";  ?>">
+            <ion-icon name="people-outline"></ion-icon>
+                
+                <p> &ensp;&ensp; All Users</p>
+            </a>
+        </li>
+    </ul>
+</li>
+<?php } ?>  
+<!-- there -->
 
 
-                            <!-- Here -->
-                            <?php
-                            if (isset($_SESSION['user_type']) && ($_SESSION['user_type']) == 1 || ($_SESSION['user_type']) == 2) {
-                                ?>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link <?php if ($page == "manage_users")
-                                    echo "active";
-                                else
-                                    echo ""; ?>">
-
-                                    <i class="nav-icon">
-                                        <ion-icon name="person-add-outline"></ion-icon>
-                                    </i>
-                                    <p>
-                                        Manage Users
-                                        <i class="fas fa-angle-left right"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="manage_users.php" class="nav-link <?php if ($page == "manage_users")
-                                            echo "active";
-                                        else
-                                            echo ""; ?>">
-                                            <ion-icon name="people-outline"></ion-icon>
-
-                                            <p> &ensp;&ensp; All Users</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <?php } ?>
-                        <!-- there -->
-
-
-                        <!-- <a href="#" class="btn btn-sm btn-primary">
+<!-- <a href="#" class="btn btn-sm btn-primary">
 <i class="fas fa-user"></i> View Profile
 </a> -->
-                        <!-- Here -->
-                        <li class="nav-item">
-                            <a href="#" class="nav-link <?php if ($page == "settings")
-                                echo "active";
-                            else
-                                echo ""; ?>">
-                                <i class="nav-icon">
-                                    <ion-icon name="settings-outline"></ion-icon>
-                                </i>
-                                <p>&ensp;Settings<i class="fas fa-angle-left right"></i></p>
-                            </a>
+<!-- Here -->
+<li class="nav-item">
+    <a href="#" class="nav-link <?php if($page == "settings") echo "active"; else echo "";  ?>">
+        <i class="nav-icon">
+            <ion-icon name="settings-outline"></ion-icon>
+        </i>
+        <p>&ensp;Settings<i class="fas fa-angle-left right"></i></p>
+    </a>
 
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="profile.php" class="nav-link <?php if ($page == "settings")
-                                        echo "active";
-                                    else
-                                        echo ""; ?>">
-                                        <ion-icon name="people-outline"></ion-icon>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="profile.php" class="nav-link <?php if($page == "settings") echo "active"; else echo "";  ?>">
+            <ion-icon name="people-outline"></ion-icon>
+                
+                <p> &ensp;&ensp; View Profile</p>
+            </a>
+        </li>
+    </ul>
 
-                                        <p> &ensp;&ensp; View Profile</p>
-                                    </a>
-                                </li>
-                            </ul>
+    
+        <li class="nav-item">
+            <a href="logout.php" class="nav-link">
+            <ion-icon name="log-out-outline"></ion-icon>
+                
+                <p> &ensp;&ensp; Log Out</p>
+            </a>
+        </li>
+   
 
-
-                        <li class="nav-item">
-                            <a href="logout.php" class="nav-link">
-                                <ion-icon name="log-out-outline"></ion-icon>
-
-                                <p> &ensp;&ensp; Log Out</p>
-                            </a>
-                        </li>
-
-
-                    </ul>
-                    </li>
-                    <!-- there -->
+    </ul>
+</li>
+<!-- there -->
 
 
 
 
-        </aside>
+</aside>
+
