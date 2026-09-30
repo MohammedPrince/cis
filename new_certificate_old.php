@@ -45,44 +45,8 @@ if (isset($_POST['send_request'])) {
     // $std_photo = $_POST['std_photo'];
     // $ = $_POST['photo'];
 
-    if ($program === '2') {
-
-        if ( $cgpa >=3.45 && $cgpa <=4.0 ) {
-                $mode = '4';
-            } else
-            if ( $cgpa >=2.95 && $cgpa <=3.44 ) {
-                $mode = '5';
-            } else
-            if ( $cgpa >=2.45 && $cgpa <=2.94 ) {
-                $mode = '6';
-            } else
-            if ( $cgpa >=1.95 && $cgpa <=2.44 ) {
-                $mode = '7';
-            }
-         
-        }
-        
-        
-        if ($program === '1') {
-        
-            if ($cgpa >=3.45 && $cgpa <=4.0) {
-                $mode = '1';
-              
-            } else if ($cgpa >=2.95 && $cgpa <=3.44) {
-                $mode = '2';
-                $division ='1';
-        
-            } else if ($cgpa >=2.45 && $cgpa <=2.94) {
-                $mode = '2';
-                $division ='2';
-            } else if ($cgpa >=1.95 && $cgpa <=2.44) {
-                $mode = '3';
-            }
-         
-        }
-
-    // $mode = $_POST['mode'];
-    // $division = $_POST['division'];
+    $mode = $_POST['mode'];
+    $division = $_POST['division'];
     $senate_on = $_POST['senate_on'];
 
     // $get_batch = Get_Batch($std_index, $batch);
@@ -140,49 +104,7 @@ if (isset($_POST['send_request'])) {
 </script>
 
 <!-- Depended Select -->
-<style>@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}
 
-.alert {
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    animation: blink 1s infinite; /* Blinking effect */
-}
-
-.alert-warning {
-    background-color:#f4ca16;
-    color: #856404;
-    border:1px solid rgba(133, 101, 4, 0.47);
- 
-}
-
-.alert-danger {
-    background-color: #ED4337;
-    color: #721c24;
-    border:1px solid rgba(114, 28, 37, 0.51);
-
-}
-
-.alert-success {
-    background-color: #155724;
-    color: #155724;
-    border: 1.5px solid #c3e6cb;
-}
-
-.icon {
-    font-size: 20px;
-}
-
-</style>
 <div class="content-wrapper">
     <!-- start of nave link active -->
     <div class="content-header">
@@ -247,25 +169,17 @@ if (isset($_POST['send_request'])) {
                                     $student_profile = student_profile_common_sql($std_index);
                                     $std_current_sem = $student_profile['curr_sem'];
 
-                                    if ($std_current_sem == 10 || $std_current_sem == 6 && $student_profile['program_code'] == 2 || $std_current_sem == 4 && $student_profile['program_code'] == 3|| $std_current_sem == 3 && $student_profile['program_code'] == 3 && $student_profile['major_code'] == 45) {
+                                    if ($std_current_sem == 10 || $std_current_sem == 6 && $student_profile['program_code'] == 2 || $std_current_sem == 4 && $student_profile['program_code'] == 3) {
                                         $student_profile_common = student_profile_common_sql($std_index);
                                         $current_sem = $student_profile_common['curr_sem'];
                                         $stud_transcript_sql = stud_transcript_sql($std_index, $current_sem);
-                                        
+                                        $total_hours = Total_Hours($std_index);
                                         $batch = $student_profile_common['batch'];
                                         $major = $student_profile_common['major_code'];
-                                        $Abbreviation=Get_Major_Abbreviation($major);
                                         $faculty = $student_profile_common['faculty_code'];
-                                        $total_hours = Total_Hours($std_index,$batch,$major);
-                                       // $major_total_hours=Get_TotalCreditHour_from_Major($major_code, $batch);
-                                        $major_total_credit_hours = Get_TotalCreditHour_from_Major($major, $batch);
-                                          
-                                        
-                                     
-                                     
-                                          //  echo "batch " . $batch . " program " . $major . " index: " . $std_index;
+
                                         $f_grades = stud_course_mark_sql($std_index, $batch, $major, $faculty);
-       
+
                                         // Check if there are any 'F' grades
                                         if (empty($f_grades)) {
                                             // لو ما شايل اي مادة
@@ -284,125 +198,63 @@ if (isset($_POST['send_request'])) {
                         <th>Grade</th>
                         <th>Sub Grade 1</th>
                         <th>Sub Grade 2</th>
-                         </tr>";
-// by anas - Check all grades BEFORE displaying the table
-
-// Check if all I grades are cleared
-$all_I_cleared = true;
-foreach ($f_grades as $grade) {
-    if ($grade['grade'] == "I") {
-        $sub1 = $grade['sub_grade1'];
-        $sub2 = $grade['sub_grade2'];
-        
-        // If still unresolved I or turned into F
-        if (
-            ($sub1 == "" || $sub1 == "I" || $sub1 == "F") &&
-            ($sub2 == "" || $sub2 == "I" || $sub2 == "F")
-        ) {
-            $all_I_cleared = false;
-            break;
-        }
-    }
-}
-
-// Check if all Z grades are cleared
-$all_z_cleared = true;
-foreach ($f_grades as $grade) {
-    if ($grade['grade'] == "Z") {
-        $sub1 = $grade['sub_grade1'];
-        $sub2 = $grade['sub_grade2'];
-        
-        // If still unresolved Z or turned into F
-        if (
-            ($sub1 == "" || $sub1 == "Z" || $sub1 == "F") &&
-            ($sub2 == "" || $sub2 == "Z" || $sub2 == "F")
-        ) {
-            $all_z_cleared = false;
-            break;
-        }
-    }
-}
-
-// Check F grades
-$has_uncleared_f = false;
-foreach ($f_grades as $grade) {
-    $grade1 = $grade['grade'];
-    $sub_grade1 = $grade['sub_grade1'];
-    $sub_grade2 = $grade['sub_grade2'];
-    
-    // لو شايل مادة بس (no attempts to clear)
-    if ($grade1 == "F" && $sub_grade1 == "" && $sub_grade2 == "") {
-        $has_uncleared_f = true;
-        break;
-    }
-    // شال مادة ونضفها وشالها تاني وشالها تالت (failed 3 times)
-    elseif ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 == "F") {
-        $has_uncleared_f = true;
-        break;
-    }
-}
-
-// Set final status based on all checks
-if ($all_I_cleared && $all_z_cleared && !$has_uncleared_f) {
-    $statuse = "allow";
-} else {
-    $statuse = "notallow";
-}
-
-// NOW display the table (display loop is separate from logic)
-foreach ($f_grades as $grade) {
-    $course_name = Get_Course_Name($grade['course_code']);
-    $grade1 = $grade['grade'];
-    $sub_grade1 = $grade['sub_grade1'];
-    $sub_grade2 = $grade['sub_grade2'];
-    
-    // Display the row
-    if ($sub_grade1 !== 'F' || $sub_grade2 !== 'F') {
-        echo "<tr>
-            <td>Semester {$grade['semester']}</td>
-            <td>{$grade['course_code']}</td>
-            <td>$course_name</td>
-            <td>$grade1</td>
-            <td>$sub_grade1</td>
-            <td>$sub_grade2</td>
-        </tr>";
-    } else {
-        // If both sub_grades are 'F', display them as is
-        echo "<tr>
-            <td>Semester {$grade['semester']}</td>
-            <td>{$grade['course_code']}</td>
-            <td>$course_name</td>
-            <td>F</td>
-            <td>F</td>
-            <td>F</td>
-        </tr>";
-    }
-}
-
-// End the table
-echo "</table>";
-
-                   }
-// Step 1: Check if major_total_credit_hours has valid data
-if ($major_total_credit_hours === "No data found") {
-    echo '<div class="alert alert-warning"style="color:white;"> <img src="include/dist/img/warning.svg" alt="error" style="width:2.5vw;"> Please ask academic affairs to update the Total Credit Hours for this Major.</div>';
-} else {
-    
-// Assign value to $major_total_hours
-    $major_total_hours = $major_total_credit_hours;
-
-    // Step 3: Compare the values and check it
-    $total_hours = Total_Hours($std_index,$batch,$major);
-    if ($major_total_credit_hours != $total_hours) {
-        $status = "notallow";  // Set status
-        echo '<div class="alert alert-danger"style="color:white;"> <img src="include/dist/img/danger.svg" alt="error" style="width:5vw;"> Total Credit Hours and Major Credit Hours do not comply! No certificate allowed.</div>';
-    } else {
-        echo '<div class="alert alert-success"style="color:white;"> <img src="include/dist/img/done.svg" alt="done" style="width:5vw;"> Credit hours match. Certificate processing allowed.</div>';
-    }
-}
-                                         
+                        </tr>";
 
 
+
+                                            foreach ($f_grades as $grade) {
+
+                                                $course_name = Get_Course_Name($grade['course_code']);
+                                                $grade1 = $grade['grade'];
+                                                $sub_grade1 = $grade['sub_grade1'];
+                                                $sub_grade2 = $grade['sub_grade2'];
+
+                                                // شايل مادة ونضفها
+                                                if ($grade1 == "F" && $sub_grade1 != "F" && $sub_grade2 == "") {
+                                                    $statuse = "allow";
+                                                }
+                                                // شايلة مادة ونضفها بس برضو شالها تاني 
+                                                if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 != "F") {
+                                                    $statuse = "allow";
+
+                                                }
+                                                // شال مادة ونضفها وشالها تاني وشالها تالت
+                                                if ($grade1 == "F" && $sub_grade1 == "F" && $sub_grade2 == "F") {
+                                                    $statuse = "notallow";
+
+                                                }
+                                                // لو شايل مادة بس
+                                                if ($grade1 == "F" && $sub_grade1 == "" && $sub_grade2 == "") {
+                                                    $statuse = "notallow";
+
+                                                }
+
+                            
+                                                // Check if sub_grade1 or sub_grade2 is not 'F'
+                                                if ($sub_grade1 !== 'F' || $sub_grade2 !== 'F') {
+                                                    echo "<tr>
+                                <td>Semester {$grade['semester']}</td>
+                                <td>{$grade['course_code']}</td>
+                                <td>$course_name</td>
+                                <td>F</td>
+                                <td>$sub_grade1</td>
+                                <td>$sub_grade2</td>
+                              </tr>";
+                                                } else {
+                                                    // If both sub_grades are 'F', display them as is
+                                                    echo "<tr>
+                                <td>Semester {$grade['semester']}</td>
+                                <td>{$grade['course_code']}</td>
+                                <td>$course_name</td>
+                                <td>F</td>
+                                <td>F</td>
+                                <td>F</td>
+                              </tr>";
+                                                }
+                                            }
+                                            // End the table
+                                            echo "</table>";
+                                        }
                                         if ($statuse == "notallow") {
                                             echo '
                 <br>
@@ -413,7 +265,7 @@ if ($major_total_credit_hours === "No data found") {
                 </div>
                 <div class="card-body"> 
                 <h6> 
-                A student <b>cannot receive</b> a certificae because he/she has a <b>failing Or absent grade</b>. All absent/failing grades must be <b>Cleared</b> in order for the student to receive a certificae.
+                A student <b>cannot receive</b> a certificae because he/she has a <b>failing grade</b>. All failing grades must be <b>removed</b> in order for the student to receive a certificae.
                
                 </h6>
 
@@ -454,53 +306,7 @@ if ($major_total_credit_hours === "No data found") {
                         <form action="new_certificate.php" method="POST" enctype="multipart/form-data">
                             <!-- start of the if statment -->
                             <!-- start Education card -->
-                           
                             <div class="card-body">
-                            
-                           <div class="row mb-3">
-                                     
-                        
-                     
-                            <div class="col">
-                                  <!-- start Ministery numbe-->
-                                 <label for="">Ministery Number</label>
-                                    <input title="Student ministery number" type="text"
-                                        value="<?php if (isset($student_profile_common))
-                                            echo $student_profile_common['temp_stud_id'];
-                                        else
-                                            echo ""; ?>"
-                                        name="ministery_number" class="form-control" placeholder="National numbe..."
-                                        required>
-            
-                            
-                                
-                                
-                             <label>Batch</label>
-                            <input title="Batch" type="text" name="Batch"
-                                        
-                                        value="<?php if (isset($batch))  echo $batch;?>"
-                                           
-                                        class="form-control" placeholder="Batch"  disabled style="margin-bottom:35px;">
-                                    
-                            </div>
-                            <div class="col">
-                                <label for="">National Number</label>
-                                
-                                    <input title="Student number" type="text" name="national_number"
-                                        value="<?php if (isset($student_profile_common))
-                                            echo $student_profile_common['identity_no'];
-                                        else
-                                            echo ""; ?>"
-                                        class="form-control" placeholder="National numbe..." required>
-                            <label>Abbreviation</label>
-                            <input title="Batch" type="text" name="abbreviation"
-                                  value="<?php if (isset($Abbreviation))  echo $Abbreviation;?>" class="form-control" placeholder="Abbreviation"  disabled style="margin-bottom:35px;">
-                                           <!-- end -->
-                           
-                            </div>
-                                        
-                           </div>
-                       
                                 <label>Education Program</label>
                                 <select title="Student education program" class="form-control" name="program" readonly>
 
@@ -631,7 +437,7 @@ if ($major_total_credit_hours === "No data found") {
                             </div>
                             <!-- end -->
 
-                            <!-- start National numbe
+                            <!-- start National numbe-->
                             <div class="card-body">
                                 <label for="">National Number</label>
                                 <div class="col-12">
@@ -642,10 +448,23 @@ if ($major_total_credit_hours === "No data found") {
                                             echo ""; ?>"
                                         class="form-control" placeholder="National numbe..." required>
                                 </div>
-                            </div> -->
+                            </div>
                             <!-- end -->
 
-                         
+                            <!-- start Ministery numbe-->
+                            <div class="card-body">
+                                <label for="">Ministery Numbe</label>
+                                <div class="col-12">
+                                    <input title="Student ministery number" type="text"
+                                        value="<?php if (isset($student_profile_common))
+                                            echo $student_profile_common['embassy_code'];
+                                        else
+                                            echo ""; ?>"
+                                        name="ministery_number" class="form-control" placeholder="National numbe..."
+                                        required>
+                                </div>
+                            </div>
+                            <!-- end -->
 
                             <div class="card-footer">
 
@@ -671,7 +490,7 @@ if ($major_total_credit_hours === "No data found") {
                         <!-- end  certificat type -->
 
                         <!-- start Printed Place -->
-                         <div class="card-body">
+                        <div class="card-body">
                             <label>Printed Place</label>
                             <select title="Certificat printed place" class="form-control" name="cert_printed_place"
                                 required="required">
@@ -680,13 +499,12 @@ if ($major_total_credit_hours === "No data found") {
                                 <option value="2">Cairo</option>
                             </select>
 
-                        </div> 
+                        </div>
                         <!-- end Printed Place -->
 
                         <!-- start Printed At -->
-                         
                         <div class="card-body">
-                            <label>Printed On</label>
+                            <label>Printed At</label>
                             <input title="Certificat printed at" type="date" name="cert_printed_at" class="form-control"
                                 required>
 
@@ -707,13 +525,11 @@ if ($major_total_credit_hours === "No data found") {
                         <!-- end current sem  -->
 
 
-                       
                         <!-- start GPA numbe-->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-4">
                                     <label for="">GPA</label>
-                                    
                                     <input title="Studentcurrent GPA" type="number" name="gpa"
                                         value="<?php if (isset($stud_transcript_sql))
                                             echo $stud_transcript_sql['gpa'];
@@ -733,7 +549,7 @@ if ($major_total_credit_hours === "No data found") {
                                 </div>
 
                                 <div class="col-4">
-                                    <label for="">Student Total Hours</label>
+                                    <label for="">Total Hours</label>
                                     <input title="Student total hours" type="number" name="total_graduate_hour"
                                         value="<?php if (isset($total_hours))
                                             echo $total_hours;
@@ -742,20 +558,7 @@ if ($major_total_credit_hours === "No data found") {
                                         name="total_graduate_hour" min="0" step="1" class="form-control"
                                         placeholder="Hours..." readonly>
                                 </div>
-                                <div class="col-4">
-                                        <label for="">Major Total Hours</label>
-                                        <label class="form-control text-danger">
-                                        
-                                            <?php 
-                                            if (isset($major_total_hours)) 
-                                                echo $major_total_hours; 
-                                            else 
-                                                echo "N/A";  // Default value if no data is available
-                                            ?>
-                                        </label>
-                                </div>
 
-                                <?php echo "The student's GPA is: " . (isset($stud_transcript_sql['gpa']) ? $stud_transcript_sql['gpa'] : 'N/A'); ?>
                             </div>
 
                         </div>
@@ -893,31 +696,28 @@ if ($major_total_credit_hours === "No data found") {
                         </div>
                         <!-- start -->
                         <!-- dependant multi select -->
-                        <!-- <div class="card-body">
+                        <div class="card-body">
                             <label>Graduation Mode(Class) </label>
                             <select class="form-control" name="mode" readonly>
                                 <option value="">Chose Mod...</option>
                                 <option value="1">First Class</option>
                                 <option value="2">Second Class</option>
                                 <option value="3">Third Class</option>
-                                <option value="4">Excellent</option>
-                                <option value="5">Very Good</option>
-                                <option value="6">Good</option>
-                                <option value="7">Pass</option>
                             </select>
 
-                        </div> -->
+                        </div>
                         <!-- end -->
                         <!-- dependant multi select -->
-                        <!-- <div class="card-body">
+                        <div class="card-body">
                             <label>Graduation Mod(Division) </label>
                             <select class="form-control" name="division" readonly>
                                 <option value="">Chose Mod...</option>
                                 <option value="1">Division One</option>
                                 <option value="2">Division Two</option>
-                                
+                                <option value="3">Division Three</option>
                             </select>
-                        </div> -->
+
+                        </div>
                         <!-- end -->
 
 

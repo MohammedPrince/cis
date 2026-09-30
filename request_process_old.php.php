@@ -120,8 +120,6 @@ if (isset($_POST['update_request_info'])) {
 
     $std_full_name_en = $_POST['std_full_name_en'];
     $std_full_name_ar = $_POST['std_full_name_ar'];
-    $senate_on       = $_POST['senate_on'];       
-    $cert_printed_at = $_POST['cert_printed_at']; 
 
     // Check if all required fields are not empty
     if (
@@ -130,12 +128,10 @@ if (isset($_POST['update_request_info'])) {
         !empty($national_number) &&
         !empty($ministery_number) &&
         !empty($std_full_name_en) &&
-        !empty($std_full_name_ar)&& 
-        !empty($senate_on)&& 
-        !empty($cert_printed_at)
+        !empty($std_full_name_ar)
     ) {
 
-        $update_request_info = Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number, $senate_on ,$cert_printed_at);
+        $update_request_info = Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number);
     } else {
         echo "<p>Error: All fields are required.</p>";
     }
@@ -270,7 +266,7 @@ if (isset($_POST['update_request_info'])) {
                             <!-- Full Name in Arabic end-->
                             <!-- Full Name in Arabic -->
                             <div class="card-body">
-                                <label for="">Student Full Name in Arabic</label>
+                                <label for="">Student Full Nmae in Arabic</label>
                                 <div class="col-8">
                                     <input type="text" name="std_full_name_ar" value="<?php if (isset($_GET['request_id']))
                                     echo $request_data['std_full_name_ar'] ?>" class="form-control"
@@ -278,25 +274,6 @@ if (isset($_POST['update_request_info'])) {
                                 </div>
                             </div>
 
-                        <!-- added senate date  -->
-
-                            <div class="card-body">
-                                <label for="">Senate Date</label>
-                                <div class="col-8">
-                                    <input type="date" name="senate_on" value="<?php if (isset($_GET['request_id']))
-                                    echo $request_data['senate_on'] ?>" class="form-control"
-                                        placeholder="تاريخ السند" required>
-                                </div>
-                            </div>
-
-                            <div class="card-body">
-                                <label for="">Print Date</label>
-                                <div class="col-8">
-                                    <input type="date" name="cert_printed_at" value="<?php if (isset($_GET['request_id']))
-                                    echo $request_data['cert_printed_at'] ?>" class="form-control"
-                                        placeholder="تاريخ السند" required>
-                                </div>
-                            </div>
                         </div>
 
 
@@ -317,7 +294,7 @@ if (isset($_POST['update_request_info'])) {
                                         <i><ion-icon name="arrow-up-circle-outline"></ion-icon></i> Update
                                     </button>
                                 </div>
-                              
+
                                 <div class="ml-auto">
                                     <?php
                                 if (isset($request_data['certificate_type']) && ($request_data['certificate_type'] == "1" || $request_data['certificate_type'] == "2" || $request_data['certificate_type'] == "3")) {
@@ -327,7 +304,6 @@ if (isset($_POST['update_request_info'])) {
                                             class="btn btn-info btn-sm btn-equal">
                                             <i><ion-icon name="print-outline"></ion-icon></i> Print Graduation
                                         </a>
-                                        
                                         <?php
                                     } elseif ($request_data['certificate_type'] == "2") {
                                         ?>
@@ -338,7 +314,6 @@ if (isset($_POST['update_request_info'])) {
                                         <?php
                                     } elseif ($request_data['certificate_type'] == "3") {
                                         ?>
-                                
                                         <a href="bachelor_temp.php?std=<?php echo $request_data['std_index']; ?>" name="print"
                                             class="btn btn-dark btn-sm btn-equal">
                                             <i><ion-icon name="print-outline"></ion-icon></i> Print Graduation
@@ -347,11 +322,6 @@ if (isset($_POST['update_request_info'])) {
                                             class="btn btn-info btn-sm btn-equal">
                                             <i><ion-icon name="print-outline"></ion-icon></i> Print Transcript
                                         </a>
-                                      
-<a href="both.php?std=<?php echo $request_data['std_index']; ?>"
-   class="btn btn-success btn-sm btn-equal">
-   <i><ion-icon name="print-outline"></ion-icon></i> Print Both
-</a>
                                         <?php
                                     }
                                 }

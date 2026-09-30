@@ -42,10 +42,6 @@ if (isset($_GET['delet_id'])) {
             </div>
         </div>
     </section>
-<input type="text" id="tableSearch"
-       class="form-control mb-2"
-       placeholder="Search..."
-       style="border: 2px solid #007bff; border-radius: 6px; margin-left:20px;width:200px;">
 
     <!-- table start-->
     <section class="content">
@@ -166,17 +162,6 @@ if (isset($_GET['delet_id'])) {
         </div>
 
 </div>
-<script>
-document.getElementById("tableSearch").addEventListener("keyup", function () {
-    let filter = this.value.toLowerCase();
-    let rows = document.querySelectorAll("#example2 tbody tr");
-
-    rows.forEach(row => {
-        let text = row.innerText.toLowerCase();
-        row.style.display = text.includes(filter) ? "" : "none";
-    });
-});
-</script>
 
 <?php
 include("include/footer.php");

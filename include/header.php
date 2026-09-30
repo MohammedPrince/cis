@@ -334,7 +334,11 @@ if(isset($_SESSION['user_type']) &&  ($_SESSION['user_type'])== 1 || ($_SESSION[
             </a>
         </li>
     </ul>
-
+    <li class="nav-item">
+    <a href="imagetest.html" class="nav-link">
+        <i><ion-icon name="camera-outline"></ion-icon></i>   <p> &ensp;&ensp; Print Photo</p>
+    </a>
+</li>
     
         <li class="nav-item">
             <a href="logout.php" class="nav-link">
