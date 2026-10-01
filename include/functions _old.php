@@ -2,6 +2,7 @@
 
 session_start();
 
+
 $conn = mysqli_connect("localhost", "root", "", "cis");
 mysqli_set_charset($conn, 'UTF8');
 mysqli_query($conn, "SET NAMES 'utf8'");
@@ -9,9 +10,7 @@ mysqli_query($conn, 'SET CHARACTER SET utf8');
 
 
 
-// $sis_con = mysqli_connect('192.168.1.3', 'exams', 'cts@09*#FUni', 'sis');
-$sis_con =mysqli_connect("localhost", "root", "", "sis");
-// $sis_con =mysqli_connect("localhost", "sis", "sisbs*#fu", "sis2");
+$sis_con = mysqli_connect("localhost", "cis_sis", "cis_sis@root*#", "sis");
 mysqli_set_charset($sis_con, 'UTF8');
 mysqli_query($sis_con, "SET NAMES 'utf8'");
 mysqli_query($sis_con, 'SET CHARACTER SET utf8');
@@ -208,30 +207,8 @@ function Insert_paper($paper_number, $serial_number_start, $serial_number_end)
 }
     
 
-    
-    //anas
-        function Get_TotalCreditHour_from_Major($major_code, $batch) {
-            // الغرض منه للتعرف علي اجمالي الساعات المقررة للدفعة 
-            global $conn;
-                     
-            $stmt = mysqli_prepare($conn, "SELECT credit_hrs FROM tbl_credit_hrs WHERE major_code = ? AND Batch = ?");
-            
- 
-            mysqli_stmt_bind_param($stmt, "is", $major_code, $batch);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-        
-            // للطالب  التاكد من وجود سجل او سجلات
-            if ($row = mysqli_fetch_assoc($result)) {
-                // Return the credit_hrs value from the row
-                return $row['credit_hrs'];
-            } else {
-                // Return message if no data is found
-                return "No data found";
-            }
-        }
-        
-    
+
+
 
 function Insert_Student_Info($std_index, $program, $faculty, $major, $nationality, $national_number, $ministery_number, $certificate_type, $cert_printed_place, $cert_printed_at, $gpa, $cgpa, $total_graduate_hour, $std_full_name_en, $std_full_name_ar, $std_first_name_en, $std_second_name_en,  $std_fourth_name_en, $std_fourth_name_ar, $std_second_name_ar, $std_first_name_ar, $std_email, $std_mobail, $mode, $division, $senate_on)
 {
@@ -318,34 +295,14 @@ function  Delete_Requests($delet_id){
 }
 
 
-function Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number, $senate_on ,$cert_printed_at) {
+function Update_Request_Info($request_id_de, $std_index, $std_full_name_en, $std_full_name_ar, $national_number, $ministery_number) {
     global $conn;
 
     $sqli = "UPDATE `student_basic_info` SET `std_full_name_en` = '$std_full_name_en', `std_full_name_ar` = '$std_full_name_ar' WHERE `std_index` = '$std_index' AND `dell_std_basic_info` = 0";
     $query_1 = mysqli_query($conn, $sqli);
     
-   
-    $getCer = "
-SELECT student_basic_info_id 
-FROM student_basic_info 
-WHERE std_index = '$std_index'
-AND dell_std_basic_info = 0
-LIMIT 1
-";
-
-$result = mysqli_query($conn, $getCer);
-$id_row = mysqli_fetch_assoc($result);
-
-$std_id = $id_row ['student_basic_info_id'] ?? null;
-if (!$std_id) {
-    return 2;
-}
-//  `cert_printed_at`= $cert_printed_at,`senate_on`=$senate_on 
-
- $sqli_2 = "UPDATE `student_cert_info` SET `national_number` = '$national_number', `ministery_number` = '$ministery_number' , `senate_on` =  '$senate_on' ,`cert_printed_at` = '$cert_printed_at' WHERE  `student_basic_info_id` = '$std_id' AND  `dell_std_cert_info` = 0";
+    $sqli_2 = "UPDATE `student_cert_info` SET `national_number` = '$national_number', `ministery_number` = '$ministery_number' WHERE  `dell_std_cert_info` = 0";
     $query_2 = mysqli_query($conn, $sqli_2);
-
-
 
     if ($query_1 && $query_2) {
         // return 1;
@@ -653,20 +610,6 @@ function Get_Major_Name($major_code){
 
 }
 
-function Get_Major_Abbreviation($major_code){
-    global $conn;
-
-    $sql = "SELECT Abbreviation FROM `major` WHERE `major_code` =  $major_code";
-    if($query = mysqli_query($conn, $sql)){
-        $row = mysqli_fetch_array($query);
-            return $row['Abbreviation'];
-
-    }else{
-            echo $query;
-        }
-
-}
-
 // 
 // function Get_Student_Faculty_Code($std_index) {
 //     global $sis_con;
@@ -840,11 +783,7 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
     global $sis_con;
 
     // Query to get the course codes and count of 'F' grades for the student
-    $stud_course_mark_sql = "SELECT course_code, semester,COALESCE(grade ,sub_grade1, sub_grade2)as last_grade, grade ,sub_grade1, sub_grade2, COUNT(*) as f_count FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `major_code` = '$major' AND `faculty_code` = '$faculty' 
-   -- grade ='F'
-     AND    grade in('F','I','Z')
-    
-     GROUP BY course_code, semester 
+    $stud_course_mark_sql = "SELECT course_code, semester, grade ,sub_grade1, sub_grade2, COUNT(*) as f_count FROM `stud_course_mark` WHERE `stud_id` = '$std_index' AND `batch` = '$batch' AND `major_code` = '$major' AND `faculty_code` = '$faculty' AND `grade` = 'F'  GROUP BY course_code, semester 
                          ORDER BY semester ASC";
 
     // Execute the query
@@ -921,17 +860,17 @@ function stud_course_mark_sql($std_index, $batch, $major, $faculty) {
             }
       }
 
-function Total_Hours($stud_index,$batch, $major_code){
+function Total_Hours($stud_index){
         global $sis_con;
         // let max batch of stud in  
-        $total_hours_sql = "SELECT SUM(course_units) AS unit FROM `stud_course_mark` WHERE `stud_id` = '$stud_index' and `batch`='$batch' and `major_code`='$major_code'";
+        $total_hours_sql = "SELECT SUM(course_units) AS unit FROM `stud_course_mark` WHERE `stud_id` = '$stud_index'";
         if($total_hours_query = mysqli_query($sis_con, $total_hours_sql)){
             $row = mysqli_fetch_assoc($total_hours_query);
             $num_rows = $row['unit'];
             return $num_rows;
 
         }else{
-                echo $total_hours_sql; 
+                echo $total_hours_sql;
             }
 
     }
@@ -1052,25 +991,13 @@ function Get_Place_Issue($place){
 
 function Get_Mode($get_mode){
     if($get_mode==1){
-        return  'First Class-';
+        return  'First Class';
     }
     if($get_mode==2){
-        return  'Second Class-';
+        return  'Second Class';
     }
-    if($get_mode==3){
+    if($get_mode==2){
         return  'Third Class';
-    }
-    if($get_mode==4){
-        return  'Excellent';
-    }
-    if($get_mode==5){
-        return  'Very Good';
-    }
-    if($get_mode==6){
-        return  'Good';
-    }
-    if($get_mode==7){
-        return  'Pass';
     }
 
 }
@@ -1081,9 +1008,9 @@ function Get_Division($get_division){
     if($get_division==2){
         return 'Division Two';
     }
-    // if($get_division==2){
-    //     return 'Division Three';
-    // }
+    if($get_division==2){
+        return 'Division Three';
+    }
 
 }
 // Function to retrieve the course name based on the course code
@@ -1094,15 +1021,5 @@ function Get_Course_Name($code) {
     $row = mysqli_fetch_array($query);
     return $row['course_name'];
 }
-/*
-// get student main infor. from sis2
-SELECT 
-		F.faculty_code ,m.major_code,m.abbreviation as 'major',F.abbreviation as'faculty', sp.stud_id,sp.stud_name,sp.familyname,sp.lastName
-		 , SPC.batch,SPC.faculty_code, SPC.major_code,SPC.stud_id 
-FROM
-		`student_profile` sp, `student_profile_common` SPC, `faculty` F , major M 
-where
-		SPC.stud_id=sp.stud_id and F.faculty_code=SPC.faculty_code and f.faculty_code=M.faculty_code and m.major_code=spc.major_code
 
-*/
 ?>
