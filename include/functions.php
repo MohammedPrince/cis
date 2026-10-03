@@ -2,26 +2,7 @@
 
 session_start();
 
-$conn = mysqli_connect("localhost", "root", "", "cis");
-mysqli_set_charset($conn, 'UTF8');
-mysqli_query($conn, "SET NAMES 'utf8'");
-mysqli_query($conn, 'SET CHARACTER SET utf8');
-
-
-
-// $sis_con = mysqli_connect('192.168.1.3', 'exams', 'cts@09*#FUni', 'sis');
-$sis_con =mysqli_connect("localhost", "root", "", "sis");
-// $sis_con =mysqli_connect("localhost", "sis", "sisbs*#fu", "sis2");
-mysqli_set_charset($sis_con, 'UTF8');
-mysqli_query($sis_con, "SET NAMES 'utf8'");
-mysqli_query($sis_con, 'SET CHARACTER SET utf8');
-
-if (!$conn && $sis_con) {
-    echo "Error," . mysqli_connect_error();
-    die;
-} else {
-    // echo "Success!";
-}
+require_once __DIR__ . '/connection.php';
 
 
 //========================= Global Variables =======================//
