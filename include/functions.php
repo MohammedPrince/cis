@@ -72,12 +72,7 @@ function Login($username, $password)
         $_SESSION['user_email'] = $row['user_email'];
         $_SESSION['created_at'] = $row['created_at'];
 
-        // header("Location: home.php");
-        // exit;
-        echo "<pre>";
-        echo "LOGIN SUCCESS\n";
-        print_r($row);
-        echo "</pre>";
+        header("Location: home.php");
         exit;
 
     } else {
