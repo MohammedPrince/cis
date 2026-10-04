@@ -49,7 +49,7 @@ function Login($username, $password)
     global $conn;
     $new_password = md5($password);
     // echo ''.$username.''.$new_password.'';
-    $sqli = "SELECT * FROM `users` WHERE  `username` = '$username' AND `password` = '$new_password' ";
+    echo $sqli = "SELECT * FROM `users` WHERE  `username` = '$username' AND `password` = '$new_password' and `dell_user` = 0";
 
     if ($query = mysqli_query($conn, $sqli)) {
         if (mysqli_num_rows($query)) {
