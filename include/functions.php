@@ -63,13 +63,14 @@ function Login($username, $password)
             $_SESSION['user_email'] = $row['user_email'];
             $_SESSION['created_at'] = $row['created_at'];
 
-            header("Location: home.php");
-
+            // header("Location: home.php"); // removed to prevent headers already sent
+            return true; // indicate success
         } else {
-            return 1;
+            return 1; // indicate invalid credentials
         }
     } else {
-        echo $sqli;
+        // On query error, return false to indicate failure
+        return false;
     }
 }
 

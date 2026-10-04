@@ -1,6 +1,24 @@
 <?php
 include("include/functions.php");
+// Process login form submission
+if (isset($_POST['submit'])) {
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
 
+    $loginResult = Login($username, $password);
+
+    if ($loginResult === true) {
+        // Login successful, redirect to home.php
+        header("Location: home.php");
+        exit;
+    } elseif ($loginResult == 1) {
+        // Invalid credentials
+        $errorMsg = alerts(4, "Invalid Username or Password!");
+    } else {
+        // Other error (e.g., query error)
+        $errorMsg = alerts(4, "An error occurred. Please try again.");
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,20 +63,9 @@ include("include/functions.php");
 <body class="hold-transition login-page">
     <div class="login-box">
 
-        <?php
-      if(isset($_POST['submit'])){
-        $username =   mysqli_real_escape_string($conn, $_POST['username']);
-        $password =  mysqli_real_escape_string($conn,$_POST['password']);
-
-        $login = Login($username,$password);
-
-         if($login==1){
-            echo $alert = alerts(4,"Invalid Username or Password!");
-        }
-    
-      }
-      
-    ?>
+        <?php if (isset($errorMsg)) {
+            echo $errorMsg;
+        } ?>
 
 
         <form action="index.php"
